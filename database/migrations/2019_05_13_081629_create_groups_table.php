@@ -14,12 +14,21 @@ class CreateGroupsTable extends Migration
     public function up()
     {
         Schema::create('groups', function (Blueprint $table) {
-        $table->increments('id');
-        $table->string('name');
-        $table->string('year');
-        $table->string('contact');
-    });
-       
+            $table->increments('id');
+            $table->string('name');
+            $table->string('year');
+            $table->string('contact')->nullable();
+            $table->integer('user_id')->unsigned();
+        });
+
+        Schema::table('groups', function (Blueprint $table) {
+           $table->foreign('user_id')
+           ->references('id')->on('users')
+           ->onDelete('cascade');       
+       });
+
+
+
     }
 
     /**

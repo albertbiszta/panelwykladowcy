@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Group;
 use App\Subject;
+use App\User;
 use Auth;
 use DB;
 use Session;
@@ -14,7 +15,7 @@ class SubjectController extends Controller
 
 	public function index() {
 		$subjects = User::find(Auth::user()->id)->subjects;
-		
+
 		return view('subjects.index')->with('subjects', $subjects); 
 	}
 
@@ -27,8 +28,9 @@ class SubjectController extends Controller
 	public function store(Request $request) {
 		$subject = new Subject($request->all());
 		Auth::user()->subjects()->save($subject);
+		$message = "Dodano przedmiot";
 
-		return redirect('subjects');
+		return redirect('subjects')->with('flash_message_success', $message);
 	}
 
 	public function edit($id) {
@@ -62,6 +64,39 @@ class SubjectController extends Controller
 		}
 	}
 
+	public function show($id) {
+		if(!empty($id)) {
+			$groups = Group::authGroups();
+			$subject = Subject::findOrFail($id);
+
+			return view('subjects.show')->with(compact('groups', 'subject'));
+		}
+	}
+
+	public function assignGroup(Request $request, $id) {
+		if(!empty($id)) {
+			$subject = Subject::findOrFail($id);
+			$groups = $request->input('groups');
+			$subject->groups()->attach($groups);
+			$message = "Dodano grupę do przedmiotu";
+
+			return redirect()->back()->with('flash_message_success', $message);
+		}
+	}
+
+
+	public function unassignGroup($subjectId, $groupId) {
+		
+		if(!empty($subjectId) && !empty($groupId)) {
+			$subject = Subject::findOrFail($subjectId);
+			$group = Group::findOrFail($groupId);
+			$subject->groups()->detach($group);
+			$message = "Usunięto grupę z przedmiotu";
+
+			return redirect()->back()->with('flash_message_success', $message);
+		}
+	
+	}
 
 
 

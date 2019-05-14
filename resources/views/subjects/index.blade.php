@@ -18,6 +18,7 @@
 								{{-- <th scope="col">Sylabus</th>
  --}}								<th scope="col">Punkty ECTS</th>
 								<th scope="col">Egzamin</th>
+								<th scope="col">Szczegóły / grupy</th>
 								{{-- <th scioe="col">Lista grup</th> --}}
 								<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
@@ -47,11 +48,11 @@
 
 								</td>
 
-								{{-- <td>   <a href="{{ url('subjects', $subject->id) }}"> 
+								<td>   <a href="{{ url('subjects', $subject->id) }}"> 
 								
 									<i class="far fa-list-alt fa-lg" style="color: black"></i>
 
-								 </a></td> --}}
+								 </a></td>
 
 								
 

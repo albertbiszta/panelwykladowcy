@@ -12,15 +12,33 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
-Auth::routes();
+Route::get('/registered', function () {
+	return view('registered');
+});
+
+Auth::routes(['verify' => true]);
 
 Route::get('/panel', 'HomeController@index')->name('panel');
 
-Route::group(['middleware' => ['auth']], function()
+Route::group(['middleware' => ['auth', 'verified']], function()
 {
+	Route::get('/verified', function() {
+		return view('verified');
+	});
+
 	Route::resource('subjects', 'SubjectController'); 
+	Route::post('/subjects/{id}', 'SubjectController@assignGroup')->name('subjects.assignGroup');
+	Route::delete('/subjects/{subject_id}/{group_id}', 'SubjectController@unassignGroup')->name('subjects.unassignGroup');
+
+
+	Route::resource('groups', 'GroupController'); 
+
+	Route::resource('students', 'StudentController'); 
+	Route::get('/groups/{id}/add-student', 'StudentController@create')->name('addStudent');
+
+
 
 });

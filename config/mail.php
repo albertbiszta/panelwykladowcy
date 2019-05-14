@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.mailtrap.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', 2525),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        "address" => "from@example.com",
+        "name" => "Example"
     ],
 
     /*
@@ -84,9 +84,8 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
-
-    'password' => env('MAIL_PASSWORD'),
+    "username" => "9d430d92b74281",
+    "password" => "246940a0479c6b",
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +98,8 @@ return [
     |
     */
 
-    'sendmail' => '/usr/sbin/sendmail -bs',
+    "sendmail" => "/usr/sbin/sendmail -bs",
+
 
     /*
     |--------------------------------------------------------------------------
