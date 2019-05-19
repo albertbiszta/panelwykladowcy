@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
-use App\Subject;
-use App\User;
 use Auth;
 use DB;
 use Session;
+use App\Group;
+use App\Subject;
+use App\User;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -100,7 +100,7 @@ class SubjectController extends Controller
 
 	public function unassignGroup($subjectId, $groupId = null) 
 	{
-		if(Subject::userSubject($id)) {
+		if(Subject::userSubject($subjectId)) {
 			$subject = Subject::findOrFail($subjectId);
 			$group = Group::findOrFail($groupId);
 			$subject->groups()->detach($group);

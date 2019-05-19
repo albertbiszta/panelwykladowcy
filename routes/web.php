@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::resource('students', 'StudentController'); 
 	Route::get('/groups/{id}/add-student', 'StudentController@create')->name('addStudent');
 
+	Route::resource('syllabuses', 'SyllabusController');
+
 
 
 });

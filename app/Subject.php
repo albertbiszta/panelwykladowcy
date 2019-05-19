@@ -24,6 +24,11 @@ class Subject extends Model
     	return $this->belongsTo('App\User');
     }
 
+    public function syllabus()
+    {
+        return $this->hasOne('App\Syllabus');
+    }
+
 
     public static function examOptions() 
     {
@@ -31,6 +36,18 @@ class Subject extends Model
 				1 => 'Tak'];
 		return $exam;
     }
+
+     /**
+    * Auth User subjects list with subject name and id as value
+    */
+    public static function authSubjects() 
+    {
+        $authSubjects = User::find(Auth::user()->id)->subjects;
+        $subjects = $authSubjects->pluck('name', 'id');
+
+        return $subjects;
+    }
+
 
     /**
     * if this subject belongs to auth user
