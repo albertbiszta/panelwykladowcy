@@ -96,6 +96,21 @@
 
               </li>
 
+
+             <li class="nav-item dropdown">
+              <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <b>Syllabusy </b> <i class="fas fa-sort-down"></i> </a>
+
+
+                <div class="dropdown-menu">
+      
+                  <a class="dropdown-item" href="/syllabuses/create">Dodaj syllabus</a>  
+
+                </div>
+
+
+              </li>
+
 {{-- 
               <li class="nav-item ">
                 <a class="nav-link" href="/users"> <b>Współpracownicy </b></a>

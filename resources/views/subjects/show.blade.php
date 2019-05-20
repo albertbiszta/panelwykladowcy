@@ -38,7 +38,7 @@
 									
 
 									<p> <b>Literaura: </b> {{$subject->syllabus->literature}}   </p>
-					p>
+
 
 								</a>
 
@@ -52,28 +52,19 @@
 
 					</div>
 
-					<div class="card-body">
-						<h6>Wyświetl Syllabus</h6>
-
-						{{$subject->syllabus->description}}
-
-
-
-
-
-
-					</div>
 
 
 
 
 
 					<div class="card-body">
-						<table class="table table-borderless">
+						<table class="table table-bordered">
 							<thead>
 								<tr>
 									<th scope="col">Nazwa</th>
 									<th scope="col">Rok</th>
+									<th scope="col">Lista studentów</th>
+									<th scope="col">Oceny</th>
 
 									<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
@@ -89,10 +80,32 @@
 								@foreach($subject->groups as $group)
 
 								<tr>
-									<td> {{$group->name}} </td>
+
+									<td> 
+										<a href="{{ url('groups', $group->id) }}" style="color: black"> 
+											{{$group->name}}
+
+										</a>
+
+									</td>
 
 
 									<td> {{$group->year}} </td>
+									<td> 
+										<a href="{{ url('groups', $group->id) }}" style="color: black"> 
+											IKONA
+
+										</a>
+
+									</td>
+									<td> 
+										<a href="{{ action('GradeController@groupGrades', [$subject->id, $group->id]) }}" style="color: black"> 
+											IKONA
+
+										</a>
+
+									</td>
+
 
 									<td>
 
@@ -124,60 +137,67 @@
 							</table>
 
 						</div>
-						<!-- Formularz -->
+						<div class="card-header">
 
-						{!! Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']) !!}
+						</div>
 
+						<div class="card-body">
+							<h6><b>Przypisz grupę do przedmiotu: </b></h6>
 
+							<!-- Formularz -->
 
-						<div class="form-group">
-							<div  class="col-md-4">
-
-								<select class="form-control" name="groups" id="exampleFormControlSelect2">
-									<option value="" disable="true" selected="true"> Wybierz grupę </option>
-									@foreach($groups as $key => $value)
-
-									@if(!$subject->groups->contains($key))
-
-									<option value="{{$key}}">{{$value}} </option>
-
-									@endif
-
-									@endforeach
-								</select>
+							{!! Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']) !!}
 
 
-							</div></div>
 
 							<div class="form-group">
-								<div class="col-md-4 col-md-offset-4">
-									{!! Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-primary']) !!}
+								<div  class="col-md-4">
+
+									<select class="form-control" name="groups" id="exampleFormControlSelect2">
+										<option value="" disable="true" selected="true"> Wybierz grupę </option>
+										@foreach($groups as $key => $value)
+
+										@if(!$subject->groups->contains($key))
+
+										<option value="{{$key}}">{{$value}} </option>
+
+										@endif
+
+										@endforeach
+									</select>
+
+
+								</div></div>
+
+								<div class="form-group">
+									<div class="col-md-4 col-md-offset-4">
+										{!! Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-secondary']) !!}
+									</div>
 								</div>
+
+
+
+
+
+
+
+								{!! Form::close() !!}
+
+
+
+
+
+
+
 							</div>
 
 
 
 
-
-
-
-							{!! Form::close() !!}
-
-
-
-
-
-
-
 						</div>
-
-
-
-
 					</div>
 				</div>
-			</div>
 
 
 
-		@endsection</div>
+			@endsection</div>

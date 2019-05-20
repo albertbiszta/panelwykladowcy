@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
 	Route::resource('syllabuses', 'SyllabusController');
 
+	Route::get('subject/{subject_id}/group/{group_id}/grades', 'GradeController@groupGrades')->name('grades.group');
+	Route::post('subject/{subject_id}/add-grade', 'GradeController@addGrade')->name('grades.addGrade');
+
 
 
 });

@@ -29,6 +29,11 @@ class Subject extends Model
         return $this->hasOne('App\Syllabus');
     }
 
+    public function grades()
+    {
+        return $this->hasMany('App\Grade');
+    }
+
 
     public static function examOptions() 
     {

@@ -14,23 +14,9 @@ class CreateGradesTable extends Migration
     public function up()
     {
         Schema::create('grades', function (Blueprint $table) {
-            $table->increments('id');
-            $table->float('value')->default(2.0);
-            $table->integer('student_id')->unsigned();
-            $table->integer('subject_id')->unsigned();
+            $table->bigIncrements('id');
             $table->timestamps();
         });
-
-         Schema::table('grades', function (Blueprint $table) {
-         $table->foreign('student_id')
-         ->references('id')->on('students')
-         ->onDelete('cascade');  
-
-         $table->foreign('subject_id')
-         ->references('id')->on('subjects')
-         ->onDelete('cascade');  
-
-     });
     }
 
     /**

@@ -16,6 +16,11 @@ class Student extends Model
 		return $this->belongsTo('App\Group');
 	}
 
+	public function grades()
+	{
+		return $this->hasMany('App\Grade');
+	}
+
 
      /**
 	* if student belongs to user's group

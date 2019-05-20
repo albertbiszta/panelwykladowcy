@@ -39,6 +39,7 @@
 
 									<p> <b>Literaura: </b> <?php echo e($subject->syllabus->literature); ?>   </p>
 
+
 								</a>
 
 
@@ -51,29 +52,19 @@
 
 					</div>
 
-					<div class="card-body">
-						<h6>Wyświetl Syllabus</h6>
-
-						<?php echo e($subject->syllabus->description); ?>
-
-
-
-
-
-
-
-					</div>
 
 
 
 
 
 					<div class="card-body">
-						<table class="table table-borderless">
+						<table class="table table-bordered">
 							<thead>
 								<tr>
 									<th scope="col">Nazwa</th>
 									<th scope="col">Rok</th>
+									<th scope="col">Lista studentów</th>
+									<th scope="col">Oceny</th>
 
 									<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
@@ -89,10 +80,33 @@
 								<?php $__currentLoopData = $subject->groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
 								<tr>
-									<td> <?php echo e($group->name); ?> </td>
+
+									<td> 
+										<a href="<?php echo e(url('groups', $group->id)); ?>" style="color: black"> 
+											<?php echo e($group->name); ?>
+
+
+										</a>
+
+									</td>
 
 
 									<td> <?php echo e($group->year); ?> </td>
+									<td> 
+										<a href="<?php echo e(url('groups', $group->id)); ?>" style="color: black"> 
+											IKONA
+
+										</a>
+
+									</td>
+									<td> 
+										<a href="<?php echo e(action('GradeController@groupGrades', [$subject->id, $group->id])); ?>" style="color: black"> 
+											IKONA
+
+										</a>
+
+									</td>
+
 
 									<td>
 
@@ -127,64 +141,71 @@
 							</table>
 
 						</div>
-						<!-- Formularz -->
+						<div class="card-header">
 
-						<?php echo Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']); ?>
+						</div>
 
+						<div class="card-body">
+							<h6><b>Przypisz grupę do przedmiotu: </b></h6>
 
+							<!-- Formularz -->
 
-
-						<div class="form-group">
-							<div  class="col-md-4">
-
-								<select class="form-control" name="groups" id="exampleFormControlSelect2">
-									<option value="" disable="true" selected="true"> Wybierz grupę </option>
-									<?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-									<?php if(!$subject->groups->contains($key)): ?>
-
-									<option value="<?php echo e($key); ?>"><?php echo e($value); ?> </option>
-
-									<?php endif; ?>
-
-									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-								</select>
+							<?php echo Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']); ?>
 
 
-							</div></div>
+
 
 							<div class="form-group">
-								<div class="col-md-4 col-md-offset-4">
-									<?php echo Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-primary']); ?>
+								<div  class="col-md-4">
 
+									<select class="form-control" name="groups" id="exampleFormControlSelect2">
+										<option value="" disable="true" selected="true"> Wybierz grupę </option>
+										<?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+										<?php if(!$subject->groups->contains($key)): ?>
+
+										<option value="<?php echo e($key); ?>"><?php echo e($value); ?> </option>
+
+										<?php endif; ?>
+
+										<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+									</select>
+
+
+								</div></div>
+
+								<div class="form-group">
+									<div class="col-md-4 col-md-offset-4">
+										<?php echo Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-secondary']); ?>
+
+									</div>
 								</div>
+
+
+
+
+
+
+
+								<?php echo Form::close(); ?>
+
+
+
+
+
+
+
+
 							</div>
 
 
 
 
-
-
-
-							<?php echo Form::close(); ?>
-
-
-
-
-
-
-
-
 						</div>
-
-
-
-
 					</div>
 				</div>
-			</div>
 
 
 
-		<?php $__env->stopSection(); ?></div>
+			<?php $__env->stopSection(); ?></div>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\aba\Desktop\LARAVEL ALL\panelwykladowcy\resources\views/subjects/show.blade.php ENDPATH**/ ?>
