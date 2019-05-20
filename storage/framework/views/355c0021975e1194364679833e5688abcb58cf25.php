@@ -1,148 +1,190 @@
-<?php $__env->startSection('content'); ?>
-
-<div class="container">
-	<div class="row justify-content-center">
-		<div class="col-md-8">
-			<div class="card">
+<div>
+	<?php $__env->startSection('content'); ?>
+	
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="card"  style="width: 65rem;" >
 
 				<div class="card-body">
+					<ul class="nav nav-tabs">
 
+						<li class="nav-item dropdown"  style="width: 60rem;">
+							<a class="btn btn-outline-secondary btn-lg btn-block" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Wyświetl Syllabus
+							</a>
 
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
 
+								<a class="dropdown-item" href="#" style="width: 60rem;">
 
-</div>
+									<p>	<b>Język prowadzenia: </b> <?php echo e($subject->syllabus->language); ?>  </p>
+									<p>	<b>Punkty ECTS: </b> <?php echo e($subject->ects); ?>  </p>
+									<p>	<b>Przedmiot kończy się egzaminem: </b> 
 
-<div class="card-body">
+										<?php if($subject->exam == 1): ?>
+										Tak
 
-	<!-- Formularz -->
+										<?php else: ?>
+										Nie
 
-	<?php echo Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']); ?>
+										<?php endif; ?>
 
+									</p>
 
 
+									<p>  <b>Opis: </b>  <?php echo e($subject->syllabus->description); ?> </p>
 
-	<div class="form-group">
-		<div  class="col-md-4">
+									
 
-			<select class="form-control" name="groups" id="exampleFormControlSelect2">
-				<option value="" disable="true" selected="true"> Wybierz grupę </option>
-				<?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+									<p> <b>Literaura: </b> <?php echo e($subject->syllabus->literature); ?>   </p>
 
-				<?php if(!$subject->groups->contains($key)): ?>
+								</a>
 
-				<option value="<?php echo e($key); ?>"><?php echo e($value); ?> </option>
-				
-				<?php endif; ?>
 
-				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-			</select>
 
 
-		</div>
+							</li>
+						</ul>
 
-		
-		
 
-	</div>
 
-	<div class="form-group">
-		<div class="col-md-4 col-md-offset-4">
-			<?php echo Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-primary']); ?>
+					</div>
 
-		</div>
-	</div>
+					<div class="card-body">
+						<h6>Wyświetl Syllabus</h6>
 
+						<?php echo e($subject->syllabus->description); ?>
 
 
 
 
 
 
-	<?php echo Form::close(); ?>
 
+					</div>
 
 
 
 
 
-</div>
+					<div class="card-body">
+						<table class="table table-borderless">
+							<thead>
+								<tr>
+									<th scope="col">Nazwa</th>
+									<th scope="col">Rok</th>
 
+									<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
 
 
+									</th>
 
-<div class="card-body">
-	<table class="table table-borderless">
-		<thead>
-			<tr>
-				<th scope="col">Nazwa</th>
-				<th scope="col">Rok</th>
+								</tr>
+							</thead>
+							<tbody>
 
-				<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
+								<?php $__currentLoopData = $subject->groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
+								<tr>
+									<td> <?php echo e($group->name); ?> </td>
 
-				</th>
 
-			</tr>
-		</thead>
-		<tbody>
+									<td> <?php echo e($group->year); ?> </td>
 
+									<td>
 
-			<?php $__currentLoopData = $subject->groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-			<tr>
-				<td> <?php echo e($group->name); ?> </td>
 
+										<?php echo Form::open(['action'=> ['SubjectController@unassignGroup',
+											$subject->id, $group->id],
+											'method'=>'POST', 'class' =>'form-horizontal']); ?>
 
-				<td> <?php echo e($group->year); ?> </td>
 
-				<td>
 
+											<?php echo e(Form::hidden('_method', 'DELETE')); ?>
 
+											<?php echo e(Form::button('<i class="far fa-trash-alt fa-lg"></i>', [ 'type'=>'submit' , 'class' => 'btn btn-light btn-sm'])); ?>
 
-					<?php echo Form::open(['action'=> ['SubjectController@unassignGroup',
-						$subject->id, $group->id],
-						'method'=>'POST', 'class' =>'form-horizontal']); ?>
 
 
+											<?php echo Form::close(); ?>				
 
-						<?php echo e(Form::hidden('_method', 'DELETE')); ?>
 
-						<?php echo e(Form::button('<i class="far fa-trash-alt fa-lg"></i>', [ 'type'=>'submit' , 'class' => 'btn btn-light btn-sm'])); ?>
 
 
+										</td>
 
-						<?php echo Form::close(); ?>				
 
 
+									</tr>
 
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-					</td>
+								</tbody>
+							</table>
 
+						</div>
+						<!-- Formularz -->
 
+						<?php echo Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']); ?>
 
-				</tr>
 
-				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-			</tbody>
-		</table>
 
-	</div>
+						<div class="form-group">
+							<div  class="col-md-4">
 
+								<select class="form-control" name="groups" id="exampleFormControlSelect2">
+									<option value="" disable="true" selected="true"> Wybierz grupę </option>
+									<?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-</div>
+									<?php if(!$subject->groups->contains($key)): ?>
 
+									<option value="<?php echo e($key); ?>"><?php echo e($value); ?> </option>
 
+									<?php endif; ?>
 
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+								</select>
 
-</div>
-</div>
-</div>
 
+							</div></div>
 
+							<div class="form-group">
+								<div class="col-md-4 col-md-offset-4">
+									<?php echo Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-primary']); ?>
 
-<?php $__env->stopSection(); ?>
+								</div>
+							</div>
+
+
+
+
+
+
+
+							<?php echo Form::close(); ?>
+
+
+
+
+
+
+
+
+						</div>
+
+
+
+
+					</div>
+				</div>
+			</div>
+
+
+
+		<?php $__env->stopSection(); ?></div>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\aba\Desktop\LARAVEL ALL\panelwykladowcy\resources\views/subjects/show.blade.php ENDPATH**/ ?>

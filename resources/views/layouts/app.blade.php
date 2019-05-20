@@ -33,6 +33,8 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/parsley.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
+
 </head>
 <body>
   <div id="app">
@@ -51,13 +53,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Left Side Of Navbar -->
 
-       
-           <ul class="navbar-nav mr-auto">
+
+          <ul class="navbar-nav mr-auto">
            <ul class="nav nav-tabs">
 
-            
-            
-             
+
+
+
 
 
              <li class="nav-item dropdown">
@@ -122,45 +124,48 @@
 
 
 
+
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
-            <!-- Authentication Links -->
-            @guest
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-            </li>
-            @if (Route::has('register'))
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-            </li>
-            @endif
-            @else
-
-            <li class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
-               <b>  {{ Auth::user()->firstname }}   {{ Auth::user()->lastname }}  </b><span class="caret"></span>
-             </a>
 
 
-
-
-
-             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{ route('logout') }}"
-              onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();">
-              {{ __('Wyloguj się') }}
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-            </form>
-          </div>
+        <!-- Authentication Links -->
+        @guest
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
         </li>
-        @endguest
-      </ul>
-    </div>
-  </div>
+        @if (Route::has('register'))
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+        </li>
+        @endif
+        @else
+
+        <li class="nav-item dropdown">
+          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
+           <b>  {{ Auth::user()->firstname }}   {{ Auth::user()->lastname }}  </b><span class="caret"></span>
+         </a>
+
+
+
+
+
+         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ route('logout') }}"
+          onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();">
+          {{ __('Wyloguj się') }}
+        </a>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
+      </div>
+    </li>
+    @endguest
+  </ul>
+</div>
+</div>
 </nav>
 
 <main class="py-4">
@@ -170,6 +175,7 @@
 
 <script src="{{ asset('js/dynamics.js') }}" type="text/javascript" ></script>
 <script src="{{ asset('js/validate.js') }}" defer></script>
+
 
 <script>
   window.ParsleyConfig = {
