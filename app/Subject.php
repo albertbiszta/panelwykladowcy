@@ -13,9 +13,19 @@ class Subject extends Model
 
 
 
+    public function grades()
+    {
+        return $this->hasMany('App\Grade');
+    }
+
     public function groups() 
     {
     	return $this->belongsToMany('App\Group');
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany('App\Lesson');
     }
 
     
@@ -29,24 +39,21 @@ class Subject extends Model
         return $this->hasOne('App\Syllabus');
     }
 
-    public function grades()
-    {
-        return $this->hasMany('App\Grade');
-    }
 
 
-    public static function examOptions() 
+
+    protected function examOptions() 
     {
     	$exam = [0 => 'Nie',
-				1 => 'Tak'];
-		return $exam;
+        1 => 'Tak'];
+        return $exam;
     }
 
      /**
     * Auth User subjects list with subject name and id as value
     */
-    public static function authSubjects() 
-    {
+    protected function authSubjects() 
+     {
         $authSubjects = User::find(Auth::user()->id)->subjects;
         $subjects = $authSubjects->pluck('name', 'id');
 
@@ -61,7 +68,7 @@ class Subject extends Model
     * 
     *@return bool
     */
-    public static function userSubject($subjectId = null): bool
+    protected function userSubject($subjectId = null): bool
     {
         $subject = Subject::findOrFail($subjectId);
         if($subject->user_id == Auth::user()->id) {

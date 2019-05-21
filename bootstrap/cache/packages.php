@@ -13,6 +13,17 @@
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
+  'hcesrl/laravel-swagger-api' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'LaravelApi\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Api' => 'LaravelApi\\Facade',
+    ),
+  ),
   'laravel/tinker' => 
   array (
     'providers' => 
@@ -30,6 +41,13 @@
     array (
       'Form' => 'Collective\\Html\\FormFacade',
       'Html' => 'Collective\\Html\\HtmlFacade',
+    ),
+  ),
+  'mpociot/laravel-apidoc-generator' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Mpociot\\ApiDoc\\ApiDocGeneratorServiceProvider',
     ),
   ),
   'nesbot/carbon' => 

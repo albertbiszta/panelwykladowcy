@@ -29,7 +29,7 @@ class Student extends Model
 	* 
 	*@return bool
 	*/
-	public static function userStudent($studentId = null): bool
+	protected function userStudent($studentId = null): bool
 	{
 		$student = Student::findOrFail($studentId);
 		if(Group::userGroup($student->group_id)) {

@@ -27,17 +27,49 @@ class SyllabusController extends Controller
 	}
 
 
+
 	public function store(Request $request)
 	{
-		
-    	$syllabus = new Syllabus($request->all());
-    	$subject = $request->input('subject');
-    	$syllabus->subject()->associate($subject);
+		$syllabus = new Syllabus($request->all());
+		$subject = $request->input('subject');
+		$syllabus->subject()->associate($subject);
 		$syllabus->save();
 		$message = "Dodano syllabus";
 
-		return redirect()->route('syllabuses.index')->with('flash_message_success', $message); 
+		return redirect()->route('subjects.show', [$subject])->with('flash_message_success', $message); 
+
 	}
+
+
+
+	public function addWithSubject($id = null)
+	{
+		if(Subject::userSubject($id)) {
+			$subject = Subject::findOrFail($id);
+			return view('syllabuses.createWithSubject')->with(compact('subjects'));
+		}else {
+			abort(404);	
+		}
+		
+	}
+
+
+	public function saveWithSubject(Request $request, $id = null)
+	{
+			if(Subject::userSubject($id)) {
+				$syllabus = new Syllabus($request->all());
+				$subject = Subject::findOrFail($id);
+				$syllabus->subject()->associate($subject);
+				$syllabus->save();
+				$message = "Dodano syllabus";
+
+				return redirect()->route('subjects.show', [$id])->with('flash_message_success', $message); 
+			}else {
+				abort(404);	
+			}	
+	}
+
+
 
 
 }

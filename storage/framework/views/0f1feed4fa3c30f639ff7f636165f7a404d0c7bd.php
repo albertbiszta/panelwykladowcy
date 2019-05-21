@@ -138,22 +138,22 @@
         <?php endif; ?>
         <?php else: ?>
 
-        <li class="nav-item dropdown">
-          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
-           <b>  <?php echo e(Auth::user()->firstname); ?>   <?php echo e(Auth::user()->lastname); ?>  </b><span class="caret"></span>
-         </a>
+         <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
+               <b>  <?php echo e(Auth::user()->firstname); ?>   <?php echo e(Auth::user()->lastname); ?>  </b><span class="caret"></span>
+             </a>
 
 
 
 
 
-         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-          <?php echo e(__('Wyloguj się')); ?>
+             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
+              onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();">
+              <?php echo e(__('Wyloguj się')); ?>
 
-        </a>
+            </a>
 
         <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
           <?php echo csrf_field(); ?>

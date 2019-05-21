@@ -5,66 +5,41 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-             <div class="card-header">
-
                <div class="card-header">
-                <a href="{{route('syllabuses.index')}}"> <i class="fas fa-long-arrow-alt-left fa-lg"></i> 
 
+                 <div class="card-header">
+                    <a href="{{route('syllabuses.index')}}"> <i class="fas fa-long-arrow-alt-left fa-lg"></i> 
+                        <br> <b>Syllabus dla przedmiotu {{$subject->name}}</b>
+                    </a>
 
-                </a>
+                    @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
 
-                @if(count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
                 </div>
-                @endif
+                <div class="card-header">
+                    <!-- Formularz -->
+                    {!! Form::open(['action'=> ['SyllabusController@storeWithSubject',
+                    $subject->id],
+                    'method'=>'POST', 'class' =>'form-horizontal']) !!}
 
-            </div>
-            <div class="card-header">
+                
 
-
-                 {!! Form::open(['route' => 'syllabuses.store']) !!}
 
 
                  <div class="form-group">
-                    <div  class="col-md-4 control-label">
-                        {!! Form::label('subject','Przedmiot: ') !!}
-                    </div>
-                    <div  class="col-md-4">
-
-                        <select class="form-control" name="subject" id="exampleFormControlSelect2">
-                            <option value="" disable="true" selected="true"> Wybierz przedmiot </option>
-                            @foreach($subjects as $key => $value)
-
-
-                            <option value="{{$key}}">{{$value}} </option>
-
-
-                            @endforeach
-                        </select>
-
-
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-                <div class="form-group">
                     <div  class="col-md-4 control-label">
                         {!! Form::label('language','Język: ') !!}
                     </div>
                     <div class="col-md-6">
 
-                     <select class="form-control" name="language" id="exampleFormControlSelect2">
+                       <select class="form-control" name="language" id="exampleFormControlSelect2">
                         <option value="" disable="true" selected="true"> Wybierz język </option>
 
                         <option value="Polski"> Polski </option>

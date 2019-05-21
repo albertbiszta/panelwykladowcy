@@ -12,6 +12,13 @@ class Group extends Model
 	public $timestamps = false;
 
 
+
+	public function lessons()
+	{
+		return $this->hasMany('App\Lesson');
+	}
+
+
 	public function subjects() 
 	{
 		return $this->belongsToMany('App\Subject');
@@ -33,7 +40,7 @@ class Group extends Model
     /**
 	* Auth User groups list with group name and id as value
 	*/
-	public static function authGroups() 
+	protected function authGroups() 
 	{
 		$authGroups = User::find(Auth::user()->id)->groups;
 		$groups = $authGroups->pluck('name', 'id');
@@ -49,7 +56,7 @@ class Group extends Model
 	* 
 	*@return bool
 	*/
-	public static function userGroup($groupId = null): bool
+	protected function userGroup($groupId = null): bool
 	{
 		$group = Group::findOrFail($groupId);
 		if($group->user_id == Auth::user()->id) {

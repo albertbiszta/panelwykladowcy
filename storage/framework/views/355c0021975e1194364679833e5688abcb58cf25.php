@@ -15,8 +15,9 @@
 
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-
+								
 								<a class="dropdown-item" href="#" style="width: 60rem;">
+									<?php if($subject->syllabus): ?>
 
 									<p>	<b>Język prowadzenia: </b> <?php echo e($subject->syllabus->language); ?>  </p>
 									<p>	<b>Punkty ECTS: </b> <?php echo e($subject->ects); ?>  </p>
@@ -38,6 +39,14 @@
 									
 
 									<p> <b>Literaura: </b> <?php echo e($subject->syllabus->literature); ?>   </p>
+
+									<?php else: ?>
+								<h6>  <b> Nie stworzyłeś jeszcze syllabusa do tego przedmiotu </b>  </h6>	
+									<a href="<?php echo e(action('SyllabusController@create')); ?>" style="color: black"> 
+											<b>  Dodaj syllabus</b>
+
+										</a>
+									<?php endif; ?>
 
 
 								</a>
@@ -65,6 +74,7 @@
 									<th scope="col">Rok</th>
 									<th scope="col">Lista studentów</th>
 									<th scope="col">Oceny</th>
+									<th scope="col">Zajęcia</th>
 
 									<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
@@ -101,7 +111,14 @@
 									</td>
 									<td> 
 										<a href="<?php echo e(action('GradeController@groupGrades', [$subject->id, $group->id])); ?>" style="color: black"> 
-											IKONA
+											IKONA  oceny
+
+										</a>
+
+									</td>
+									<td> 
+										<a href="<?php echo e(action('LessonController@groupLessons', [$subject->id, $group->id])); ?>" style="color: black"> 
+											IKONA  zajęcia
 
 										</a>
 

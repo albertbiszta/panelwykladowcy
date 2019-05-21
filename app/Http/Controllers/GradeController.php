@@ -38,8 +38,6 @@ class GradeController extends Controller
     	}else {
     		abort(404);
     	}
-
-
     }
 
 

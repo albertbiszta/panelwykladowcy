@@ -15,8 +15,9 @@
 
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-
+								
 								<a class="dropdown-item" href="#" style="width: 60rem;">
+									@if($subject->syllabus)
 
 									<p>	<b>Język prowadzenia: </b> {{$subject->syllabus->language}}  </p>
 									<p>	<b>Punkty ECTS: </b> {{$subject->ects}}  </p>
@@ -38,6 +39,14 @@
 									
 
 									<p> <b>Literaura: </b> {{$subject->syllabus->literature}}   </p>
+
+									@else
+								<h6>  <b> Nie stworzyłeś jeszcze syllabusa do tego przedmiotu </b>  </h6>	
+									<a href="{{action('SyllabusController@create')}}" style="color: black"> 
+											<b>  Dodaj syllabus</b>
+
+										</a>
+									@endif
 
 
 								</a>
@@ -65,6 +74,7 @@
 									<th scope="col">Rok</th>
 									<th scope="col">Lista studentów</th>
 									<th scope="col">Oceny</th>
+									<th scope="col">Zajęcia</th>
 
 									<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
@@ -100,7 +110,14 @@
 									</td>
 									<td> 
 										<a href="{{ action('GradeController@groupGrades', [$subject->id, $group->id]) }}" style="color: black"> 
-											IKONA
+											IKONA  oceny
+
+										</a>
+
+									</td>
+									<td> 
+										<a href="{{ action('LessonController@groupLessons', [$subject->id, $group->id]) }}" style="color: black"> 
+											IKONA  zajęcia
 
 										</a>
 
