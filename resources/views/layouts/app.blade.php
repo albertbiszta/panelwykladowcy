@@ -33,6 +33,7 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/parsley.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/layout/app.css') }}" rel="stylesheet">
 
 
 </head>
@@ -140,44 +141,48 @@
 
 
 
-          <!-- Right Side Of Navbar -->
-          <ul class="navbar-nav ml-auto">
+   
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                  <!-- Authentication Links -->
+                  <nav class="navbar navbar-light bg-light justify-content-between">
+                   <div class="flex-center position-ref full-height">
+                    @if (Route::has('login'))
 
+                    <div class="top-right links">
+                      @auth
+                      {{--    <a href="{{ url('/') }}">Home</a> --}}
 
-        <!-- Authentication Links -->
-        @guest
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-        </li>
-        @if (Route::has('register'))
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-        </li>
-        @endif
-        @else
-
-         <li class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
-               <b>  {{ Auth::user()->firstname }}   {{ Auth::user()->lastname }}  </b><span class="caret"></span>
-             </a>
+                      <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
+                         <b>  {{ Auth::user()->name }}  </b><span class="caret"></span>
+                       </a>
 
 
 
 
 
-             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{ route('logout') }}"
-              onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();">
-              {{ __('Wyloguj się') }}
-            </a>
+                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        {{ __('Wyloguj się') }}
+                      </a>
 
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          @csrf
-        </form>
-      </div>
-    </li>
-    @endguest
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                      </form>
+                    </div>
+                  </li>
+                  @else
+                  <a href="{{ route('login') }}">Login</a>
+
+                  @if (Route::has('register'))
+                  <a href="{{ route('register') }}">Register</a>
+                  @endif
+                  @endauth
+                </div>
+                @endif
   </ul>
 </div>
 </div>
@@ -187,6 +192,32 @@
   @yield('content')
 </main>
 </div>
+
+
+
+
+<!-- Footer -->
+
+<footer class="app-footer">
+
+
+
+
+  
+  <!-- Footer Elements -->
+
+
+  <!-- Copyright -->
+  <div class="text-muted">
+
+  <div class="footer-copyright text-center py-3" id="copyright-text"> PanelWykladowcy © 2019 
+
+  </div>
+  
+  <!-- Copyright -->
+  </div>
+</footer>
+<!-- Footer --> 
 
 <script src="{{ asset('js/dynamics.js') }}" type="text/javascript" ></script>
 <script src="{{ asset('js/validate.js') }}" defer></script>

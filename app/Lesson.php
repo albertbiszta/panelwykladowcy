@@ -25,4 +25,9 @@ class Lesson extends Model
 		return $this->belongsTo('App\Subject');
 	}
 
+	public function attendances()
+	{
+		return $this->hasMany('App\Attendance');
+	}
+
 }

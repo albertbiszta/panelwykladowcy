@@ -16,14 +16,13 @@ class GradeController extends Controller
     	if(Subject::userSubject($subjectId) && Group::userGroup($groupId)) {
     		$subject = Subject::findOrFail($subjectId);
     		$group = Group::findOrFail($groupId);
-
     		return view('grades.group')->with(compact('subject', 'group'));
 
     	}else {
     		abort(404);
     	}
     }
-
+ 
 
     public function addGrade(Request $request, $subjectId = null) {
     	if(Subject::userSubject($subjectId)) {

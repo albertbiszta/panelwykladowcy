@@ -21,13 +21,15 @@ Route::get('/registered', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/panel', 'HomeController@index')->name('panel');
+
 
 Route::group(['middleware' => ['auth', 'verified']], function()
 {
 	Route::get('/verified', function() {
 		return view('verified');
 	});
+
+	Route::get('/panel', 'PanelController@index')->name('panel');
 
 	Route::resource('subjects', 'SubjectController'); 
 	Route::post('/subjects/{id}', 'SubjectController@assignGroup')->name('subjects.assignGroup');
@@ -44,12 +46,18 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	/*Route::get('syllabuses/add?subject={id}', 'SyllabusController@addWithSubject')->name('syllabuses.addWithSubject');
 	Route::post('syllabuses/save?subject={id}', 'SyllabusController@saveWithSubject');*/
 
-	Route::get('subject/{subject_id}/group/{group_id}/grades', 'GradeController@groupGrades')->name('grades.group');
-	Route::post('subject/{subject_id}/add-grade', 'GradeController@addGrade')->name('grades.addGrade');
+	Route::get('grades/subject/{subject_id}/group/{group_id}', 'GradeController@groupGrades')->name('grades.group');
+	Route::post('grades/add/subject/{subject_id}', 'GradeController@addGrade')->name('grades.addGrade');
+	
 
-	Route::get('lesson/subject/{subject_id}/group/{group_id}', 'LessonController@groupLessons')->name('lessons.group');
+
+	Route::get('lessons/subject/{subject_id}/group/{group_id}', 'LessonController@groupLessons')->name('lessons.group');
 	Route::post('add-lesson/subject/{subject_id}/group/{group_id}', 'LessonController@addLesson')->name('lessons.addLesson');
-	Route::patch('/lesson/{id}/edit-status','LessonController@editStatus');
+	Route::patch('/lessons/{id}/edit-status','LessonController@editStatus');
+
+	//Route::resource('attendances', 'AttendanceController');
+	Route::get('attendances/lessons/{lesson_id}', 'AttendanceController@lessonAttendance')->name('attendances.lesson');
+	Route::post('attendances/save/lessons/{lesson_id}/', 'AttendanceController@saveAttendance')->name('attendances.lesson');
 
 
 

@@ -36,6 +36,7 @@
 								<th scope="col">Data</th>
 								<th scope="col">Temat zajęć</th>
 								<th scope="col">Status(zmień status)</th>
+								<th scope="col">Obecność</th>
 
 								
 
@@ -68,28 +69,37 @@
 
 								@else
 								Nie odbyły się 
-                                {!! Form::model($groupLesson, ['method'=>'PATCH',
-                                'action'=>['LessonController@editStatus', $groupLesson->id]]) !!}
-                                {!! Form::hidden('performed', 1) !!}
+								{!! Form::model($groupLesson, ['method'=>'PATCH',
+								'action'=>['LessonController@editStatus', $groupLesson->id]]) !!}
+								{!! Form::hidden('performed', 1) !!}
 
-                                <div class="form-group">
-                                    <div class="col-md-6 col-md-offset-4">
-
-
-
-                                     {{ Form::button('<i class="fas fa-plus-circle fa-lg"></i>', [ 'type'=>'submit' , 'class' => 'btn btn-light btn-sm']) }}
-                                 </div>
-                             </div>
+								<div class="form-group">
+									<div class="col-md-6 col-md-offset-4">
 
 
 
-                             {!! Form::close() !!}   
+										{{ Form::button('<i class="fas fa-plus-circle fa-lg"></i>', [ 'type'=>'submit' , 'class' => 'btn btn-light btn-sm']) }}
+									</div>
+								</div>
+
+
+
+								{!! Form::close() !!}   
 
 								@endif
 
 							</td>
 
+							@if ($groupLesson->performed == 1)
+							<td>
+								<a href="{{ action('AttendanceController@lessonAttendance', $groupLesson->id) }}" style="color: black"> 
+									<i class="fas fa-chalkboard" style="color: black"></i>
 
+								</a>
+								
+							</td>
+
+							@endif
 
 
 

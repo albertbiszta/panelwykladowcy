@@ -15,7 +15,7 @@ class Group extends Model
 
 	public function lessons()
 	{
-		return $this->hasMany('App\Lesson');
+		 return $this->hasMany('App\Lesson');
 	}
 
 

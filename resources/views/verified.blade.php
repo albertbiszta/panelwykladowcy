@@ -10,8 +10,9 @@
  Weryfikacja przebiegła prawidłowo! <br>
  Od tej pory masz dostęp do aplikacji.
            
-            </div>
+             </div>
         </div>
     </div>
 </div>
-@endsection
+ @endsection
+ 

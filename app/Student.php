@@ -10,6 +10,11 @@ class Student extends Model
 
 	public $timestamps = false;
 
+	 public function attendances()
+    {
+        return $this->hasMany('App\Attendance');
+    }
+
 
 	public function group() 
 	{

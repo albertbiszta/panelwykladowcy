@@ -33,6 +33,7 @@
   <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
   <link href="<?php echo e(asset('css/parsley.css')); ?>" rel="stylesheet">
   <link href="<?php echo e(asset('css/main.css')); ?>" rel="stylesheet">
+  <link href="<?php echo e(asset('css/layout/app.css')); ?>" rel="stylesheet">
 
 
 </head>
@@ -122,45 +123,49 @@
 
 
 
-          <!-- Right Side Of Navbar -->
-          <ul class="navbar-nav ml-auto">
+   
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                  <!-- Authentication Links -->
+                  <nav class="navbar navbar-light bg-light justify-content-between">
+                   <div class="flex-center position-ref full-height">
+                    <?php if(Route::has('login')): ?>
 
+                    <div class="top-right links">
+                      <?php if(auth()->guard()->check()): ?>
+                      
 
-        <!-- Authentication Links -->
-        <?php if(auth()->guard()->guest()): ?>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
-        </li>
-        <?php if(Route::has('register')): ?>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
-        </li>
-        <?php endif; ?>
-        <?php else: ?>
-
-         <li class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
-               <b>  <?php echo e(Auth::user()->firstname); ?>   <?php echo e(Auth::user()->lastname); ?>  </b><span class="caret"></span>
-             </a>
+                      <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
+                         <b>  <?php echo e(Auth::user()->name); ?>  </b><span class="caret"></span>
+                       </a>
 
 
 
 
 
-             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
-              onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();">
-              <?php echo e(__('Wyloguj się')); ?>
+                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        <?php echo e(__('Wyloguj się')); ?>
 
-            </a>
+                      </a>
 
-        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
-          <?php echo csrf_field(); ?>
-        </form>
-      </div>
-    </li>
-    <?php endif; ?>
+                      <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                        <?php echo csrf_field(); ?>
+                      </form>
+                    </div>
+                  </li>
+                  <?php else: ?>
+                  <a href="<?php echo e(route('login')); ?>">Login</a>
+
+                  <?php if(Route::has('register')): ?>
+                  <a href="<?php echo e(route('register')); ?>">Register</a>
+                  <?php endif; ?>
+                  <?php endif; ?>
+                </div>
+                <?php endif; ?>
   </ul>
 </div>
 </div>
@@ -170,6 +175,32 @@
   <?php echo $__env->yieldContent('content'); ?>
 </main>
 </div>
+
+
+
+
+<!-- Footer -->
+
+<footer class="app-footer">
+
+
+
+
+  
+  <!-- Footer Elements -->
+
+
+  <!-- Copyright -->
+  <div class="text-muted">
+
+  <div class="footer-copyright text-center py-3" id="copyright-text"> PanelWykladowcy © 2019 
+
+  </div>
+  
+  <!-- Copyright -->
+  </div>
+</footer>
+<!-- Footer --> 
 
 <script src="<?php echo e(asset('js/dynamics.js')); ?>" type="text/javascript" ></script>
 <script src="<?php echo e(asset('js/validate.js')); ?>" defer></script>
