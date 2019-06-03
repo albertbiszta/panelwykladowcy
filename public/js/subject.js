@@ -1,7 +1,23 @@
 $(document).ready(function(){
 
+	addSubject();
+	deleteSubject();
 
 
+	assignGroup();
+	unassignGroup();
+
+	
+
+
+
+
+
+});
+
+
+var addSubject = () =>
+{
 	/*Add new subject*/
 	$('#submitSubject').click(function(event){
 
@@ -15,7 +31,7 @@ $(document).ready(function(){
 
 		var appendToTable = (data) => {
 
-			var newRecord = `
+			let newRecord = `
 			<tr>
 			<td> ${data.subject.name} </td>
 			<td> ${data.subject.ects} </td>
@@ -36,7 +52,6 @@ $(document).ready(function(){
 
 
 
-
 			</td>
 			</tr>
 			`;
@@ -45,11 +60,11 @@ $(document).ready(function(){
 		};
 
 
-		var name = $('#name').val();
-		var ects = $('#ects').val();
-		var exam = $('#exam').val();
+		let name = $('#name').val();
+		let ects = $('#ects').val();
+		let exam = $('#exam').val();
 
-		var postData = {
+		let postData = {
 			"name": name,
 			"ects": ects,
 			"exam": exam,
@@ -65,25 +80,28 @@ $(document).ready(function(){
 				$('#info').html(data.success);
 				appendToTable(data);
 
-
 			}
 
 		});
 
 	});
 
+}
 
+
+var deleteSubject = () =>
+{
 	/*delete*/
 	$('body').on('click', '#delete-subject', function(){
-		var id = $(this).data('id');
-		var el = this;
+		let id = $(this).data('id');
+		let el = this;
 
 		$('#confirm-delete-subject').click(function(event){
 
 
-		var sendData = {
-			"_token": $('#token').val()
-		};
+			let sendData = {
+				"_token": $('#token').val()
+			};
 
 			$.ajax({
 				type: "DELETE",
@@ -101,21 +119,25 @@ $(document).ready(function(){
 
 
 	});
+}
 
 
+
+var editSubject = () =>
+{
 	/*edit*/
 
 	$('body').on('click', '.edit subject', function(){
 
-		var id = $(this).data('id');
-		var el = this;
+		let id = $(this).data('id');
+		let el = this;
 
 		$('#submitEditSubject').click(function(event){
 
 
 
 
-				$.ajax({
+			$.ajax({
 				type: "DELETE",
 				url: `/subjects/edit/${id}`,
 				data: {"id": id, "_token": $('#token').val()},
@@ -133,9 +155,118 @@ $(document).ready(function(){
 
 
 	});
+}
+
+var assignGroup = () =>
+{
+	/*Assign group*/
+	$('#assignSubmit').click(function(event){
+
+		
+		var appendGroup = (data, subjectId) => {
+
+			let newRecord = `
+			<tr>
+			<td> ${data.group.name} </td>
+			<td> ${data.group.year} </td>
+			<td> 
+			<a href="/groups/${data.group.id}" style="color: black"> 
+			IKONA
+			</a>
+			</td>
+
+			<td> 
+			<a href="/grades/subject/${subjectId}/group/${data.group.id}" style="color: black"> 
+			IKONA OCENY
+			</a>
+			</td>
+
+			
+			<td> 
+			<a href="/lessons/subject/${subjectId}/group/${data.group.id}" style="color: black"> 
+			IKONA ZAJĘCI
+			</a>
+			</td>
+
+			<td>
+
+
+
+			<input type="hidden" name="group" id="group" value="{{ $group->id }}">
+			<button type="submit" data-toggle="modal" data-target="#confirm-unassign" data-id="${data.group.id}" id="unassign-group" class="btn btn-light btn-sm">
+			<i class="far fa-trash-alt fa-lg"></i>
+			</button>
 
 
 
 
+			</td>
+			</tr>
+			`;
 
-});
+			$('#groups-tbody').append(newRecord);
+		};
+
+
+		let group = $('#groups').val();
+		let subjectId = $('#subjectId').val();
+
+
+		let postData = {
+			"group": group,
+			"_token": $('#token').val()
+		};
+
+		$.ajax({
+			type: "POST",
+			url: `/subjects/${subjectId}/assign-group`,
+			data: postData,
+			success: function(data){
+				$('#success-info').show();
+				$('#info').html(data.success);
+				appendGroup(data, subjectId);
+
+
+			}
+
+		});
+
+	});
+
+}
+
+
+var unassignGroup = () =>
+{
+	/*delete*/
+	$('body').on('click', '#unassign-group', function(){
+
+		let subjectId = $('#subjectId').val();
+		let groupId = $(this).data('id');
+		let groupName = $(this).data('name');
+		let el = this;
+		
+
+		let sendData = {
+			"_token": $('#token').val()
+		};
+
+		$.ajax({
+			type: "DELETE",
+			url: `/subjects/${subjectId}/${groupId}`,
+			data: sendData,
+			success: function(data)
+			{
+				$('#success-info').show();
+				$('#info').html(data.success);
+				$(el).closest('tr').remove();
+
+				$('groups').append(`<option value="${groupId}"> ${groupName} </option>`);
+			}
+		});
+
+
+
+
+	});
+}

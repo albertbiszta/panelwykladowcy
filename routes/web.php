@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::post('/new-subject', 'SubjectController@storeModal');
 	Route::post('/edit-subject', 'SubjectController@editModal');
 	Route::delete('/subjects/delete/{id}', 'SubjectController@delete')->name('subjects.delete');
-	Route::post('/subjects/{id}', 'SubjectController@assignGroup')->name('subjects.assignGroup');
+	Route::post('/subjects/{id}/assign-group', 'SubjectController@assignGroup')->name('subjects.assignGroup');
 	Route::delete('/subjects/{subject_id}/{group_id}', 'SubjectController@unassignGroup')->name('subjects.unassignGroup');
 
 

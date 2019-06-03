@@ -114,14 +114,16 @@ class SubjectController extends Controller
 	{
 		if(Subject::userSubject($id)) {
 			$subject = Subject::findOrFail($id);
-			$groups = $request->input('groups');
+			$groups = $request->input('group');
 			$subject->groups()->attach($groups);
-			$message = "Dodano grupę do przedmiotu";
 
-			return redirect()->back()->with('flash_message_success', $message);
+			$group = Group::findOrFail($groups);
+			$message = "Dodano grupę do przedmiotu";
+			return response()->json(['success'=>$message, 'group'=> $group]);
 		}else {
-			abort(404);	
-		}	
+			$message = "Wystąpił błąd";
+			return response()->json(['error'=>$message]);
+		}
 	}
 
 
@@ -133,9 +135,10 @@ class SubjectController extends Controller
 			$subject->groups()->detach($group);
 			$message = "Usunięto grupę z przedmiotu";
 
-			return redirect()->back()->with('flash_message_success', $message);
+			return response()->json(['success'=>$message]);
 		}else {
-			abort(404);	
+			$message = "Wystąpił błąd";
+			return response()->json(['error'=>$message]);
 		}
 	}
 
