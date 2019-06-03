@@ -75,10 +75,7 @@
 
 									<a href="" data-toggle="modal" data-target="#editSubject" data-id="{{$subject->id}}" data-name="{{$subject->name}}" class="btn btn-light btn-sm edit-subject"><i class="far fa-edit fa-lg"></i></a>
 
-									{{-- <a href="" data-toggle="modal" data-target="#confirm-delete" data-id="{{$subject->id}}"  id="delete-subject" class="far fa-trash-alt fa-lg">
-									</a>
-
-									--}}
+									
 									<input type="hidden" name="subjectId" id="subjectId" value="{{ $subject->id }}">
 									<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="{{$subject->id}}" id="delete-subject" class="btn btn-light btn-sm">
 										<i class="far fa-trash-alt fa-lg"></i>

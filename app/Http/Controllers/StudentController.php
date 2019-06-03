@@ -45,23 +45,28 @@ class StudentController extends Controller
 
 
 
-	public function create($id = null)
+/*	public function create($id = null)
 	{
 		$group = Group::findOrFail($id);
 
 		return view('students.create')->with(compact('group'));
 	}
+*/
 
 
-	public function store(Request $request) 
+	public function addStudent(Request $request) 
 	{
+		$groupId = $request->get('group_id');
+
 		$student = new Student($request->all());
-		$student->group()->associate($request->input('group_id'));
+		$student->group()->associate($groupId);
 		$student->save();
 		
 		$message = "Dodano studenta do grupy";
+		return response()->json(['success'=>$message, 'student' => $student]);
 
-		return redirect()->back()->with('flash_message_success', $message); 
+		
+		
 	}
 
 
@@ -91,15 +96,15 @@ class StudentController extends Controller
 	}
 
 
-	public function destroy($id = null)
+	public function delete($id = null)
 	{
 		if(Student::userStudent($id)) {
 			$student = Student::where(['id'=>$id])->delete();
 			$message = "Usunięto studenta";
-
-			return redirect()->back()->with('flash_message_success', $message);
+			return response()->json(['success'=>$message]);
 		}else {
-			abort(404);	
+			$message = "Wystąpił błąd";
+			return response()->json(['error'=>$message]);
 		}
 	}
 

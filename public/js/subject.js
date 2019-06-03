@@ -82,9 +82,6 @@ $(document).ready(function(){
 
 
 		var sendData = {
-			"name": name,
-			"ects": ects,
-			"exam": exam,
 			"_token": $('#token').val()
 		};
 
@@ -116,9 +113,7 @@ $(document).ready(function(){
 		$('#submitEditSubject').click(function(event){
 
 
-		var name = $('#name').val();
-		var ects = $('#ects').val();
-		var exam = $('#exam').val();
+
 
 				$.ajax({
 				type: "DELETE",

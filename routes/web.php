@@ -40,12 +40,14 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
 
 	Route::resource('groups', 'GroupController'); 
-	Route::post('groups/new', 'GroupController@storeModal');
+	Route::post('/groups/new', 'GroupController@storeModal');
+	Route::delete('/groups/delete/{id}', 'GroupController@delete')->name('groups.delete');
 	Route::get('/user-group/{id}', 'GroupController@userGroup');
 
 	Route::resource('students', 'StudentController'); 
+	Route::post('/students/new', 'StudentController@addStudent')->name('addStudent');
+	Route::delete('/students/delete/{id}', 'StudentController@delete')->name('students.delete');
 	Route::get('/search-students', 'StudentController@search')->name('students.search');
-	Route::get('/groups/{id}/add-student', 'StudentController@create')->name('addStudent');
 
 	Route::resource('syllabuses', 'SyllabusController');
 	/*Route::get('syllabuses/add?subject={id}', 'SyllabusController@addWithSubject')->name('syllabuses.addWithSubject');

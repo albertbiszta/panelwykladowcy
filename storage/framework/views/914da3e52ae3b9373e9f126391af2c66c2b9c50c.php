@@ -38,7 +38,7 @@
 								
 							</tr>
 						</thead>
-						<tbody id="students-tbody">
+						<tbody id="subjects-tbody">
 
 
 

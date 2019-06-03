@@ -79,15 +79,15 @@ class GroupController extends Controller
 	}
 
 
-	public function destroy($id = null) 
+	public function delete($id = null) 
 	{
 		if(Group::userGroup($id)) {
 			$group = Group::where(['id'=>$id])->delete();
 			$message = "Usunięto grupę";
-
-			return redirect()->back()->with('flash_message_success', $message);
-		} else {
-			abort(404);	
+			return response()->json(['success'=>$message]);
+		}else {
+			$message = "Wystąpił błąd";
+			return response()->json(['error'=>$message]);
 		}
 	}
 

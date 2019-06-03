@@ -57,22 +57,14 @@
 
 									<td>
 
-
-										<?php echo Form::open(['action'=> ['GroupController@destroy', $group->id],
-										'method'=>'POST', 'class' =>'form-horizontal']); ?>
-
-										<a href="<?php echo e(route('groups.edit', $group->id)); ?>" class="btn btn-light btn-sm"><i class="far fa-edit fa-lg"></i></a>
-
-										<?php echo e(Form::hidden('_method', 'DELETE')); ?>
-
-										<?php echo e(Form::button('<i class="far fa-trash-alt fa-lg"></i>', [ 'type'=>'submit' , 'class' => 'btn btn-light btn-sm'])); ?>
+										<a href="" data-toggle="modal" data-target="#editGroup" data-id="<?php echo e($group->id); ?>" 
+											data-name="<?php echo e($group->name); ?>" class="btn btn-light btn-sm edit-group"><i class="far fa-edit fa-lg"></i></a>
 
 
-
-										<?php echo Form::close(); ?>				
-
-
-
+										<input type="hidden" name="subjectId" id="subjectId" value="<?php echo e($group->id); ?>">
+										<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="<?php echo e($group->id); ?>" id="delete-group" class="btn btn-light btn-sm">
+											<i class="far fa-trash-alt fa-lg"></i>
+										</button>
 
 
 
@@ -80,6 +72,8 @@
 
 									</td>
 
+
+									
 
 								</tr>
 
@@ -121,7 +115,7 @@
 						</div>	
 					</div>
 
-					
+
 					<div class="form-group">
 						<div class="col-md-8">
 							<input type="text" id="contact" placeholder="Kontakt do przedstawiciela grupy" class="form-control">
@@ -137,13 +131,41 @@
 
 
 				</div>
-				
+
 
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 
 	
+
+	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h4 class="modal-title">Czy na pewno chcesz usunąć tę grupę?</h4>
+
+
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<button type="button" id="confirm-delete-group" class="btn btn-outline-danger float-right"
+					data-dismiss="modal">Tak</button>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+	
+
+
+
+
+
+
 	<input type="hidden" name="_token" id="token" value="<?php echo e(csrf_token()); ?>">
 
 	<?php $__env->stopSection(); ?>
