@@ -67,15 +67,23 @@
 
 
 
+                <div class="form-group">
+                    <div  class="col-md-4 control-label">
+                        {!! Form::label('indexNumber','Numer indeksu:') !!}
+                    </div>
+                    <div class="col-md-6">
+                        {!! Form::text('indexNumber',null,['class'=>'form-control']) !!}
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <div  class="col-md-4 control-label">
-                    {!! Form::label('contact','Kontakt do przedstawiciela:') !!}
+                <div class="form-group">
+                    <div  class="col-md-4 control-label">
+                        {!! Form::label('contact','Kontakt:') !!}
+                    </div>
+                    <div class="col-md-6">
+                        {!! Form::text('contact',null,['class'=>'form-control']) !!}
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    {!! Form::text('contact',null,['class'=>'form-control']) !!}
-                </div>
-            </div>
 
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">

@@ -58,7 +58,7 @@
 
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
-                        <?php echo Form::submit('Dodaj przedmiot',['class'=>'btn btn-primary']); ?>
+                        <?php echo Form::submit('Dodaj przedmiot',['class'=>'btn btn-secondary']); ?>
 
                     </div>
                 </div>

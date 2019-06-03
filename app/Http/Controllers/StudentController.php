@@ -29,18 +29,20 @@ class StudentController extends Controller
 	{
 		$query = $request->get('query');
 		$data = explode(' ', $query);
-/*		$firstname = $data[0];
-		$lastname = $data[1];*/
+
 		$students = Student::where('firstname', 'LIKE', '%'.$data[0].'%')->where('lastname', 'LIKE', '%'.$data[1].'%')->get();
 		if(count($students) > 0) {
-			return view('students.search-results')->with(compact('students'));
+			return response()->json(['students'=>$students]);
+
 		} else {
 			$message = "Student nie istnieje";
-			return redirect()->back()->with('flash_message_error', $message);
-		}
 
-		
+			return response()->json(['error'=>$message]);
+		}	
 	}
+
+
+
 
 
 	public function create($id = null)

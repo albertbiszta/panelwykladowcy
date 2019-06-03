@@ -1,3 +1,5 @@
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -13,20 +15,45 @@
 
 				<div class="card-body">
 
-					<!-- Search form -->
-	
-					<form action="{{ route('students.search') }}" method="GET">
-						@csrf
-						<input class="form-control mr-sm-2" placeholder="Szukaj studenta (Imię Nazwisko)" id="query" 
-						value="{{ request()->input('query')}}" type="text" name="query" />
-						<br>
-						<input type="submit" class="btn btn-sm btn-secendary" value="Szukaj" />
-					</form>
+
+					<input class="form-control mr-sm-2" placeholder="Szukaj studenta (Imię Nazwisko)" id="query" 
+					type="text" name="query" />
 					
 
-				</div>
+					<div class="card-body"  id="no-result" style="display: none">
+
+
+
+					</div>
+
+					<table class="table table-borderless student-results-table" style="display: none">
+						<thead>
+							<tr>
+								<th scope="col">Imię</th>
+								<th scope="col">Nazwisko</th>
+								<th scope="col">Numer indeksu</th>
+								<th scope="col">Groupa</th>
+								<th scope="col">Wyświetl szczegóły</th>
+
+
+
+							</th>
+
+						</tr>
+					</thead>
+					<tbody id="results">
+
+
+
+
+					</tbody>
+				</table>
+
+
 			</div>
 		</div>
 	</div>
 </div>
+</div>
 @endsection
+

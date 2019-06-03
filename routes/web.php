@@ -32,11 +32,16 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::get('/panel', 'PanelController@index')->name('panel');
 
 	Route::resource('subjects', 'SubjectController'); 
+	Route::post('/new-subject', 'SubjectController@storeModal');
+	Route::post('/edit-subject', 'SubjectController@editModal');
+	Route::delete('/subjects/delete/{id}', 'SubjectController@delete')->name('subjects.delete');
 	Route::post('/subjects/{id}', 'SubjectController@assignGroup')->name('subjects.assignGroup');
 	Route::delete('/subjects/{subject_id}/{group_id}', 'SubjectController@unassignGroup')->name('subjects.unassignGroup');
 
 
 	Route::resource('groups', 'GroupController'); 
+	Route::post('groups/new', 'GroupController@storeModal');
+	Route::get('/user-group/{id}', 'GroupController@userGroup');
 
 	Route::resource('students', 'StudentController'); 
 	Route::get('/search-students', 'StudentController@search')->name('students.search');

@@ -15,8 +15,9 @@ class SubjectController extends Controller
 
 	public function index() 
 	{
+		$exam = Subject::examOptions();
 		$subjects = User::find(Auth::user()->id)->subjects;
-		return view('subjects.index')->with('subjects', $subjects); 
+		return view('subjects.index', compact('exam', 'subjects')); 
 	}
 
 
@@ -32,8 +33,30 @@ class SubjectController extends Controller
 		$subject = new Subject($request->all());
 		Auth::user()->subjects()->save($subject);
 		$message = "Dodano przedmiot";
+		return response()->json(['success'=>$message]);
 
-		return redirect('subjects')->with('flash_message_success', $message);
+		/*	return redirect('subjects')->with('flash_message_success', $message);*/
+	}
+	
+
+	public function storeModal(Request $request) 
+	{
+		$subject = new Subject($request->all());
+		Auth::user()->subjects()->save($subject);
+		$message = "Dodano przedmiot";
+		return response()->json(['success'=>$message, 'subject' => $subject]);
+
+		/*	return redirect('subjects')->with('flash_message_success', $message);*/
+	}
+
+
+	public function editModal(Request $request) 
+	{
+		$subject = Subject::findOrFail($request->id);
+		$subject->update($request->all());
+		$message = "Zapisano zmiany";
+
+		return response()->json(['success'=>$message, 'subject' => $subject]);
 	}
 
 
@@ -51,22 +74,26 @@ class SubjectController extends Controller
 
 	public function update(Request $request, $id = null) 
 	{
-		$subject = Subject::findOrFail($id);
-		$subject->update($request->all());
-		$message = "Zapisano zmiany";
+		if(Subject::userSubject($id)) {
+			$subject = Subject::findOrFail($id);
+			$subject->update($request->all());
+			$message = "Zapisano zmiany";
+			return response()->json(['success'=>$message, 'subject' => $subject]);
+		}
+		
 
-		return redirect('subjects')->with('flash_message_success', $message);
 	}
 
 
-	public function destroy($id = null)
+	public function delete($id = null)
 	{
 		if(Subject::userSubject($id)) {
 			$subject = Subject::where(['id'=>$id])->delete();
 			$message = "Usunięto przedmiot";
-			return redirect()->back()->with('flash_message_success', $message);
+			return response()->json(['success'=>$message]);
 		}else {
-			abort(404);	
+			$message = "Wystąpił błąd";
+			return response()->json(['error'=>$message]);
 		}
 	}
 

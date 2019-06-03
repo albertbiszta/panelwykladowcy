@@ -70,17 +70,27 @@
 
 
 
+                <div class="form-group">
+                    <div  class="col-md-4 control-label">
+                        <?php echo Form::label('indexNumber','Numer indeksu:'); ?>
 
-            <div class="form-group">
-                <div  class="col-md-4 control-label">
-                    <?php echo Form::label('contact','Kontakt do przedstawiciela:'); ?>
+                    </div>
+                    <div class="col-md-6">
+                        <?php echo Form::text('indexNumber',null,['class'=>'form-control']); ?>
 
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <?php echo Form::text('contact',null,['class'=>'form-control']); ?>
 
+                <div class="form-group">
+                    <div  class="col-md-4 control-label">
+                        <?php echo Form::label('contact','Kontakt:'); ?>
+
+                    </div>
+                    <div class="col-md-6">
+                        <?php echo Form::text('contact',null,['class'=>'form-control']); ?>
+
+                    </div>
                 </div>
-            </div>
 
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">

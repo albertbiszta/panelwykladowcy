@@ -12,6 +12,18 @@ use Illuminate\Http\Request;
 class GroupController extends Controller
 {
 
+	public function userGroup($id = null) 
+	{
+		if(Group::userGroup($id)) {
+			$group = Group::findOrFail($id);
+			return response()->json(['success'=>'true', 'group'=> $group->name]);
+		} else {
+			return response()->json(['error'=>'true']);
+		}
+	}
+
+
+
 	public function index() 
 	{
 		$groups = User::find(Auth::user()->id)->groups;
@@ -30,6 +42,16 @@ class GroupController extends Controller
 		$group = new Group($request->all());
 		Auth::user()->groups()->save($group);
 		return redirect('groups');
+	}
+
+	public function storeModal(Request $request) 
+	{
+		$group = new Group($request->all());
+		Auth::user()->groups()->save($group);
+		$message = 'Dodano grupę';
+		
+		return response()->json(['success'=>$message, 'group' => $group]);
+
 	}
 
 

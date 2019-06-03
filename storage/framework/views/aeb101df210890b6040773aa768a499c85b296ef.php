@@ -56,7 +56,7 @@
 
 
                                     <td> <?php echo e($group->year); ?> </td>
-                                   <td>   <a href="<?php echo e(url('subjects', $subject->id)); ?>"> 
+                                   <td>    <a href="<?php echo e(url('groups', $group->id)); ?>" > 
                                 
                                     <i class="fas fa-user-graduate fa-lg" style="color: black"></i>
 

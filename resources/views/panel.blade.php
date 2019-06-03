@@ -55,7 +55,7 @@
 
 
                                     <td> {{$group->year}} </td>
-                                   <td>   <a href="{{ url('subjects', $subject->id) }}"> 
+                                   <td>    <a href="{{ url('groups', $group->id) }}" > 
                                 
                                     <i class="fas fa-user-graduate fa-lg" style="color: black"></i>
 
