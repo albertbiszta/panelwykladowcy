@@ -15,8 +15,9 @@ class AttendanceController extends Controller
 	 /**
 	* Attendance for lesson
 	* 
-	*@param int $lessonId
+	* @param int $lessonId
 	* 
+	* @return \Illuminate\Http\Response
 	*/
 	public function lessonAttendance($lessonId = null)
 	{
@@ -25,6 +26,7 @@ class AttendanceController extends Controller
 		if(Subject::userSubject($lesson->subject_id) && Group::userGroup($lesson->group_id)) {
 			$subject = Subject::findOrFail($lesson->subject_id);
 			$group = Group::findOrFail($lesson->group_id);
+			
 
 			return view('attendances.lesson')->with(compact('lesson', 'subject', 'group'));
 		}else {
@@ -33,17 +35,46 @@ class AttendanceController extends Controller
 	}
 
 
+
+	/**
+	* Save attenndance
+	* 
+	* /attendances/save
+	* 
+	* @param  Request $request
+	* 
+	* @return \Illuminate\Http\Response
+    */
 	public function save(Request $request) {
-		/*if(Subject::userSubject($lesson->subject_id) && Group::userGroup($student->group_id)) {*/
-			$attendance = new Attendance($request->all());
-			$attendance->save();
+		$attendance = new Attendance($request->all());
+		$attendance->save();
+		$student = Student::findOrFail($attendance->student_id);
 
-			$student = Student::findOrFail($attendance->student_id);
-
-			return response()->json(['success'=>'true', 'attendance'=>$attendance, 'student'=>$student]);
-		/*}*/
-
+		return response()->json(['success'=>'true', 'attendance'=>$attendance, 'student'=>$student]);
 	}
+
+
+	/**
+	* Update attenndance
+	* 
+	* /attendances/update
+	* 
+	* @param  Request $request
+	* 
+	* @param  int $id
+	* 
+	* @return \Illuminate\Http\Response
+    */
+	public function update(Request $request, $id = null) {
+		$attendance = Attendance::findOrFail($id);
+		$attendance->status = $request->input('status');
+		$attendance->update();
+		$message = "Zapisano zmiany";
+		$student = Student::findOrFail($attendance->student_id);
+
+		return response()->json(['success'=>'true', 'attendance'=>$attendance, 'student'=>$student, 'message'=>$message]);
+	}
+
 
 
 

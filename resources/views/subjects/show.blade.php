@@ -6,111 +6,118 @@
 			<div class="card"  style="width: 65rem;" >
 
 				<div class="card-body">
-					<div class="float-right" > 
-						<a class="btn btn-outline-secondary button-1" href="#" role="button" data-toggle="modal" data-target="#showSyllabus" aria-haspopup="true" aria-expanded="false">
-							Wyświetl Syllabus
-						</a>
-
-						<a class="btn btn-outline-secondary button-1" id="open-assignGroup-modal" href="#" role="button" data-toggle="modal" data-target="#assignGroup" aria-haspopup="true" aria-expanded="false">
-							Przypisz grupę do przedmiotu
-						</a>
 
 
+					<div class="card-body">
 
-				<br> <br>
+						@if(Session::has('flash_message_error'))
+						<div class="alert alert-error alert-block">
+							<button type="button" class="close" data-dismiss="alert">×</button> 
+							<strong>{!! session('flash_message_error') !!}</strong>
+						</div>
+						@endif   
+						@if(Session::has('flash_message_success'))
+						<div class="alert alert-success alert-block">
+							<button type="button" class="close" data-dismiss="alert">×</button> 
+							<strong>{!! session('flash_message_success') !!}</strong>
+						</div>
+						@endif
 
-					
+						<div>
+							<div class="alert alert-success alert-block"  id="success-info" style="display: none">
+								<button type="button" class="close" data-dismiss="alert" >×</button> 
+								<strong>
+									<p id="info">
+									</p>
+								</strong>
+							</div>
 
-				</div>
-
-
-
-
-
-
-				<div class="card-body">
-
-					@if(Session::has('flash_message_error'))
-					<div class="alert alert-error alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button> 
-						<strong>{!! session('flash_message_error') !!}</strong>
-					</div>
-					@endif   
-					@if(Session::has('flash_message_success'))
-					<div class="alert alert-success alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button> 
-						<strong>{!! session('flash_message_success') !!}</strong>
-					</div>
-					@endif
-
-					<div>
-						<div class="alert alert-success alert-block"  id="success-info" style="display: none">
-							<button type="button" class="close" data-dismiss="alert" >×</button> 
-							<strong>
-								<p id="info">
-								</p>
-							</strong>
 						</div>
 
-					</div>
-
-					<table class="table table-bordered table-sm">
-						<thead>
-							<tr>
-								<th scope="col">Nazwa </th>
-								<th scope="col">Rok</th>
-								<th scope="col">Lista studentów</th>
-								<th scope="col">Oceny</th>
-								<th scope="col">Zajęcia</th>
-
-								<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
 
 
-								</th>
+						<div class="float-right" > 
+							<a class="btn btn-outline-secondary button-1" href="#" role="button" data-toggle="modal" data-target="#showSyllabus" aria-haspopup="true" aria-expanded="false">
+								Wyświetl Syllabus
+							</a>
 
-							</tr>
-						</thead>
-						<tbody id="groups-tbody">
-
-
-							@foreach($subject->groups as $group)
-
-							<tr>
-
-								<td> 
-									<a href="{{ url('groups', $group->id) }}" style="color: black"> 
-										{{$group->name}}
-
-									</a>
-
-								</td>
+							<a class="btn btn-outline-secondary button-1" id="open-assignGroup-modal" href="#" role="button" data-toggle="modal" data-target="#assignGroup" aria-haspopup="true" aria-expanded="false">
+								Przypisz grupę do przedmiotu
+							</a>
 
 
-								<td> {{$group->year}} </td>
-								<td> 
-									<a href="{{ url('groups', $group->id) }}" style="color: black"> 
-										IKONA
 
-									</a>
+							<br> <br>
 
-								</td>
-								<td> 
-									<a href="{{ action('GradeController@groupGrades', [$subject->id, $group->id]) }}" style="color: black"> 
-										IKONA  oceny
+							
 
-									</a>
+						</div>
 
-								</td>
-								<td> 
-									<a href="{{ action('LessonController@groupLessons', [$subject->id, $group->id]) }}" style="color: black"> 
-										IKONA  zajęcia
 
-									</a>
 
-								</td>
 
-								<td>
+
+
+						
+
+						<table class="table table-bordered table-sm">
+							<thead>
+								<tr>
+									<th scope="col">Nazwa </th>
+									<th scope="col">Rok</th>
+									<th scope="col">Lista studentów</th>
+									<th scope="col">Oceny</th>
+									<th scope="col">Zajęcia</th>
+
+									<th scope="col"><i class="fas fa-cog fa-lg"></i>
+
+
+
+									</th>
+
+								</tr>
+							</thead>
+							<tbody id="groups-tbody">
+
+
+								@foreach($subject->groups as $group)
+
+								<tr>
+
+									<td> 
+										<a href="{{ url('groups', $group->id) }}" style="color: black"> 
+											{{$group->name}}
+
+										</a>
+
+									</td>
+
+
+									<td> {{$group->year}} </td>
+									<td> 
+										<a href="{{ url('groups', $group->id) }}" style="color: black"> 
+											IKONA
+
+										</a>
+
+									</td>
+									<td> 
+										<a href="{{ action('GradeController@groupGrades', [$subject->id, $group->id]) }}" style="color: black"> 
+											IKONA  oceny
+
+										</a>
+
+									</td>
+									<td> 
+										<a href="{{ action('LessonController@groupLessons', [$subject->id, $group->id]) }}" style="color: black"> 
+											IKONA  zajęcia
+
+										</a>
+
+									</td>
+
+									<td>
 
 
 

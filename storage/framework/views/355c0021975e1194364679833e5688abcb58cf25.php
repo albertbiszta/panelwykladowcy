@@ -6,112 +6,119 @@
 			<div class="card"  style="width: 65rem;" >
 
 				<div class="card-body">
-					<div class="float-right" > 
-						<a class="btn btn-outline-secondary button-1" href="#" role="button" data-toggle="modal" data-target="#showSyllabus" aria-haspopup="true" aria-expanded="false">
-							Wyświetl Syllabus
-						</a>
-
-						<a class="btn btn-outline-secondary button-1" id="open-assignGroup-modal" href="#" role="button" data-toggle="modal" data-target="#assignGroup" aria-haspopup="true" aria-expanded="false">
-							Przypisz grupę do przedmiotu
-						</a>
 
 
+					<div class="card-body">
 
-				<br> <br>
+						<?php if(Session::has('flash_message_error')): ?>
+						<div class="alert alert-error alert-block">
+							<button type="button" class="close" data-dismiss="alert">×</button> 
+							<strong><?php echo session('flash_message_error'); ?></strong>
+						</div>
+						<?php endif; ?>   
+						<?php if(Session::has('flash_message_success')): ?>
+						<div class="alert alert-success alert-block">
+							<button type="button" class="close" data-dismiss="alert">×</button> 
+							<strong><?php echo session('flash_message_success'); ?></strong>
+						</div>
+						<?php endif; ?>
 
-					
+						<div>
+							<div class="alert alert-success alert-block"  id="success-info" style="display: none">
+								<button type="button" class="close" data-dismiss="alert" >×</button> 
+								<strong>
+									<p id="info">
+									</p>
+								</strong>
+							</div>
 
-				</div>
-
-
-
-
-
-
-				<div class="card-body">
-
-					<?php if(Session::has('flash_message_error')): ?>
-					<div class="alert alert-error alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button> 
-						<strong><?php echo session('flash_message_error'); ?></strong>
-					</div>
-					<?php endif; ?>   
-					<?php if(Session::has('flash_message_success')): ?>
-					<div class="alert alert-success alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button> 
-						<strong><?php echo session('flash_message_success'); ?></strong>
-					</div>
-					<?php endif; ?>
-
-					<div>
-						<div class="alert alert-success alert-block"  id="success-info" style="display: none">
-							<button type="button" class="close" data-dismiss="alert" >×</button> 
-							<strong>
-								<p id="info">
-								</p>
-							</strong>
 						</div>
 
-					</div>
-
-					<table class="table table-bordered table-sm">
-						<thead>
-							<tr>
-								<th scope="col">Nazwa </th>
-								<th scope="col">Rok</th>
-								<th scope="col">Lista studentów</th>
-								<th scope="col">Oceny</th>
-								<th scope="col">Zajęcia</th>
-
-								<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
 
 
-								</th>
+						<div class="float-right" > 
+							<a class="btn btn-outline-secondary button-1" href="#" role="button" data-toggle="modal" data-target="#showSyllabus" aria-haspopup="true" aria-expanded="false">
+								Wyświetl Syllabus
+							</a>
 
-							</tr>
-						</thead>
-						<tbody id="groups-tbody">
-
-
-							<?php $__currentLoopData = $subject->groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-							<tr>
-
-								<td> 
-									<a href="<?php echo e(url('groups', $group->id)); ?>" style="color: black"> 
-										<?php echo e($group->name); ?>
+							<a class="btn btn-outline-secondary button-1" id="open-assignGroup-modal" href="#" role="button" data-toggle="modal" data-target="#assignGroup" aria-haspopup="true" aria-expanded="false">
+								Przypisz grupę do przedmiotu
+							</a>
 
 
-									</a>
 
-								</td>
+							<br> <br>
+
+							
+
+						</div>
 
 
-								<td> <?php echo e($group->year); ?> </td>
-								<td> 
-									<a href="<?php echo e(url('groups', $group->id)); ?>" style="color: black"> 
-										IKONA
 
-									</a>
 
-								</td>
-								<td> 
-									<a href="<?php echo e(action('GradeController@groupGrades', [$subject->id, $group->id])); ?>" style="color: black"> 
-										IKONA  oceny
 
-									</a>
 
-								</td>
-								<td> 
-									<a href="<?php echo e(action('LessonController@groupLessons', [$subject->id, $group->id])); ?>" style="color: black"> 
-										IKONA  zajęcia
+						
 
-									</a>
+						<table class="table table-bordered table-sm">
+							<thead>
+								<tr>
+									<th scope="col">Nazwa </th>
+									<th scope="col">Rok</th>
+									<th scope="col">Lista studentów</th>
+									<th scope="col">Oceny</th>
+									<th scope="col">Zajęcia</th>
 
-								</td>
+									<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
-								<td>
+
+
+									</th>
+
+								</tr>
+							</thead>
+							<tbody id="groups-tbody">
+
+
+								<?php $__currentLoopData = $subject->groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+								<tr>
+
+									<td> 
+										<a href="<?php echo e(url('groups', $group->id)); ?>" style="color: black"> 
+											<?php echo e($group->name); ?>
+
+
+										</a>
+
+									</td>
+
+
+									<td> <?php echo e($group->year); ?> </td>
+									<td> 
+										<a href="<?php echo e(url('groups', $group->id)); ?>" style="color: black"> 
+											IKONA
+
+										</a>
+
+									</td>
+									<td> 
+										<a href="<?php echo e(action('GradeController@groupGrades', [$subject->id, $group->id])); ?>" style="color: black"> 
+											IKONA  oceny
+
+										</a>
+
+									</td>
+									<td> 
+										<a href="<?php echo e(action('LessonController@groupLessons', [$subject->id, $group->id])); ?>" style="color: black"> 
+											IKONA  zajęcia
+
+										</a>
+
+									</td>
+
+									<td>
 
 
 

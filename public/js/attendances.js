@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 	saveAttendance();
+	updateAttendance();
 
 });
 
@@ -46,9 +47,9 @@ var saveAttendance = () =>
 
 
 					<div > 
-					<select class="form-control" name="status" id="status" data-id="{{$student->id}}">
+					<select class="form-control" name="status" id="status" data-id="${data.attendance.id}">
 					
-						 ${editStatusOptions(data.attendance.status)}
+					${editStatusOptions(data.attendance.status)}
 
 
 					</select>
@@ -63,7 +64,7 @@ var saveAttendance = () =>
 
 					`;
 
-					$('#attendances-tbody').append()
+					$('#attendances-tbody').append(studentAttendance);
 
 				}
 			});
@@ -74,6 +75,11 @@ var saveAttendance = () =>
 		$('#main').empty();
 
 		let table = `
+
+
+		<button class="btn btn-outline-secondary float-right" id="update-attendance"> Zatwierdź zmiany w obecności</button>
+		<br> <br>
+
 		<table class="table table-bordered table-sm">
 		<thead>
 		<tr>
@@ -139,4 +145,78 @@ var editStatusOptions = (status) =>
 		return options;
 	}
 
+}
+
+
+
+var updateAttendance = () =>
+{
+
+	$('#update-attendance').click(function(){
+
+
+		$('select').each(function(){
+
+			let status = $(this).val();
+			let attendanceId = $(this).data('id');
+
+			let postData = {
+				"status": status,
+				"_token": $('#token').val()
+			};
+
+
+				$('#attendances-tbody').empty();
+			$.ajax({
+				type: "POST",
+				url: `/attendances/${attendanceId}/update`,
+				data: postData,
+				success(data)
+				{
+					let studentAttendance = `
+					<tr>
+
+
+					<td> ${data.student.lastname} </td>
+					<td> ${data.student.firstname} </td>
+					<td> ${data.student.lastname} </td>
+
+
+
+					<td> 
+
+
+					<div > 
+					<select class="form-control" name="status" id="status" data-id="${data.attendance.id}">
+					
+					${editStatusOptions(data.attendance.status)}
+
+
+					</select>
+					</div>
+
+					</td>
+
+
+
+
+					</tr>
+
+					`;
+
+					$('#attendances-tbody').append(studentAttendance);
+
+				}
+			});
+
+
+		});
+
+	
+
+		
+		
+
+
+	});
 }

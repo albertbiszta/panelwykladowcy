@@ -66,8 +66,9 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::patch('/lessons/{id}/edit-status','LessonController@editStatus');
 
 	//Route::resource('attendances', 'AttendanceController');
-	Route::get('attendances/lessons/{lesson_id}', 'AttendanceController@lessonAttendance')->name('attendances.lesson');
-	Route::post('attendances/save', 'AttendanceController@save')->name('attendances.save');
+	Route::get('/attendances/lessons/{lesson_id}', 'AttendanceController@lessonAttendance')->name('attendances.lesson');
+	Route::post('/attendances/save', 'AttendanceController@save')->name('attendances.save');
+	Route::post('/attendances/{id}/update', 'AttendanceController@update')->name('attendances.update');
 
 
 
