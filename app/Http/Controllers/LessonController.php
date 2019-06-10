@@ -23,21 +23,21 @@ class LessonController extends Controller
 		}
 	}
 
-	  public function addLesson(Request $request, $subjectId, $groupId = null) {
-    	if(Subject::userSubject($subjectId) && Group::userGroup($groupId)) {
-    		$lesson = new Lesson;
-    		$lesson->subject_id = $subjectId;
-    		$lesson->group_id = $groupId;
-    		$lesson->topic = $request->input('topic');
-    		$lesson->performed = $request->input('performed');
-    		$lesson->date = $request->input('date');
-    		$lesson->save();
-    		$message = "Dodano lekcję";
 
-			return redirect()->back()->with('flash_message_success', $message);
-    	}else {
-    		abort(404);
-    	}
+	 public function add(Request $request, $subjectId, $groupId = null) {
+        if(Subject::userSubject($subjectId) && Group::userGroup($groupId)) {
+            $lesson = new Lesson;
+            $lesson->subject_id = $subjectId;
+            $lesson->group_id = $groupId;
+            $lesson->topic = $request->input('topic');
+            $lesson->performed = $request->input('performed');
+            $lesson->date = $request->input('date');
+            $lesson->save();
+            $message = "Dodano lekcję";
+            return redirect()->back()->with('flash_message_success', $message);
+        }else {
+            abort(404);
+        }
     }
 
 
@@ -45,8 +45,10 @@ class LessonController extends Controller
             $lesson = Lesson::findOrFail($id);
             $lesson->performed = $request->input('performed');
             $lesson->update();
+            $message = "Zmieniono status zajęć";
+
             
-            return redirect()->back();
+            return redirect()->back()->with('flash_message_success', $message);
     }
 
 

@@ -1,100 +1,120 @@
-<!doctype html>
-<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php $__env->startSection('content'); ?>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+               <div class="card-body"></div>
+               <div class="card-body"></div>
 
-        <title>Laravel</title>
+               <div class="card-body">
+                <p id="p-center-big">  Zaloguj się  </p>    
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+            </div>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+            <div class="card-body" id="login-form">
+                <form method="POST" action="<?php echo e(route('login')); ?>">
+                    <?php echo csrf_field(); ?>
 
-            .full-height {
-                height: 100vh;
-            }
+                    <div class="form-group row">
+                      
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+                      <div class="col-md-6">
+                        <input id="email" type="email" placeholder="E-Mail" class="form-control <?php if ($errors->has('email')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('email'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="email" value="<?php echo e(old('email')); ?>" required autocomplete="email" autofocus>
 
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            <?php if(Route::has('login')): ?>
-                <div class="top-right links">
-                    <?php if(auth()->guard()->check()): ?>
-                        <a href="<?php echo e(url('/home')); ?>">Home</a>
-                    <?php else: ?>
-                        <a href="<?php echo e(route('login')); ?>">Login</a>
-
-                        <?php if(Route::has('register')): ?>
-                            <a href="<?php echo e(route('register')); ?>">Register</a>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                        <?php if ($errors->has('email')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('email'); ?>
+                        <span class="invalid-feedback" role="alert">
+                            <strong><?php echo e($message); ?></strong>
+                        </span>
+                        <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+                    </div>
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="form-group row">
+                 
+
+                 <div class="col-md-6">
+                    <input id="password" type="password" placeholder="Hasło" class="form-control <?php if ($errors->has('password')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('password'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="password" required autocomplete="current-password">
+
+                    <?php if ($errors->has('password')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('password'); ?>
+                    <span class="invalid-feedback" role="alert">
+                        <strong><?php echo e($message); ?></strong>
+                    </span>
+                    <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6 offset-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember" <?php echo e(old('remember') ? 'checked' : ''); ?>>
+
+                        <label class="form-check-label" for="remember">
+                            <?php echo e(__('Zapamiętaj mnie')); ?>
+
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-0">
+                <div class="col-md-8 offset-md-4">
+
+
+                                    <p id="p-center">
+
+                                     <button type="submit" class="btn btn-outline-secondary" id="button-1">
+                                        <?php echo e(__('Login')); ?>
+
+                                    </button>
+                                </p>
+
+
+                            </div>
+                        </div>
+
+                    </form>
+                    <div class="card-body">
+                        <p id="p-center">
+                            Nie masz konta?
+
+                        </p>
+
+                        <p id="p-center">
+                            <b>   
+                              <a href="<?php echo e(route('register')); ?>">
+                                <?php echo e(__('Zarejestruj się')); ?>
+
+                            </a> 
+                        </b>
+
+
+
+                    </p>
+
+
+
                 </div>
             </div>
         </div>
-    </body>
-</html>
-<?php /**PATH C:\Users\aba\Desktop\LARAVEL ALL\panelwykladowcy\resources\views/welcome.blade.php ENDPATH**/ ?>
+    </div>
+</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.guest', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\aba\Desktop\LARAVEL ALL\panelwykladowcy\resources\views/welcome.blade.php ENDPATH**/ ?>

@@ -1,6 +1,8 @@
 @extends('layouts.app')
-
 @section('content')
+
+
+
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-md-8">
@@ -24,7 +26,7 @@
 							</div>
 
 						</div>
-						<table class="table table-borderless">
+						<table class="table table-bordered table-sm">
 							<thead>
 								<tr>
 									<th scope="col">Nazwa przedmiotu</th>
@@ -77,10 +79,11 @@
 
 									
 									<input type="hidden" name="subjectId" id="subjectId" value="{{ $subject->id }}">
-									<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="{{$subject->id}}" id="delete-subject" class="btn btn-light btn-sm">
+									<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="{{$subject->id}}" id="delete-subject" class="btn btn-light btn-sm button-1">
 										<i class="far fa-trash-alt fa-lg"></i>
 									</button>
 
+									
 
 									
 
@@ -100,7 +103,6 @@
 				</div>
 
 				{{-- add modal --}}
-
 				<div class="modal fade" id="addSubject" tabindex="-1" role="dialog" data-dismiss="modal">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -144,7 +146,7 @@
 							<div class="modal-footer">
 								<div class="form-group">
 									<div class="col-md-6 col-md-offset-4">
-										{!! Form::submit('Dodaj przedmiot',['class'=>'btn btn-secondary', 'id'=>"submitSubject", 
+										{!! Form::submit('Dodaj przedmiot',['class'=>'btn btn-outline-secondary button-1', 'id'=>"submitSubject", 
 										'data-dismiss'=>'modal']) !!}
 									</div>
 								</div>
@@ -205,7 +207,7 @@
 							<div class="modal-footer">
 								<div class="form-group">
 									<div class="col-md-6 col-md-offset-4">
-										{!! Form::submit('Zapisz zmiany',['class'=>'btn btn-secondary', 'id'=>"submitEditSubject", 
+										{!! Form::submit('Zapisz zmiany',['class'=>'btn btn-outline-secondary button-1', 'id'=>"submitEditSubject", 
 										'data-dismiss'=>'modal']) !!}
 									</div>
 								</div>
@@ -247,6 +249,6 @@
 </div>
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
-
-
 @endsection
+
+

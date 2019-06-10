@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-	return view('welcome');
+	return view('auth.login');
 });
 
 Route::get('/registered', function () {
@@ -32,11 +32,13 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::get('/panel', 'PanelController@index')->name('panel');
 
 	Route::resource('subjects', 'SubjectController'); 
-	Route::post('/new-subject', 'SubjectController@storeModal');
+	Route::post('/subjects/add', 'SubjectController@add');
 	Route::post('/edit-subject', 'SubjectController@editModal');
-	Route::delete('/subjects/delete/{id}', 'SubjectController@delete')->name('subjects.delete');
+	Route::delete('/subjects/{id}/delete', 'SubjectController@delete')->name('subjects.delete');
+
 	Route::post('/subjects/{id}/assign-group', 'SubjectController@assignGroup')->name('subjects.assignGroup');
 	Route::delete('/subjects/{subject_id}/{group_id}', 'SubjectController@unassignGroup')->name('subjects.unassignGroup');
+	Route::get('/subject/{id}/groups', 'SubjectController@subjectGroups');
 
 
 	Route::resource('groups', 'GroupController'); 
@@ -59,12 +61,13 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
 
 	Route::get('lessons/subject/{subject_id}/group/{group_id}', 'LessonController@groupLessons')->name('lessons.group');
-	Route::post('add-lesson/subject/{subject_id}/group/{group_id}', 'LessonController@addLesson')->name('lessons.addLesson');
+	Route::post('lessons/subject/{subject_id}/group/{group_id}/add', 'LessonController@add')->name('lessons.add');
+
 	Route::patch('/lessons/{id}/edit-status','LessonController@editStatus');
 
 	//Route::resource('attendances', 'AttendanceController');
 	Route::get('attendances/lessons/{lesson_id}', 'AttendanceController@lessonAttendance')->name('attendances.lesson');
-	Route::post('attendances/save/lessons/{lesson_id}/', 'AttendanceController@saveAttendance')->name('attendances.lesson');
+	Route::post('attendances/save', 'AttendanceController@save')->name('attendances.save');
 
 
 

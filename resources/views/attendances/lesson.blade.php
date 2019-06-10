@@ -32,21 +32,111 @@
 
 				<div class="card-body">
 
-					<?php
-					$students = [];
+					<div id="main">
 
-					?>
+						@if(count($lesson->attendances) > 0)
 
-					<!-- Formularz -->
-					{!! Form::open(['action'=> ['AttendanceController@saveAttendance',
-						$lesson->id],
-						'method'=>'POST', 'class' =>'form-horizontal']) !!}
+						<button class="btn btn-outline-secondary float-right" id="update-attendance"> Zatwierdź zmiany w obecności</button>
+						<br> <br>
+
+						<table class="table table-bordered table-sm">
+							<thead>
+								<tr>
+									<th scope="col">Nazwisko</th>
+									<th scope="col">Imię</th>
+									<th scope="col">Numer indeksu</th>
+									<th scope="col">Status obecności</th>
 
 
-					{!! Form::submit('Zatwierdź obecność',['class'=>'btn btn-secondary']) !!}
+								</tr>
+							</thead>
+							<tbody id="attendances-tbody">
 
 
-					<table class="table table-borderless">
+								@foreach($lesson->attendances as $attendance)
+
+
+								@foreach($group->students as $student)
+
+
+								@if($attendance->student_id == $student->id)
+
+								<tr>
+
+
+									<td> {{$student->lastname}} </td>
+									<td> {{$student->firstname}} </td>
+									<td> {{$student->indexNumber}} </td> 
+
+
+
+									<td> 
+
+
+										<select class="form-control" name="status" id="status" data-id="{{$attendance->id}}">
+
+											@if($attendance->status == 'Obecny')
+											<option value="Obecny" disable="true" selected="true"> Obecny </option>
+											<option value="Nieobecny"> Nieobecny </option>
+											<option value="Nieobecność usprawiedliwiona"> Nieobecność usprawiedliwiona </option>
+
+
+											@elseif($attendance->status == 'Nieobecny')
+
+											<option value="Nieobecny" disable="true" selected="true"> Nieobecny </option>
+											<option value="Obecny"> Obecny </option>
+											<option value="Nieobecność usprawiedliwiona"> Nieobecność usprawiedliwiona </option>
+
+											@else
+											<option value="Nieobecność usprawiedliwiona" disable="true" selected="true"> Nieobecność usprawiedliwiona </option>
+											<option value="Obecny"> Obecny </option>
+											<option value="Nieobecny"> Nieobecny </option>
+
+											@endif
+											
+
+
+										</select>
+
+
+									{{-- <div > 
+										<select class="form-control" name="status" id="status" data-id="{{$student->id}}">
+											<option value="Obecny" disable="true" selected="true"> Obecny </option>
+
+
+											<option value="Nieobecny"> Nieobecny </option>
+											<option value="Nieobecność usprawiedliwiona"> Nieobecność usprawiedliwiona </option>
+
+
+										</select>
+									</div>
+									--}}
+								</td>
+
+
+
+
+							</tr>
+
+							@endif
+
+							@endforeach
+							@endforeach
+
+						</tbody>
+					</table>
+
+
+
+
+					@else
+
+					<button class="btn btn-outline-secondary float-right" id="submit-attendance"> Zatwierdź obecność </button>
+					<br> <br>
+
+
+
+					<table class="table table-bordered table-sm">
 						<thead>
 							<tr>
 								<th scope="col">Nazwisko</th>
@@ -57,59 +147,71 @@
 
 
 
-							</th>
-
-						</tr>
-					</thead>
-					<tbody>
 
 
-						@foreach($group->students as $student)
 
-						<?php
-						array_push($students, $student->id)
-
-						?>
+							</tr>
+						</thead>
+						<tbody>
 
 
-						<tr>
-							<td> {{$student->lastname}} </td>
-							<td> {{$student->firstname}} </td>
-							<td> {{$student->indexNumber}} </td>
+							@foreach($group->students as $student)
 
 
-							 {{ Form::hidden($student->id, $student->id) }}
-
-							<td>
-
-								
-								<div class="col-md-6">
-									<select class="form-control" name="status" id="exampleFormControlSelect2">
-										<option value="Obecny" disable="true" selected="true"> Obecny </option>
+							<tr>
 
 
-										<option value="Nieobecny"> Nieobecny </option>
-										<option value="Nieobecność upsrawiedliona"> Nieobecność upsrawiedliona </option>
+								<td> {{$student->lastname}} </td>
+								<td> {{$student->firstname}} </td>
+								<td> {{$student->indexNumber}} </td>
 
 
-									</select>
-								</div>
 
-							</td>
+								<td> 
+
+
+									<div > 
+										<select class="form-control" name="status" id="status" data-id="{{$student->id}}">
+											<option value="Obecny" disable="true" selected="true"> Obecny </option>
+
+
+											<option value="Nieobecny"> Nieobecny </option>
+											<option value="Nieobecność usprawiedliwiona"> Nieobecność usprawiedliwiona </option>
+
+
+										</select>
+									</div>
+
+								</td>
 
 
 
 
-						</tr>
+							</tr>
 
-						@endforeach
+							@endforeach
 
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+
+					@endif
+
+
+
+
+
+				</div>	
+
+
+
 
 			</div>
 
-			
+
+			<input type="hidden" name="lessonId" id="lessonId" value="{{ $lesson->id }}">
+
+			<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+
 
 
 

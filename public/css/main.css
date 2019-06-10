@@ -23,7 +23,6 @@ li.dropdown:hover > .dropdown-menu {
 
 
 
-
 .form-control {
 	
 	border-top: none;
@@ -179,3 +178,23 @@ a:hover {
 }
 
 body { padding-bottom: 70px; } 
+
+.button-1{
+  /*color: rgba(30, 22, 54, 0.6);*/
+  color: #000;
+ 
+}
+
+
+
+.button-1:hover{
+  color: rgba(255, 255, 255, 0.85);
+
+  box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 1px inset;
+}
+
+
+#p-center{
+  text-align: center;
+    font-size: 15px;
+}

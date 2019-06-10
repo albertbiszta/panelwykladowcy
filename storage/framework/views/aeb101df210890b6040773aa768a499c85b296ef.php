@@ -16,6 +16,7 @@
             <div class="card-body">
 
           <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+     
           <h6><b> 
            <a href="<?php echo e(url('subjects', $subject->id)); ?>" style="color: black"> 
                                             <?php echo e($subject->name); ?>
@@ -24,7 +25,7 @@
                                         </a>
                                          </b></h6>
 
-        <table class="table table-bordless table-sm">
+        <table class="table table-bordered table-sm responsive">
                             <thead>
                                 <tr>
                                     <th scope="col">Nazwa grupy</th>
@@ -82,6 +83,7 @@
                                   
 
                                     </tr>
+
 
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 

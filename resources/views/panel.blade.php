@@ -17,6 +17,7 @@
             <div class="card-body">
 
           @foreach($subjects as $subject)
+     
           <h6><b> 
            <a href="{{ url('subjects', $subject->id) }}" style="color: black"> 
                                             {{$subject->name}}
@@ -24,7 +25,7 @@
                                         </a>
                                          </b></h6>
 
-        <table class="table table-bordless table-sm">
+        <table class="table table-bordered table-sm responsive">
                             <thead>
                                 <tr>
                                     <th scope="col">Nazwa grupy</th>
@@ -81,6 +82,7 @@
                                   
 
                                     </tr>
+
 
                                     @endforeach
 

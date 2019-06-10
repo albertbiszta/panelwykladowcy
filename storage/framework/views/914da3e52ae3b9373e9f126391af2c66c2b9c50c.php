@@ -1,4 +1,7 @@
 <?php $__env->startSection('content'); ?>
+
+
+
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-md-8">
@@ -22,7 +25,7 @@
 							</div>
 
 						</div>
-						<table class="table table-borderless">
+						<table class="table table-bordered table-sm">
 							<thead>
 								<tr>
 									<th scope="col">Nazwa przedmiotu</th>
@@ -74,10 +77,11 @@
 
 									
 									<input type="hidden" name="subjectId" id="subjectId" value="<?php echo e($subject->id); ?>">
-									<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="<?php echo e($subject->id); ?>" id="delete-subject" class="btn btn-light btn-sm">
+									<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="<?php echo e($subject->id); ?>" id="delete-subject" class="btn btn-light btn-sm button-1">
 										<i class="far fa-trash-alt fa-lg"></i>
 									</button>
 
+									
 
 									
 
@@ -97,7 +101,6 @@
 				</div>
 
 				
-
 				<div class="modal fade" id="addSubject" tabindex="-1" role="dialog" data-dismiss="modal">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -147,7 +150,7 @@
 							<div class="modal-footer">
 								<div class="form-group">
 									<div class="col-md-6 col-md-offset-4">
-										<?php echo Form::submit('Dodaj przedmiot',['class'=>'btn btn-secondary', 'id'=>"submitSubject", 
+										<?php echo Form::submit('Dodaj przedmiot',['class'=>'btn btn-outline-secondary button-1', 'id'=>"submitSubject", 
 										'data-dismiss'=>'modal']); ?>
 
 									</div>
@@ -216,7 +219,7 @@
 							<div class="modal-footer">
 								<div class="form-group">
 									<div class="col-md-6 col-md-offset-4">
-										<?php echo Form::submit('Zapisz zmiany',['class'=>'btn btn-secondary', 'id'=>"submitEditSubject", 
+										<?php echo Form::submit('Zapisz zmiany',['class'=>'btn btn-outline-secondary button-1', 'id'=>"submitEditSubject", 
 										'data-dismiss'=>'modal']); ?>
 
 									</div>
@@ -259,7 +262,8 @@
 </div>
 <input type="hidden" name="_token" id="token" value="<?php echo e(csrf_token()); ?>">
 
-
-
 <?php $__env->stopSection(); ?>
+
+
+
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\aba\Desktop\LARAVEL ALL\panelwykladowcy\resources\views/subjects/index.blade.php ENDPATH**/ ?>

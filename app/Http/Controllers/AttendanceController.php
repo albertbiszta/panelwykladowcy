@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Attendance;
 use App\Group;
 use App\Lesson;
+use App\Student;
 use App\Subject;
 use Illuminate\Http\Request;
 
@@ -31,14 +33,15 @@ class AttendanceController extends Controller
 	}
 
 
-	public function saveAttendance(Request $request, $lessonId = null) {
-		$lesson = Lesson::findOrFail($lessonId);
+	public function save(Request $request) {
+		/*if(Subject::userSubject($lesson->subject_id) && Group::userGroup($student->group_id)) {*/
+			$attendance = new Attendance($request->all());
+			$attendance->save();
 
-		if(Subject::userSubject($lesson->subject_id) && Group::userGroup($lesson->group_id)) {
-		
-		}else {
-			abort(404);
-		}
+			$student = Student::findOrFail($attendance->student_id);
+
+			return response()->json(['success'=>'true', 'attendance'=>$attendance, 'student'=>$student]);
+		/*}*/
 
 	}
 

@@ -37,6 +37,8 @@
   <link href="<?php echo e(asset('css/main.css')); ?>" rel="stylesheet">
   <link href="<?php echo e(asset('css/layout/app.css')); ?>" rel="stylesheet">
 
+   <link href="<?php echo e(asset('css/mobile.css')); ?>" rel="stylesheet">
+
 
 </head>
 <body>
@@ -215,9 +217,13 @@ src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 crossorigin="anonymous"></script>
 
+<script src="<?php echo e(asset('js/attendances.js')); ?>" type="text/javascript"></script>
 <script src="<?php echo e(asset('js/group.js')); ?>" type="text/javascript"></script>
-<script src="<?php echo e(asset('js/subject.js')); ?>" type="text/javascript"></script>
+
 <script src="<?php echo e(asset('js/search.js')); ?>" type="text/javascript"></script>
+<script src="<?php echo e(asset('js/subject.js')); ?>" type="text/javascript"></script>
+
+
 
 
 

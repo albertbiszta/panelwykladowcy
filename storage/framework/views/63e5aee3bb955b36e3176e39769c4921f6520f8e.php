@@ -23,7 +23,7 @@
 							</div>
 
 						</div>
-						<table class="table table-borderless">
+						<table class="table table-bordered">
 							<thead>
 								<tr>
 									<th scope="col">Nazwa Grupy</th>
@@ -123,7 +123,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-md-8 col-md-offset-4">
-							<input type="submit" value="Dodaj grupę" id="submitGroup" class="btn btn-secondary float-right"
+							<input type="submit" value="Dodaj grupę" id="submitGroup" class="btn btn-outline-secondary button-1 float-right"
 							data-dismiss='modal'>
 						</div>	
 					</div>
