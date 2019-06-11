@@ -13,11 +13,11 @@
 
             </div>
 
-            <div class="card-body" id="login-form">
+            <div class="card-body " id="login-form">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    <div class="form-group row">
+                    <div class="form-group row justify-content-center">
                       {{--   <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label> --}}
 
                       <div class="col-md-6">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group row justify-content-center">
                  {{--    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label> --}}
 
                  <div class="col-md-6">
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row ">
                 <div class="col-md-6 offset-md-4">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -98,7 +98,12 @@
 
 
                 </div>
+
             </div>
+            {{--  --}}
+
+
+
         </div>
     </div>
 </div>

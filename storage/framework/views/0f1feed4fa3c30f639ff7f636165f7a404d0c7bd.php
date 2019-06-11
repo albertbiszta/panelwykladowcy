@@ -66,20 +66,12 @@
 
 
 
-
-             <li class="nav-item dropdown">
-              <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <b>Przedmioty </b> <i class="fas fa-sort-down"></i> </a>
-
-
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="/subjects">Lista przedmiotów</a>
-                  <a class="dropdown-item" href="/subjects/create">Dodaj przedmiot</a>  
-
-                </div>
-
-
+  
+              <li class="nav-item ">
+                <a class="nav-link" href="/subjects"> <b>Przedmioty </b></a>
               </li>
+
+            
 
 
               <li class="nav-item dropdown">
@@ -89,10 +81,10 @@
 
 
                  <div class="dropdown-menu">
-                  <a class="dropdown-item" href="/groups">Lista grup</a>
-                  <a class="dropdown-item" href="/groups/create">Dodaj grupę</a>  
+                  <a class="dropdown-item" href="/groups">Lista grup / Dodaj grupy</a>
+            
                   <div class="dropdown-divider">  </div>
-                  <a class="dropdown-item" href="/students">Studenci</a>
+                  <a class="dropdown-item" href="/students">Wyszukaj studenta</a>
 
 
 
@@ -100,6 +92,7 @@
 
 
               </li>
+
 
 
               <li class="nav-item dropdown">

@@ -50,7 +50,7 @@
 
 
 				<div class="card-body">
-					<table class="table table-bordered table-sm">
+				<table class="table table-bordered table-sm table-responsive-sm">
 						<thead>
 							<tr>
 								<th scope="col">Data</th>

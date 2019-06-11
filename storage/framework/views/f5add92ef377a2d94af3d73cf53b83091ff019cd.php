@@ -14,7 +14,7 @@
                     <form method="POST" action="<?php echo e(route('register')); ?>">
                         <?php echo csrf_field(); ?>
 
-                        <div class="form-group row">
+                        <div class="form-group row justify-content-center">
                         
 
                             <div class="col-md-6">
@@ -37,7 +37,7 @@ endif; ?>
                         </div>
 
                        
-                        <div class="form-group row">
+                        <div class="form-group row justify-content-center">
                            
 
                             <div class="col-md-6">
@@ -60,7 +60,7 @@ endif; ?>
                         </div>
 
 
-                        <div class="form-group row">
+                        <div class="form-group row justify-content-center">
                           
                             <div class="col-md-6">
                                 <input id="email" placeholder="E-Mail" ype="email" class="form-control <?php if ($errors->has('email')) :
@@ -81,7 +81,7 @@ endif; ?>
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row justify-content-center">
                           
                             <div class="col-md-6">
                                 <input id="password"  placeholder="Hasło" type="password" class="form-control <?php if ($errors->has('password')) :
@@ -102,7 +102,7 @@ endif; ?>
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row justify-content-center">
                        
 
                             <div class="col-md-6">
@@ -111,8 +111,8 @@ endif; ?>
                         </div>
                      <br>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="form-group row mb-0 justify-content-center">
+                            <div class="col-md-6">
 
                                     <p id="p-center">
 

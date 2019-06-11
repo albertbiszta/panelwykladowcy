@@ -39,7 +39,7 @@
 						<button class="btn btn-outline-secondary float-right" id="update-attendance"> Zatwierdź zmiany w obecności</button>
 						<br> <br>
 
-						<table class="table table-bordered table-sm">
+						<table class="table table-bordered table-sm table-responsive-sm">
 							<thead>
 								<tr>
 									<th scope="col">Nazwisko</th>

@@ -26,7 +26,10 @@
 
 					</div>
 
-					<table class="table table-borderless student-results-table" style="display: none">
+
+	
+						
+					<table class="table table-borderless table-sm table-responsive-sm student-results-table" style="display: none">
 						<thead>
 							<tr>
 								<th scope="col">Imię</th>

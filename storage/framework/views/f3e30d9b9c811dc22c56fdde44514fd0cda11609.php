@@ -11,11 +11,11 @@
 
             </div>
 
-            <div class="card-body" id="login-form">
+            <div class="card-body " id="login-form">
                 <form method="POST" action="<?php echo e(route('login')); ?>">
                     <?php echo csrf_field(); ?>
 
-                    <div class="form-group row">
+                    <div class="form-group row justify-content-center">
                       
 
                       <div class="col-md-6">
@@ -37,7 +37,7 @@ endif; ?>
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group row justify-content-center">
                  
 
                  <div class="col-md-6">
@@ -59,7 +59,7 @@ endif; ?>
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row ">
                 <div class="col-md-6 offset-md-4">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="remember" id="remember" <?php echo e(old('remember') ? 'checked' : ''); ?>>
@@ -110,7 +110,12 @@ endif; ?>
 
 
                 </div>
+
             </div>
+            
+
+
+
         </div>
     </div>
 </div>
