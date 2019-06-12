@@ -59,9 +59,9 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::post('grades/add/subject/{subject_id}', 'GradeController@addGrade')->name('grades.addGrade');
 	
 
-
-	Route::get('lessons/subject/{subject_id}/group/{group_id}', 'LessonController@groupLessons')->name('lessons.group');
-	Route::post('lessons/subject/{subject_id}/group/{group_id}/add', 'LessonController@add')->name('lessons.add');
+	Route::get('/lessons', 'LessonController@index')->name('lessons.index');
+	Route::get('/lessons/subject/{subject_id}/group/{group_id}', 'LessonController@groupLessons')->name('lessons.group');
+	Route::post('/lessons/subject/{subject_id}/group/{group_id}/add', 'LessonController@add')->name('lessons.add');
 
 	Route::patch('/lessons/{id}/edit-status','LessonController@editStatus');
 

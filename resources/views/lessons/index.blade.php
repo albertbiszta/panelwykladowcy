@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-     <div class="card"  style="width: 65rem;" >
+       <div class="card"  style="width: 65rem;" >
 
-        <div class="card-header"><b> Twoje przedmioty </b></div>
+        <div class="card-header"><b> Twoje zajęcia </b></div>
 
         <div class="card-body">
             @if (session('status'))
@@ -34,9 +34,8 @@
                 <tr>
                     <th scope="col">Nazwa grupy</th>
                     <th scope="col">Rok</th>
-                    <th scope="col">Lista studentów</th>
-                    <th scope="col">Oceny</th>
-                    <th scope="col">Zajęcia</th>
+                
+                    <th scope="col">Lista zajęć</th>
 
 
                 </th>
@@ -60,20 +59,8 @@
 
 
                 <td> {{$group->year}} </td>
-                <td>    <a href="{{ url('groups', $group->id) }}" > 
-
-                    <i class="fas fa-user-graduate fa-lg" style="color: black"></i>
-
-                </a></td>
-                <td> 
-                    <a href="{{ action('GradeController@groupGrades', [$subject->id, $group->id]) }}" style="color: black"> 
-                      <i class="far fa-file-alt fa-lg" style="color: black"></i>
-
-                  </a>
-
-
-
-              </td>
+               
+               
               <td> 
                 <a href="{{ action('LessonController@groupLessons', [$subject->id, $group->id]) }}" style="color: black"> 
                   <i class="fas fa-chalkboard" style="color: black"></i>
@@ -97,21 +84,13 @@
 
 <br>
 
-@else
-   
-              <h6><b> <u> 
-                 <a href="{{ url('subjects', $subject->id) }}" style="color: black"> 
-                    {{$subject->name}}
 
-                </a>
-             </u>
-            </b></h6>
-           
-            <p>[ Nie dodałeś grup do tego przedmiotu ]</p>
 
 @endif
 
 @endforeach
+
+
 
 
 

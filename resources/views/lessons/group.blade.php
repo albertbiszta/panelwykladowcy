@@ -50,7 +50,7 @@
 
 
 				<div class="card-body">
-				<table class="table table-bordered table-sm table-responsive-sm">
+					<table class="table table-bordered table-sm table-responsive-sm">
 						<thead>
 							<tr>
 								<th scope="col">Data</th>
@@ -151,16 +151,104 @@
 
 			</div>
 
+
 			<div class="card-body">
-				<div class="card-body">
+				
+
+
+			
+
+				<h6><b>Frekwencja studentów</b></h6>
+				
+				
+
+
+				<table class="table table-bordered table-sm table-responsive-sm">
+					<thead>
+						<tr>
+							<th scope="col">Nazwisko i Imię</th>
+							<th scope="col">Obecności</th>
+							<th scope="col">Nieobecności</th>
+							<th scope="col">Nb. usprawiedliwione</th>
+
+
+
+						</th>
+
+					</tr>
+				</thead>
+				<tbody id="students-tbody">
+
+
+					@foreach($group->students as $student)
+
+					<?php
+					$ob = 0;
+					$nb = 0;
+					$uspr = 0;
+					?>
+
+					<tr>
+						<td> {{$student->lastname}} {{$student->firstname}}  </td>
+
+						<?php
+						$studentAttendances = App\Student::studentAttendances($student->id,$subject->id);
+
+						?>
+
+						<td>
+
+							{{-- {{App\Student::studentAttendances($student->id,$subject->id)['ob']}} --}}
+							{{$studentAttendances['ob']}}
+							
+						</td>
+
+						<td>
+							{{$studentAttendances['nb']}}
+						</td>
+
+						<td>
+							{{$studentAttendances['uspr']}}
+						</td>
 
 
 
 
-				</div>
-			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						
+
+
+
+
+
+					</tr>
+
+					@endforeach
+
+				</tbody>
+			</table>
+
+
+
+
+
 		</div>
 	</div>
+</div>
+</div>
 </div>
 </div>
 
@@ -225,17 +313,17 @@
 						</div>
 					</div>
 
-<div class="modal-footer">
+					<div class="modal-footer">
 
-					<div class="form-group">
+						<div class="form-group">
 
-						
 
-						<div class="col-md-6 col-md-offset-4">
-							{!! Form::submit('Dodaj zajęcia',['class'=>'btn btn-outline-secondary float-right']) !!}
 
+							<div class="col-md-6 col-md-offset-4">
+								{!! Form::submit('Dodaj zajęcia',['class'=>'btn btn-outline-secondary float-right']) !!}
+
+							</div>
 						</div>
-</div>
 
 						{!! Form::close() !!}   
 					</div>

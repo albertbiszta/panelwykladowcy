@@ -58,7 +58,7 @@
 
 
 
-
+						@if(count($subject->groups) > 0)
 						
 
 						<table class="table table-bordered table-sm table-responsive-sm">
@@ -157,127 +157,139 @@
 							</tbody>
 						</table>
 
-					</div>
-					<div class="card-header">
-
-					</div>
+						@else
 
 
+		<h6><b> 
+							<p>[ Nie dodałeś grup do tego przedmiotu ]</p>
+					</b></h6>
 
+					
+					
+
+
+
+					@endif
 
 				</div>
+				
+
+
+
+
 			</div>
 		</div>
+	</div>
 
 
-		<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+	<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
-		<input type="hidden" name="subjectId" id="subjectId" value="{{ $subject->id }}">
-
-
-
-
-		{{-- show syllabus--}}
-
-		<div class="modal fade" id="showSyllabus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-
-					<div class="modal-header">
-						<h4 class="modal-title"><b>Syllabus:  </b> {{$subject->name}}</h4>
+	<input type="hidden" name="subjectId" id="subjectId" value="{{ $subject->id }}">
 
 
 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<div class="modal-body">
-						@if($subject->syllabus)
 
-						<p>	<b>Język prowadzenia: </b> {{$subject->syllabus->language}}  </p>
-						<p>	<b>Punkty ECTS: </b> {{$subject->ects}}  </p>
-						<p>	<b>Przedmiot kończy się egzaminem: </b> 
+	{{-- show syllabus--}}
 
-							@if ($subject->exam == 1)
-							Tak
+	<div class="modal fade" id="showSyllabus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
 
-							@else
-							Nie
-
-							@endif
-
-						</p>
-
-
-						<p>  <b>Opis: </b>  {{$subject->syllabus->description}} </p>
+				<div class="modal-header">
+					<h4 class="modal-title"><b>Syllabus:  </b> {{$subject->name}}</h4>
 
 
 
-						<p> <b>Literaura: </b> {{$subject->syllabus->literature}}   </p>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					@if($subject->syllabus)
+
+					<p>	<b>Język prowadzenia: </b> {{$subject->syllabus->language}}  </p>
+					<p>	<b>Punkty ECTS: </b> {{$subject->ects}}  </p>
+					<p>	<b>Przedmiot kończy się egzaminem: </b> 
+
+						@if ($subject->exam == 1)
+						Tak
 
 						@else
-						<h6>  <b> Nie stworzyłeś jeszcze syllabusa do tego przedmiotu </b>  </h6>	
-						<a href="{{action('SyllabusController@create')}}" style="color: black"> 
-							<b>  Dodaj syllabus</b>
+						Nie
 
-						</a>
 						@endif
-					</div>
+
+					</p>
 
 
+					<p>  <b>Opis: </b>  {{$subject->syllabus->description}} </p>
+
+
+
+					<p> <b>Literaura: </b> {{$subject->syllabus->literature}}   </p>
+
+					@else
+					<h6>  <b> Nie stworzyłeś jeszcze syllabusa do tego przedmiotu </b>  </h6>	
+					<a href="{{action('SyllabusController@create')}}" style="color: black"> 
+						<b>  Dodaj syllabus</b>
+
+					</a>
+					@endif
 				</div>
+
+
 			</div>
 		</div>
+	</div>
 
-		{{--  --}}
-
-
-
-		{{-- assign group --}}
-
-		{!! Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']) !!}
+	{{--  --}}
 
 
-		<div class="modal fade" id="assignGroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
 
-					<div class="modal-header">
-						<h4 class="modal-title">Przypisz grupę do przedmiotu</h4>
+	{{-- assign group --}}
+
+	{!! Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']) !!}
 
 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<div class="modal fade" id="assignGroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h4 class="modal-title">Przypisz grupę do przedmiotu</h4>
+
+
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+
+					<div class="form-group">
+						<div  class="col-md-6">
+
+							<select class="form-control" name="groups" id="groups">
+								<option value="" disable="true" selected="true"> Wybierz grupę </option>
+								@foreach($groups as $key => $value)
+
+								@if(!$subject->groups->contains($key))
+
+								<option value="{{$key}}">{{$value}} </option>
+
+								@endif
+
+								@endforeach
+							</select>
+
+
+						</div></div>
+
+
+
 					</div>
-					<div class="modal-body">
+					<div class="modal-footer">
 
 						<div class="form-group">
-							<div  class="col-md-6">
-
-								<select class="form-control" name="groups" id="groups">
-									<option value="" disable="true" selected="true"> Wybierz grupę </option>
-									@foreach($groups as $key => $value)
-
-									@if(!$subject->groups->contains($key))
-
-									<option value="{{$key}}">{{$value}} </option>
-
-									@endif
-
-									@endforeach
-								</select>
-
-
-							</div></div>
-
-
-
-						</div>
-						<div class="modal-footer">
-
-							<div class="form-group">
-								<div class="col-md-4 col-md-offset-4">
-									{!! Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-outline-secondary button-1']) !!}
-								</div>
+							<div class="col-md-4 col-md-offset-4">
+								{!! Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-outline-secondary button-1']) !!}
 							</div>
+						</div>
 
 						{{-- <div class="form-group">
 							<div class="col-md-4 col-md-offset-4">
@@ -301,6 +313,8 @@
 
 		{{-- confirm unassign modal --}}
 
+
+@if(count($subject->groups) > 0)
 		<div class="modal fade" id="confirm-unassign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -331,7 +345,7 @@
 				</div>
 			</div>
 
-			
+		@endif	
 
 
 

@@ -58,10 +58,10 @@
 
 
 
-
+						<?php if(count($subject->groups) > 0): ?>
 						
 
-						<table class="table table-bordered table-sm">
+						<table class="table table-bordered table-sm table-responsive-sm">
 							<thead>
 								<tr>
 									<th scope="col">Nazwa </th>
@@ -149,129 +149,141 @@
 							</tbody>
 						</table>
 
-					</div>
-					<div class="card-header">
-
-					</div>
+						<?php else: ?>
 
 
+		<h6><b> 
+							<p>[ Nie dodałeś grup do tego przedmiotu ]</p>
+					</b></h6>
 
+					
+					
+
+
+
+					<?php endif; ?>
 
 				</div>
+				
+
+
+
+
 			</div>
 		</div>
+	</div>
 
 
-		<input type="hidden" name="_token" id="token" value="<?php echo e(csrf_token()); ?>">
+	<input type="hidden" name="_token" id="token" value="<?php echo e(csrf_token()); ?>">
 
-		<input type="hidden" name="subjectId" id="subjectId" value="<?php echo e($subject->id); ?>">
-
-
-
-
-		
-
-		<div class="modal fade" id="showSyllabus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-
-					<div class="modal-header">
-						<h4 class="modal-title"><b>Syllabus:  </b> <?php echo e($subject->name); ?></h4>
+	<input type="hidden" name="subjectId" id="subjectId" value="<?php echo e($subject->id); ?>">
 
 
 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<div class="modal-body">
-						<?php if($subject->syllabus): ?>
 
-						<p>	<b>Język prowadzenia: </b> <?php echo e($subject->syllabus->language); ?>  </p>
-						<p>	<b>Punkty ECTS: </b> <?php echo e($subject->ects); ?>  </p>
-						<p>	<b>Przedmiot kończy się egzaminem: </b> 
+	
 
-							<?php if($subject->exam == 1): ?>
-							Tak
+	<div class="modal fade" id="showSyllabus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
 
-							<?php else: ?>
-							Nie
-
-							<?php endif; ?>
-
-						</p>
-
-
-						<p>  <b>Opis: </b>  <?php echo e($subject->syllabus->description); ?> </p>
+				<div class="modal-header">
+					<h4 class="modal-title"><b>Syllabus:  </b> <?php echo e($subject->name); ?></h4>
 
 
 
-						<p> <b>Literaura: </b> <?php echo e($subject->syllabus->literature); ?>   </p>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<?php if($subject->syllabus): ?>
+
+					<p>	<b>Język prowadzenia: </b> <?php echo e($subject->syllabus->language); ?>  </p>
+					<p>	<b>Punkty ECTS: </b> <?php echo e($subject->ects); ?>  </p>
+					<p>	<b>Przedmiot kończy się egzaminem: </b> 
+
+						<?php if($subject->exam == 1): ?>
+						Tak
 
 						<?php else: ?>
-						<h6>  <b> Nie stworzyłeś jeszcze syllabusa do tego przedmiotu </b>  </h6>	
-						<a href="<?php echo e(action('SyllabusController@create')); ?>" style="color: black"> 
-							<b>  Dodaj syllabus</b>
+						Nie
 
-						</a>
 						<?php endif; ?>
-					</div>
+
+					</p>
 
 
+					<p>  <b>Opis: </b>  <?php echo e($subject->syllabus->description); ?> </p>
+
+
+
+					<p> <b>Literaura: </b> <?php echo e($subject->syllabus->literature); ?>   </p>
+
+					<?php else: ?>
+					<h6>  <b> Nie stworzyłeś jeszcze syllabusa do tego przedmiotu </b>  </h6>	
+					<a href="<?php echo e(action('SyllabusController@create')); ?>" style="color: black"> 
+						<b>  Dodaj syllabus</b>
+
+					</a>
+					<?php endif; ?>
 				</div>
+
+
 			</div>
 		</div>
+	</div>
 
-		
-
-
-
-		
-
-		<?php echo Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']); ?>
+	
 
 
 
-		<div class="modal fade" id="assignGroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
+	
 
-					<div class="modal-header">
-						<h4 class="modal-title">Przypisz grupę do przedmiotu</h4>
+	<?php echo Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']); ?>
 
 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+	<div class="modal fade" id="assignGroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h4 class="modal-title">Przypisz grupę do przedmiotu</h4>
+
+
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+
+					<div class="form-group">
+						<div  class="col-md-6">
+
+							<select class="form-control" name="groups" id="groups">
+								<option value="" disable="true" selected="true"> Wybierz grupę </option>
+								<?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+								<?php if(!$subject->groups->contains($key)): ?>
+
+								<option value="<?php echo e($key); ?>"><?php echo e($value); ?> </option>
+
+								<?php endif; ?>
+
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+							</select>
+
+
+						</div></div>
+
+
+
 					</div>
-					<div class="modal-body">
+					<div class="modal-footer">
 
 						<div class="form-group">
-							<div  class="col-md-6">
+							<div class="col-md-4 col-md-offset-4">
+								<?php echo Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-outline-secondary button-1']); ?>
 
-								<select class="form-control" name="groups" id="groups">
-									<option value="" disable="true" selected="true"> Wybierz grupę </option>
-									<?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-									<?php if(!$subject->groups->contains($key)): ?>
-
-									<option value="<?php echo e($key); ?>"><?php echo e($value); ?> </option>
-
-									<?php endif; ?>
-
-									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-								</select>
-
-
-							</div></div>
-
-
-
-						</div>
-						<div class="modal-footer">
-
-							<div class="form-group">
-								<div class="col-md-4 col-md-offset-4">
-									<?php echo Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-outline-secondary button-1']); ?>
-
-								</div>
 							</div>
+						</div>
 
 						
 
@@ -291,6 +303,8 @@
 
 		
 
+
+<?php if(count($subject->groups) > 0): ?>
 		<div class="modal fade" id="confirm-unassign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -325,7 +339,7 @@
 				</div>
 			</div>
 
-			
+		<?php endif; ?>	
 
 
 

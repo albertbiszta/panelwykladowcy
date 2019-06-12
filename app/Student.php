@@ -10,10 +10,10 @@ class Student extends Model
 
 	public $timestamps = false;
 
-	 public function attendances()
-    {
-        return $this->hasMany('App\Attendance');
-    }
+	public function attendances()
+	{
+		return $this->hasMany('App\Attendance');
+	}
 
 
 	public function group() 
@@ -30,9 +30,9 @@ class Student extends Model
      /**
 	* if student belongs to user's group
 	* 
-	*@param int $studentId
+	* @param int $studentId
 	* 
-	*@return bool
+	* @return bool
 	*/
 	protected function userStudent($studentId = null): bool
 	{
@@ -44,5 +44,39 @@ class Student extends Model
 		}
 	}
 
+	 /**
+	* Counting student's attendance 
+	* 
+	* @param int $studentId
+	* 
+	* @param int $subjectId
+	* 
+	* @return bool
+	*/
+	public static function studentAttendances($studentId, $subjectId)
+	{
+		$student = Student::findOrFail($studentId);
 
-}
+		$attendances = [];
+		$attendances['ob'] = 0;
+		$attendances['nb'] = 0;
+		$attendances['uspr'] = 0;
+
+		$ob = 0;
+		foreach($student->attendances as $attendance) {
+			if($attendance->lesson->subject_id == $subjectId && $attendance->status == 'Obecny') {
+				$attendances['ob'] ++;
+
+			}else if($attendance->lesson->subject_id == $subjectId && $attendance->status == 'Nieobecny') {
+				$attendances['nb'] ++;
+				} else if($attendance->lesson->subject_id == $subjectId && $attendance->status == 'Nieobecność usprawiedliwiona') {
+					$attendances['uspr'] ++;
+				}
+			}
+
+			return $attendances;
+
+		}
+
+
+	}

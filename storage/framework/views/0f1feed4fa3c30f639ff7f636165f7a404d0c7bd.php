@@ -93,6 +93,12 @@
 
               </li>
 
+              
+
+              <li class="nav-item ">
+                <a class="nav-link" href="/lessons"> <b> Zajęcia </b></a>
+              </li>
+
 
 
               <li class="nav-item dropdown">
@@ -110,13 +116,13 @@
                 </li>
 
 
+
               
             </ul>
           </ul>
 
 
           
-
 
 
 
@@ -133,7 +139,7 @@
                 
 
                 <li class="nav-item dropdown">
-                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
+                  <a id="nav-link" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
                    <b>  <?php echo e(Auth::user()->name); ?>  </b><span class="caret"></span>
                  </a>
 

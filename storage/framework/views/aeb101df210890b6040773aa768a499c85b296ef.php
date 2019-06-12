@@ -15,91 +15,105 @@
 
             <div class="card-body">
 
-          <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-     
-          <h6><b> 
-           <a href="<?php echo e(url('subjects', $subject->id)); ?>" style="color: black"> 
-                                            <?php echo e($subject->name); ?>
+              <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <?php if(count($subject->groups) > 0): ?>
 
 
-                                        </a>
-                                         </b></h6>
-
-      
-                            <table class="table table-bordered table-sm table-responsive-sm">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nazwa grupy</th>
-                                    <th scope="col">Rok</th>
-                                    <th scope="col">Lista studentów</th>
-                                    <th scope="col">Oceny</th>
-                                    <th scope="col">Zajęcia</th>
+             <h6><b> <u> 
+                 <a href="<?php echo e(url('subjects', $subject->id)); ?>" style="color: black"> 
+                    <?php echo e($subject->name); ?>
 
 
-                                    </th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
+                </a>
+             </u>
+            </b></h6>
 
 
-                                <?php $__currentLoopData = $subject->groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-                                <tr>
-
-                                    <td> 
-                                        <a href="<?php echo e(url('groups', $group->id)); ?>" style="color: black"> 
-                                            <?php echo e($group->name); ?>
-
-
-                                        </a>
-
-                                    </td>
+        <table class="table table-bordered table-sm table-responsive-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Nazwa grupy</th>
+                    <th scope="col">Rok</th>
+                    <th scope="col">Lista studentów</th>
+                    <th scope="col">Oceny</th>
+                    <th scope="col">Zajęcia</th>
 
 
-                                    <td> <?php echo e($group->year); ?> </td>
-                                   <td>    <a href="<?php echo e(url('groups', $group->id)); ?>" > 
-                                
-                                    <i class="fas fa-user-graduate fa-lg" style="color: black"></i>
+                </th>
 
-                                 </a></td>
-                                    <td> 
-                                        <a href="<?php echo e(action('GradeController@groupGrades', [$subject->id, $group->id])); ?>" style="color: black"> 
-                                          <i class="far fa-file-alt fa-lg" style="color: black"></i>
-
-                                        </a>
-                             
+            </tr>
+        </thead>
+        <tbody>
 
 
-                                    </td>
-                                    <td> 
-                                        <a href="<?php echo e(action('LessonController@groupLessons', [$subject->id, $group->id])); ?>" style="color: black"> 
-                                          <i class="fas fa-chalkboard" style="color: black"></i>
+            <?php $__currentLoopData = $subject->groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                                        </a>
+            <tr>
 
-                                    </td>
-
-
-                                  
-
-                                    </tr>
+                <td> 
+                    <a href="<?php echo e(url('groups', $group->id)); ?>" style="color: black"> 
+                        <?php echo e($group->name); ?>
 
 
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </a>
 
-                                </tbody>
-                            </table>
+                </td>
+
+
+                <td> <?php echo e($group->year); ?> </td>
+                <td>    <a href="<?php echo e(url('groups', $group->id)); ?>" > 
+
+                    <i class="fas fa-user-graduate fa-lg" style="color: black"></i>
+
+                </a></td>
+                <td> 
+                    <a href="<?php echo e(action('GradeController@groupGrades', [$subject->id, $group->id])); ?>" style="color: black"> 
+                      <i class="far fa-file-alt fa-lg" style="color: black"></i>
+
+                  </a>
 
 
 
-          <br>
+              </td>
+              <td> 
+                <a href="<?php echo e(action('LessonController@groupLessons', [$subject->id, $group->id])); ?>" style="color: black"> 
+                  <i class="fas fa-chalkboard" style="color: black"></i>
 
-          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+              </a>
+
+          </td>
 
 
 
 
+      </tr>
+
+
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+  </tbody>
+</table>
+
+
+
+<br>
+
+<?php else: ?>
+   
+              <h6><b> <u> 
+                 <a href="<?php echo e(url('subjects', $subject->id)); ?>" style="color: black"> 
+                    <?php echo e($subject->name); ?>
+
+
+                </a>
+             </u>
+            </b></h6>
+           
+            <p>[ Nie dodałeś grup do tego przedmiotu ]</p>
+
+<?php endif; ?>
+
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 
@@ -109,11 +123,15 @@
 
 
 
-            </div>
 
 
-        </div>
-    </div>
+
+
+</div>
+
+
+</div>
+</div>
 </div>
 </div>
 </div>

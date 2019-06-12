@@ -93,6 +93,12 @@
 
               </li>
 
+              
+
+              <li class="nav-item ">
+                <a class="nav-link" href="/lessons"> <b> Zajęcia </b></a>
+              </li>
+
 
 
               <li class="nav-item dropdown">
@@ -108,6 +114,7 @@
 
 
                 </li>
+
 
 {{-- 
               <li class="nav-item ">
@@ -137,7 +144,6 @@
 
 
 
-
           
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -151,7 +157,7 @@
                 {{--    <a href="{{ url('/') }}">Home</a> --}}
 
                 <li class="nav-item dropdown">
-                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
+                  <a id="nav-link" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
                    <b>  {{ Auth::user()->name }}  </b><span class="caret"></span>
                  </a>
 
