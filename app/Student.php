@@ -51,9 +51,9 @@ class Student extends Model
 	* 
 	* @param int $subjectId
 	* 
-	* @return bool
+	* @return array
 	*/
-	public static function studentAttendances($studentId, $subjectId)
+	public static function studentAttendances($studentId, $subjectId): array
 	{
 		$student = Student::findOrFail($studentId);
 
@@ -62,7 +62,6 @@ class Student extends Model
 		$attendances['nb'] = 0;
 		$attendances['uspr'] = 0;
 
-		$ob = 0;
 		foreach($student->attendances as $attendance) {
 			if($attendance->lesson->subject_id == $subjectId && $attendance->status == 'Obecny') {
 				$attendances['ob'] ++;
