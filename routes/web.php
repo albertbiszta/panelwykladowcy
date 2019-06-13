@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
 	Route::resource('subjects', 'SubjectController'); 
 	Route::post('/subjects/add', 'SubjectController@add');
-	Route::post('/subjects/{id}/update', 'SubjectController@update');
+	Route::patch('/subjects/{id}/update', 'SubjectController@update');
 	Route::delete('/subjects/{id}/delete', 'SubjectController@delete')->name('subjects.delete');
 
 	Route::post('/subjects/{id}/assign-group', 'SubjectController@assignGroup')->name('subjects.assignGroup');
@@ -48,8 +48,9 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::get('/user-group/{id}', 'GroupController@userGroup');
 
 	Route::resource('students', 'StudentController'); 
-	Route::post('/students/new', 'StudentController@addStudent')->name('addStudent');
-	Route::delete('/students/delete/{id}', 'StudentController@delete')->name('students.delete');
+	Route::post('/students/add', 'StudentController@add')->name('students.add');
+	Route::patch('/students/{id}/update', 'StudentController@update');
+	Route::delete('/students/{id}/delete', 'StudentController@delete')->name('students.delete');
 	Route::get('/search-students', 'StudentController@search')->name('students.search');
 
 	Route::resource('syllabuses', 'SyllabusController');

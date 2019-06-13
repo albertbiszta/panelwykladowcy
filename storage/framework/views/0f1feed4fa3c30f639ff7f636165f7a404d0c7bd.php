@@ -220,6 +220,7 @@ crossorigin="anonymous"></script>
 <script src="<?php echo e(asset('js/group.js')); ?>" type="text/javascript"></script>
 
 <script src="<?php echo e(asset('js/search.js')); ?>" type="text/javascript"></script>
+<script src="<?php echo e(asset('js/student.js')); ?>" type="text/javascript"></script>
 <script src="<?php echo e(asset('js/subject.js')); ?>" type="text/javascript"></script>
 
 

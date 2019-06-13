@@ -16,7 +16,7 @@
 						<a href=""  id="newStudent" class="float-right" style="color: black" data-toggle="modal" data-target="#addStudent">
 							<i class="fas fa-plus-circle fa-lg"></i> Dodaj studentów 	</a>
 						</b>
-					</div>
+					<br> 
 					<input type="hidden" name="groupId" id="groupId" value="<?php echo e($group->id); ?>">
 
 					<div class="card-body">
@@ -64,145 +64,229 @@
 
 
 
-										<a href="" data-toggle="modal" data-target="#editStudent" data-id="<?php echo e($student->id); ?>" data-name="<?php echo e($student->name); ?>" class="btn btn-light btn-sm edit-subject"><i class="far fa-edit fa-lg"></i></a>
+										<a href="" data-toggle="modal" data-target="#editStudent" data-id="<?php echo e($student->id); ?>" 
+											data-firstname="<?php echo e($student->firstname); ?>" data-lastname="<?php echo e($student->lastname); ?>"
+											data-indexNumber="<?php echo e($student->indexNumber); ?>" 
+											data-contact="<?php echo e($student->contact); ?>" 
+											class="btn btn-light btn-sm edit-student"><i class="far fa-edit fa-lg"></i></a>
 
-
-										<input type="hidden" name="studentId" id="studentId" value="<?php echo e($student->id); ?>">
-										<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="<?php echo e($student->id); ?>" id="delete-student" class="btn btn-light btn-sm">
-											<i class="far fa-trash-alt fa-lg"></i>
-										</button>
-
-
-
-
-
-									</td>
+											<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="<?php echo e($student->id); ?>" id="delete-student" class="btn btn-light btn-sm">
+												<i class="far fa-trash-alt fa-lg"></i>
+											</button>
 
 
 
-									
 
 
-								</tr>
+										</td>
 
-								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-							</tbody>
-						</table>
 
+
+
+
+									</tr>
+
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+								</tbody>
+							</table>
+
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 
-	
+		
+		<div class="modal fade" id="addStudent" tabindex="-1" role="dialog" data-dismiss="modal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Dodaj studenta</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-	<div class="modal fade" id="addStudent" tabindex="-1" role="dialog" data-dismiss="modal">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Dodaj studenta</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-				</div>
-				<div class="modal-body">
-					<?php echo Form::hidden('group_id', $group->id); ?>
-
-
-
-					<div class="form-group">
-						<div  class="col-md-4 control-label">
-							<?php echo Form::label('firstname','Imię:'); ?>
-
-						</div>
-						<div class="col-md-6">
-							<?php echo Form::text('firstname',null,['class'=>'form-control', 'id'=>'firstname']); ?>
-
-						</div>
 					</div>
-
-
-					<div class="form-group">
-						<div  class="col-md-4 control-label">
-							<?php echo Form::label('lastname','Nazwisko:'); ?>
-
-						</div>
-						<div class="col-md-6">
-							<?php echo Form::text('lastname',null,['class'=>'form-control', 'id'=>'lastname']); ?>
-
-						</div>
-					</div>
-
-					<div class="form-group">
-						<div  class="col-md-4 control-label">
-							<?php echo Form::label('indexNumber','Numer indeksu:'); ?>
-
-						</div>
-						<div class="col-md-6">
-							<?php echo Form::text('indexNumber',null,['class'=>'form-control', 'id'=>'indexNumber']); ?>
-
-						</div>
-					</div>
-
-					<div class="form-group">
-						<div  class="col-md-4 control-label">
-							<?php echo Form::label('contact','Kontakt:'); ?>
-
-						</div>
-						<div class="col-md-6">
-							<?php echo Form::text('contact',null,['class'=>'form-control', 'id'=>'contact']); ?>
-
-						</div>
-					</div>
+					<div class="modal-body">
+						<?php echo Form::hidden('group_id', $group->id); ?>
 
 
 
+						<div class="form-group">
+							<div  class="col-md-4 control-label">
+								<?php echo Form::label('firstname','Imię:'); ?>
 
-
-				</div>
-				<div class="modal-footer">
-					<div class="form-group">
-						<div class="col-md-6 col-md-offset-4">
-							<?php echo Form::submit('Dodaj studenta',['class'=>'btn btn-secondary', 'id'=>"submitStudent"
-								,
-								'data-dismiss'=>'modal']); ?>
+							</div>
+							<div class="col-md-6">
+								<?php echo Form::text('firstname',null,['class'=>'form-control', 'id'=>'firstname']); ?>
 
 							</div>
 						</div>
+
+
+						<div class="form-group">
+							<div  class="col-md-4 control-label">
+								<?php echo Form::label('lastname','Nazwisko:'); ?>
+
+							</div>
+							<div class="col-md-6">
+								<?php echo Form::text('lastname',null,['class'=>'form-control', 'id'=>'lastname']); ?>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div  class="col-md-4 control-label">
+								<?php echo Form::label('indexNumber','Numer indeksu:'); ?>
+
+							</div>
+							<div class="col-md-6">
+								<?php echo Form::text('indexNumber',null,['class'=>'form-control', 'id'=>'indexNumber']); ?>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div  class="col-md-4 control-label">
+								<?php echo Form::label('contact','Kontakt:'); ?>
+
+							</div>
+							<div class="col-md-6">
+								<?php echo Form::text('contact',null,['class'=>'form-control', 'id'=>'contact']); ?>
+
+							</div>
+						</div>
+
+
+
+
+
 					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+					<div class="modal-footer">
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<?php echo Form::submit('Dodaj studenta',['class'=>'btn btn-outline-secondary button-1', 'id'=>"submitStudent"
+									,
+									'data-dismiss'=>'modal']); ?>
+
+								</div>
+							</div>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
 
 
 
-		
+			
+			<div class="modal fade" id="editStudent" tabindex="-1" role="dialog" data-dismiss="modal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Zaktualizuj dane studenta</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-		<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-
-					<div class="modal-header">
-						<h4 class="modal-title">Czy na pewno chcesz usunąć studenta?</h4>
+						</div>
+						<div class="modal-body">
+							<?php echo Form::hidden('group_id', $group->id); ?>
 
 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+							<div class="form-group">
+								<div  class="col-md-4 control-label">
+									<?php echo Form::label('firstnameEdit','Imię:'); ?>
+
+								</div>
+								<div class="col-md-6">
+									
+									<?php echo Form::text('firstnameEdit',null,['class'=>'form-control', 'id'=>'firstnameEdit']); ?>
+
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<div  class="col-md-4 control-label">
+									<?php echo Form::label('lastnameEdit','Nazwisko:'); ?>
+
+								</div>
+								<div class="col-md-6">
+									<?php echo Form::text('lastnameEdit',null,['class'=>'form-control', 'id'=>'lastnameEdit']); ?>
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div  class="col-md-4 control-label">
+									<?php echo Form::label('indexNumberEdit','Numer indeksu:'); ?>
+
+								</div>
+								<div class="col-md-6">
+									<?php echo Form::text('indexNumberEdit',null,['class'=>'form-control', 'id'=>'indexNumberEdit']); ?>
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div  class="col-md-4 control-label">
+									<?php echo Form::label('contactEdit','Kontakt:'); ?>
+
+								</div>
+								<div class="col-md-6">
+									<?php echo Form::text('contactEdit',null,['class'=>'form-control', 'id'=>'contactEdit']); ?>
+
+								</div>
+							</div>
+
+
+
+
+
+						</div>
+						<div class="modal-footer">
+							<div class="form-group">
+								<div class="col-md-6 col-md-offset-4">
+									<?php echo Form::submit('Zapisz zmiany',['class'=>'btn btn-outline-secondary button-1', 'id'=>"submitEditStudent"
+										,
+										'data-dismiss'=>'modal']); ?>
+
+									</div>
+								</div>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+
+
+
+
+
+				
+
+				<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+
+							<div class="modal-header">
+								<h4 class="modal-title">Czy na pewno chcesz usunąć studenta?</h4>
+
+
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<div class="modal-body">
+								<button type="button" id="confirm-delete-student" class="btn btn-outline-danger float-right"
+								data-dismiss="modal">Tak</button>
+							</div>
+
+
+						</div>
 					</div>
-					<div class="modal-body">
-						<button type="button" id="confirm-delete-student" class="btn btn-outline-danger float-right"
-						data-dismiss="modal">Tak</button>
-					</div>
-
-
 				</div>
-			</div>
-		</div>
 
-		
+				
 
-		<input type="hidden" name="_token" id="token" value="<?php echo e(csrf_token()); ?>">
+				<input type="hidden" name="_token" id="token" value="<?php echo e(csrf_token()); ?>">
 
-		<?php $__env->stopSection(); ?>
+				<?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\aba\Desktop\LARAVEL ALL\panelwykladowcy\resources\views/groups/show.blade.php ENDPATH**/ ?>

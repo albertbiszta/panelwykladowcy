@@ -13,7 +13,7 @@
 						
 					</h5>
 					
-					 
+					
 					
 				</div>
 
@@ -75,7 +75,7 @@
 											data-name="{{$group->name}}" data-year="{{$group->year}}" data-contact="{{$group->contact}}" class="btn btn-light btn-sm edit-group"><i class="far fa-edit fa-lg"></i></a>
 
 
-											<input type="hidden" name="subjectId" id="subjectId" value="{{ $group->id }}">
+											
 											<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="{{$group->id}}" id="delete-group" class="btn btn-light btn-sm">
 												<i class="far fa-trash-alt fa-lg"></i>
 											</button>

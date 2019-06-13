@@ -12,22 +12,23 @@ use Illuminate\Http\Request;
 class AttendanceController extends Controller
 {
 
-	 /**
+    /**
 	* Attendance for lesson
 	* 
-	* @param int $lessonId
+	* /attendances/lessons/{lesson_id}
+	* 
+	* @param int $id
 	* 
 	* @return \Illuminate\Http\Response
 	*/
-	public function lessonAttendance($lessonId = null)
+	public function lessonAttendance($id = null)
 	{
-		$lesson = Lesson::findOrFail($lessonId);
+		$lesson = Lesson::findOrFail($id);
 
 		if(Subject::userSubject($lesson->subject_id) && Group::userGroup($lesson->group_id)) {
 			$subject = Subject::findOrFail($lesson->subject_id);
 			$group = Group::findOrFail($lesson->group_id);
 			
-
 			return view('attendances.lesson')->with(compact('lesson', 'subject', 'group'));
 		}else {
 			abort(404);
@@ -57,7 +58,7 @@ class AttendanceController extends Controller
 	/**
 	* Update attenndance
 	* 
-	* /attendances/update
+	* /attendances/{id}/update
 	* 
 	* @param  Request $request
 	* 

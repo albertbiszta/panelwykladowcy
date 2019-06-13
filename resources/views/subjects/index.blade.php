@@ -78,83 +78,86 @@
 								<td>
 
 									<a href="" data-toggle="modal" data-target="#editSubject" data-id="{{$subject->id}}" 
-										 class="btn btn-light btn-sm edit-subject"><i class="far fa-edit fa-lg"></i></a>
-
-
-										<input type="hidden" name="subjectId" id="subjectId" value="{{ $subject->id }}">
-										<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="{{$subject->id}}" id="delete-subject" class="btn btn-light btn-sm button-1">
-											<i class="far fa-trash-alt fa-lg"></i>
-										</button>
+										data-name="{{$subject->name}}" data-ects="{{$subject->ects}}" data-exam="{{$subject->exam}}" 
+										class="btn btn-light btn-sm edit-subject">
+										<i class="far fa-edit fa-lg"></i>
+									</a>
 
 
 
-
-
-
-									</td>
+									<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="{{$subject->id}}" id="delete-subject" class="btn btn-light btn-sm button-1">
+										<i class="far fa-trash-alt fa-lg"></i>
+									</button>
 
 
 
 
-								</tr>
 
 
-								@endforeach
+								</td>
 
-							</tbody>
-						</table>
 
-					</div>
 
-					{{-- add modal --}}
-					<div class="modal fade" id="addSubject" tabindex="-1" role="dialog" data-dismiss="modal">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title">Dodaj nowy przedmiot</h4>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
+							</tr>
+
+
+							@endforeach
+
+						</tbody>
+					</table>
+
+				</div>
+
+				{{-- add modal --}}
+				<div class="modal fade" id="addSubject" tabindex="-1" role="dialog" data-dismiss="modal">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Dodaj nowy przedmiot</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<div  class="col-md-4 control-label">
+										{!! Form::label('name','Nazwa:') !!}
+									</div>
+									<div class="col-md-6">
+										{!! Form::text('name',null,['class'=>'form-control', 'id'=>'name']) !!}
+									</div>
 								</div>
-								<div class="modal-body">
-									<div class="form-group">
-										<div  class="col-md-4 control-label">
-											{!! Form::label('name','Nazwa:') !!}
-										</div>
-										<div class="col-md-6">
-											{!! Form::text('name',null,['class'=>'form-control', 'id'=>'name']) !!}
-										</div>
+
+								<div class="form-group">
+									<div  class="col-md-4 control-label">
+										{!! Form::label('ects','Punkty ECTS:') !!}
 									</div>
-
-									<div class="form-group">
-										<div  class="col-md-4 control-label">
-											{!! Form::label('ects','Punkty ECTS:') !!}
-										</div>
-										<div class="col-md-6">
-											{!! Form::text('ects',null,['class'=>'form-control', 'id'=>'ects']) !!}
-										</div>
+									<div class="col-md-6">
+										{!! Form::text('ects',null,['class'=>'form-control', 'id'=>'ects']) !!}
 									</div>
-
-
-									<div class="form-group">
-										<div  class="col-md-4 control-label">
-											{!! Form::label('exam','Egzamin') !!}
-										</div>
-										<div class="col-md-6">
-
-											<select class="form-control" name="exam" id="exam" >
-												<option value="0" disable="true" selected="true"> Nie </option>
-												<option value="1"> Tak </option>
-											</select>
-										</div>
-									</div>
-
-
 								</div>
-								<div class="modal-footer">
-									<div class="form-group">
-										<div class="col-md-6 col-md-offset-4">
-											{!! Form::submit('Dodaj przedmiot',['class'=>'btn btn-outline-secondary button-1', 
-												'id'=>"submitSubject", 
+
+
+								<div class="form-group">
+									<div  class="col-md-4 control-label">
+										{!! Form::label('exam','Egzamin') !!}
+									</div>
+									<div class="col-md-6">
+
+										<select class="form-control" name="exam" id="exam" >
+											<option value="0" disable="true" selected="true"> Nie </option>
+											<option value="1"> Tak </option>
+										</select>
+									</div>
+								</div>
+
+
+							</div>
+							<div class="modal-footer">
+								<div class="form-group">
+									<div class="col-md-6 col-md-offset-4">
+										{!! Form::submit('Dodaj przedmiot',['class'=>'btn btn-outline-secondary button-1', 
+											'id'=>"submitSubject", 
 											'data-dismiss'=>'modal']) !!}
 										</div>
 									</div>
@@ -179,31 +182,31 @@
 								<div class="modal-body">
 									<div class="form-group">
 										<div  class="col-md-4 control-label">
-											{!! Form::label('name','Nazwa:') !!}
+											{!! Form::label('nameEdit','Nazwa:') !!}
 										</div>
 										<div class="col-md-6">
-											<input type="text" class="form-control" name="name" id="name">
+											<input type="text" class="form-control" name="name" id="nameEdit">
 											
 										</div>
 									</div>
 
 									<div class="form-group">
 										<div  class="col-md-4 control-label">
-											{!! Form::label('ects','Punkty ECTS:') !!}
+											{!! Form::label('ectEdits','Punkty ECTS:') !!}
 										</div>
 										<div class="col-md-6">
-										<input type="text" class="form-control" name="ects" id="ects">
+											<input type="text" class="form-control" name="ects" id="ectsEdit">
 										</div>
 									</div>
 
 
 									<div class="form-group">
 										<div  class="col-md-4 control-label">
-											{!! Form::label('exam','Egzamin') !!}
+											{!! Form::label('examEdit','Egzamin') !!}
 										</div>
 										<div class="col-md-6">
 
-											<select class="form-control" name="exam" id="exam" >
+											<select class="form-control" name="exam" id="examEdit" >
 												<option value="0" disable="true" selected="true"> Nie </option>
 												<option value="1"> Tak </option>
 											</select>
@@ -226,43 +229,43 @@
 						</div><!-- /.modal-dialog -->
 					</div><!-- /.modal -->
 
-						{{--  --}}
+					{{--  --}}
 
 
 
 
 
-						{{-- confirm delete modal --}}
+					{{-- confirm delete modal --}}
 
-						<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
+					<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
 
-									<div class="modal-header">
-										<h4 class="modal-title">Czy na pewno chcesz usunąć ten przedmiot?</h4>
-
-
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									</div>
-									<div class="modal-body">
-										<button type="button" id="confirm-delete-subject" class="btn btn-outline-danger float-right"
-										data-dismiss="modal">Tak</button>
-									</div>
+								<div class="modal-header">
+									<h4 class="modal-title">Czy na pewno chcesz usunąć ten przedmiot?</h4>
 
 
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								</div>
+								<div class="modal-body">
+									<button type="button" id="confirm-delete-subject" class="btn btn-outline-danger float-right"
+									data-dismiss="modal">Tak</button>
+								</div>
+
+
 							</div>
 						</div>
-
-						{{--  --}}
-
-
 					</div>
+
+					{{--  --}}
+
+
 				</div>
 			</div>
 		</div>
-		<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+	</div>
+	<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
-		@endsection
+	@endsection
 
 

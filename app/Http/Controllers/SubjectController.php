@@ -12,6 +12,8 @@ class SubjectController extends Controller
 {
 
 	/**
+	 * List of subjects + modals [Subject CRUD]
+	 * 
 	 * /subjects
 	 * 
      * @return \Illuminate\Http\Response
@@ -25,81 +27,55 @@ class SubjectController extends Controller
 
 
 	/**
-	 * /subjects/create
+	 * Save new subject
+	 * 
+	 * /subjects/add
+	 * 
+	 * @param  Request $request
+	 * 
+	 * @return \Illuminate\Http\Response
 	*/
-	public function create() 
-	{
-		$exam = Subject::examOptions();
-		return view('subjects.create')->with('exam',$exam);
-	}
-
-
-	public function store(Request $request) 
+	public function add(Request $request) 
 	{
 		$subject = new Subject($request->all());
 		Auth::user()->subjects()->save($subject);
 		$message = "Dodano przedmiot";
-		return redirect('subjects')->with('flash_message_success', $message);
+		return response()->json(['success'=>$message, 'subject' => $subject]);
 	}
-	
-
-		/**
-		 * Save new subject
-		 * 
-		 * /subjects/add
-		 * 
-		 * @param  Request $request
-		 * 
-		 * @return \Illuminate\Http\Response
-		*/
-		public function add(Request $request) 
-		{
-			$subject = new Subject($request->all());
-			Auth::user()->subjects()->save($subject);
-			$message = "Dodano przedmiot";
-			return response()->json(['success'=>$message, 'subject' => $subject]);
-		}
 
 
-
-		public function editModal(Request $request) 
-		{
-			$subject = Subject::findOrFail($request->id);
+	/**
+	 * Update subject data
+	 * 
+	 * /subjects/{id}/update
+     * 
+	 * @param  Request $request
+	 * 
+	 * @param  int $id
+	 * 
+	 * @return \Illuminate\Http\Response
+     */
+	public function update(Request $request, $id = null) 
+	{
+		if(Subject::userSubject($id)) {
+			$subject = Subject::findOrFail($id);
 			$subject->update($request->all());
 			$message = "Zapisano zmiany";
 
 			return response()->json(['success'=>$message, 'subject' => $subject]);
 		}
-
-
-		/*public function edit($id = null) 
-		{
-			if(Subject::userSubject($id)) {
-				$exam = Subject::examOptions();
-				$subject = Subject::findOrFail($id);
-
-				return view('subjects.edit')->with(compact('exam', 'subject'));
-			}else {
-				abort(404);	
-			}
-		}*/
-
-		public function update(Request $request) 
-		{
-			$id = $request->input('subject_id');
-			if(Subject::userSubject($id)) {
-				$subject = Subject::findOrFail($id);
-				$subject->update($request->all());
-				$message = "Zapisano zmiany";
-				
-				return response()->json(['success'=>$message, 'subject' => $subject]);
-			}
-		}
+	}
 
 
 	/**
+	 * Delete subject
+	 * 
 	 * /subjects/{id}/delete
-	*/
+	 * 
+	 * @param  int $id
+	 * 
+	 * @return \Illuminate\Http\Response
+     */
 	public function delete($id = null)
 	{
 		if(Subject::userSubject($id)) {
@@ -114,9 +90,13 @@ class SubjectController extends Controller
 
 
 	/**
-	 *  Details about subject: groups, syllabuses
+	 * Details about subject: groups, syllabuses
 	 * 
 	 * /subjects/{id}
+	 * 
+	 * @param  int $id
+	 * 
+	 * @return \Illuminate\Http\Response
 	*/
 	public function show($id = null) 
 	{ 
@@ -130,6 +110,7 @@ class SubjectController extends Controller
 	}
 
 
+	/*?*/
 	public function subjectGroups($id = null)
 	{
 		$subject = Subject::findOrFail($id);
@@ -139,29 +120,6 @@ class SubjectController extends Controller
 		return response()->json(['success'=>'test']);
 	}
 
-
-	/**
-	 * /subjects/{id}/assign-group
-	 *  AJAX
-	*/
-/*	public function assignGroup(Request $request, $id = null) 
-	{
-		if(Subject::userSubject($id)) {
-			$subject = Subject::findOrFail($id);
-			$groups = $request->input('group');
-			$subject->groups()->attach($groups);
-
-			$group = Group::findOrFail($groups);
-			$message = "Dodano grupę do przedmiotu";
-
-			return response()->json(['success'=>$message, 'group'=> $group]);
-
-		}else {
-			$message = "Wystąpił błąd";
-			return response()->json(['error'=>$message]);
-		}
-	}
-*/
 
 	/**
 	 *  Assign group to subject
@@ -187,8 +145,9 @@ class SubjectController extends Controller
 		}	
 	}
 
+
 	/**
-	 * Unassign group to subject
+	 * Unassign group from subject
 	 * 
 	 * /subjects/{id}/unassign-group
 	 * 

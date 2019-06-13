@@ -42,59 +42,65 @@ class StudentController extends Controller
 	}
 
 
-
-
-
-/*	public function create($id = null)
-	{
-		$group = Group::findOrFail($id);
-
-		return view('students.create')->with(compact('group'));
-	}
-*/
-
-
-	public function addStudent(Request $request) 
+	/**
+	 * Add new student to group
+	 * 
+	 * /students/add'
+	 * 
+	 * @param  Request $request
+	 * 
+	 * @return \Illuminate\Http\Response
+	*/
+	public function add(Request $request) 
 	{
 		$groupId = $request->get('group_id');
 
 		$student = new Student($request->all());
 		$student->group()->associate($groupId);
-		$student->save();
-		
+		$student->save();	
 		$message = "Dodano studenta do grupy";
 		return response()->json(['success'=>$message, 'student' => $student]);
-
-		
 		
 	}
 
 
-	public function edit($id = null) 
-	{
-		if(Student::userStudent($id)) {
-			$groups = Group::authGroups();
-			$student = Student::findOrFail($id);
-			return view('students.edit')->with(compact('groups', 'student'));
-		}else {
-			abort(404);	
-		}
-	}
-
-
+	/**
+	 * Update student data
+	 * 
+	 * /students/{id}/update
+     * 
+	 * @param  Request $request
+	 * 
+	 * @param  int $id
+	 * 
+	 * @return \Illuminate\Http\Response
+	 */
 	public function update(Request $request, $id = null) 
 	{
-		$student = Student::findOrFail($id);
-		$groupId = $request->input('group_id');
-		$student->group()->associate($groupId);
-		$student->update($request->all());
+		if(Student::userStudent($id)) {
+			$student = Student::findOrFail($id);
+			$groupId = $request->input('group_id');
+			$student->group()->associate($groupId);
+			$student->update($request->all());
 
-		$message = "Zapisano zmiany";
+			$message = "Zapisano zmiany";
+			return response()->json(['success'=> $message, 'student' => $student]);
+		} 
 
-		/*return redirect('groups.show', $request->input('group_id'))->with('flash_message_success', $message);*/
-		return redirect()->route('groups.show', $groupId)->with('flash_message_success', $message);
 	}
 
+
+	/**
+	 * Update group data
+	 * 
+	 * /groups/{id}/update
+     * 
+	 * @param  Request $request
+	 * 
+	 * @param  int $id
+	 * 
+	 * @return \Illuminate\Http\Response
+	 */
 
 	public function delete($id = null)
 	{

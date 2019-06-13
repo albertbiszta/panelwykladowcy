@@ -237,6 +237,7 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('js/group.js') }}" type="text/javascript"></script>
 {{-- <script src="{{ asset('js/lesson.js') }}" type="text/javascript"></script> --}}
 <script src="{{ asset('js/search.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/student.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/subject.js') }}" type="text/javascript"></script>
 
 
