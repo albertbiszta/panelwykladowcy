@@ -97,21 +97,21 @@
 									<td> {{$group->year}} </td>
 									<td> 
 										<a href="{{ url('groups', $group->id) }}" style="color: black"> 
-											IKONA
+											<i class="fas fa-user-graduate fa-lg" style="color: black"></i>
 
 										</a>
 
 									</td>
 									<td> 
 										<a href="{{ action('GradeController@groupGrades', [$subject->id, $group->id]) }}" style="color: black"> 
-											IKONA  oceny
+										  <i class="far fa-file-alt fa-lg" style="color: black"></i>
 
 										</a>
 
 									</td>
 									<td> 
 										<a href="{{ action('LessonController@groupLessons', [$subject->id, $group->id]) }}" style="color: black"> 
-											IKONA  zajęcia
+											  <i class="fas fa-chalkboard" style="color: black"></i>
 
 										</a>
 

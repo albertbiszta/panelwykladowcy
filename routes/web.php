@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
 	Route::resource('subjects', 'SubjectController'); 
 	Route::post('/subjects/add', 'SubjectController@add');
-	Route::post('/edit-subject', 'SubjectController@editModal');
+	Route::post('/subjects/{id}/update', 'SubjectController@update');
 	Route::delete('/subjects/{id}/delete', 'SubjectController@delete')->name('subjects.delete');
 
 	Route::post('/subjects/{id}/assign-group', 'SubjectController@assignGroup')->name('subjects.assignGroup');
@@ -42,8 +42,9 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
 
 	Route::resource('groups', 'GroupController'); 
-	Route::post('/groups/new', 'GroupController@storeModal');
-	Route::delete('/groups/delete/{id}', 'GroupController@delete')->name('groups.delete');
+	Route::post('/groups/add', 'GroupController@add');
+	Route::patch('/groups/{id}/update', 'GroupController@update');
+	Route::delete('/groups/{id}/delete', 'GroupController@delete')->name('groups.delete');
 	Route::get('/user-group/{id}', 'GroupController@userGroup');
 
 	Route::resource('students', 'StudentController'); 

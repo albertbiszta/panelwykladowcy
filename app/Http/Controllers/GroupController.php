@@ -31,20 +31,8 @@ class GroupController extends Controller
 	}
 
 
-	public function create() 
-	{
-		return view('groups.create');
-	}
 
-
-	public function store(Request $request) 
-	{
-		$group = new Group($request->all());
-		Auth::user()->groups()->save($group);
-		return redirect('groups');
-	}
-
-	public function storeModal(Request $request) 
+	public function add(Request $request) 
 	{
 		$group = new Group($request->all());
 		Auth::user()->groups()->save($group);
@@ -72,10 +60,8 @@ class GroupController extends Controller
 			$group = Group::findOrFail($id);
 			$group->update($request->all());
 			$message = "Zapisano zmiany";
-			return redirect('groups')->with('flash_message_success', $message);
-		} else {
-			abort(404);	
-		}
+			return response()->json(['success'=>$message, 'group' => $group]);
+		} 
 	}
 
 

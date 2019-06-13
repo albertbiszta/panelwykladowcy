@@ -3,6 +3,7 @@ $(document).ready(function(){
 	/* /groups */
 	addGroup();
 	deleteGroup();
+	editGroup();
 
 	/*  /groups.show */
 	addStudent();
@@ -44,7 +45,7 @@ var appendStudent = (data) => {
 	<td> ${data.student.lastname} </td>
 	<td> ${data.student.indexNumber} </td>
 	<td> ${data.student.contact} </td>
-<td>
+	<td>
 	<a href="" data-toggle="modal" data-target="#editStudent" data-id="${data.student.id}"  class="btn btn-light btn-sm edit-student"><i class="far fa-edit fa-lg"></i></a>
 
 	<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="${data.student.id}" id="delete-student" class="btn btn-light btn-sm">
@@ -79,7 +80,7 @@ var addGroup = () =>
 
 		$.ajax({
 			type: "POST",
-			url: "/groups/new",
+			url: "/groups/add",
 			data: postData,
 			success: function(data)
 			{
@@ -129,6 +130,56 @@ var deleteGroup = () =>
 	});
 
 }
+
+
+var editGroup = () => 
+{
+	$('body').on('click', '.edit-group', function(){
+		let id = $(this).data('id');
+		let el = this;
+
+		$("#nameEdit").attr("value",  $(this).data('name'));
+		$("#yearEdit").attr("value",  $(this).data('year'));
+		$("#contactEdit").attr("value",  $(this).data('contact'));
+
+		$('#submitEditGroup').click(function(event){
+
+			let name = $('#nameEdit').val();
+			let year = $('#yearEdit').val();
+			let contact = $('#contactEdit').val();
+
+			let postData = {
+				"name": name,
+				"year": year,
+				"contact": contact,
+				"_token": $('#token').val()
+			};
+
+
+			
+
+			$.ajax({
+				type: "PATCH",
+				url: `/groups/${id}/update`,
+				data: postData,
+				success: function(data)
+				{
+					$(el).closest('tr').remove();
+					$('#success-info').show();
+					$('#info').html(data.success);
+					appendToTable(data);
+
+					
+				}
+			});
+
+		});
+
+
+	});
+
+}
+
 
 
 
@@ -188,7 +239,7 @@ var deleteStudent = () =>
 
 			$.ajax({
 				type: "DELETE",
-				url: `/students/delete/${id}`,
+				url: `/students/${id}/delete`,
 				data: sendData,
 				success: function(data)
 				{

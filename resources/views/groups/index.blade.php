@@ -13,7 +13,7 @@
 						
 					</h5>
 					
-					
+					 
 					
 				</div>
 
@@ -72,7 +72,7 @@
 									<td>
 
 										<a href="" data-toggle="modal" data-target="#editGroup" data-id="{{$group->id}}" 
-											data-name="{{$group->name}}" class="btn btn-light btn-sm edit-group"><i class="far fa-edit fa-lg"></i></a>
+											data-name="{{$group->name}}" data-year="{{$group->year}}" data-contact="{{$group->contact}}" class="btn btn-light btn-sm edit-group"><i class="far fa-edit fa-lg"></i></a>
 
 
 											<input type="hidden" name="subjectId" id="subjectId" value="{{ $group->id }}">
@@ -105,7 +105,6 @@
 
 
 		{{-- add modal --}}
-
 		<div class="modal fade" id="addGroup" tabindex="-1" role="dialog" data-dismiss="modal">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -143,10 +142,7 @@
 							</div>	
 						</div>
 
-
-
 					</div>
-
 
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
@@ -175,6 +171,50 @@
 		</div>
 
 		{{--  --}}
+
+		{{-- edit modal --}}
+		<div class="modal fade" id="editGroup" tabindex="-1" role="dialog" data-dismiss="modal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Edytuj grupę</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+					</div>
+
+
+					<div class="modal-body float-center">
+
+						<div class="form-group">
+							<div class="col-md-8">
+								<input type="text" id="nameEdit"  class="form-control" >
+							</div>	
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-8">
+								<input type="text" id="yearEdit" placeholder="Rok (np. 2019/2020)" class="form-control">
+							</div>	
+						</div>
+
+
+						<div class="form-group">
+							<div class="col-md-8">
+								<input type="text" id="contactEdit" placeholder="Kontakt do przedstawiciela grupy" class="form-control">
+							</div>	
+						</div>
+						<div class="form-group">
+							<div class="col-md-8 col-md-offset-4">
+								<input type="submit" value="Zapisz zmiany" id="submitEditGroup" class="btn btn-outline-secondary button-1 float-right"
+								data-dismiss='modal'>
+							</div>	
+						</div>
+
+					</div>
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
 
 

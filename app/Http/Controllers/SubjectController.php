@@ -72,7 +72,7 @@ class SubjectController extends Controller
 		}
 
 
-		public function edit($id = null) 
+		/*public function edit($id = null) 
 		{
 			if(Subject::userSubject($id)) {
 				$exam = Subject::examOptions();
@@ -82,14 +82,16 @@ class SubjectController extends Controller
 			}else {
 				abort(404);	
 			}
-		}
+		}*/
 
-		public function update(Request $request, $id = null) 
+		public function update(Request $request) 
 		{
+			$id = $request->input('subject_id');
 			if(Subject::userSubject($id)) {
 				$subject = Subject::findOrFail($id);
 				$subject->update($request->all());
 				$message = "Zapisano zmiany";
+				
 				return response()->json(['success'=>$message, 'subject' => $subject]);
 			}
 		}
