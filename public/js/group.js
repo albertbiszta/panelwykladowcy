@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 });
 
-var appendToTable = (data) => {
+var appendGroupToTable = (data) => {
 
 	var newRecord = `
 	<tr>
@@ -66,7 +66,7 @@ var addGroup = () =>
 			{
 				$('#success-info').show();
 				$('#info').html(data.success);
-				appendToTable(data);
+				appendGroupToTable(data);
 
 			}
 
@@ -145,7 +145,7 @@ var editGroup = () =>
 				success: function(data)
 				{
 					$(el).closest('tr').remove();
-					appendToTable(data);
+					appendGroupToTable(data);
 					$('#success-info').show();
 					$('#info').html(data.success);
 				}

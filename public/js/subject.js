@@ -4,12 +4,8 @@ $(document).ready(function(){
 	deleteSubject();
 	editSubject();
 
-
-
-
-
-
 });
+
 
 
 var addSubject = () =>
@@ -18,33 +14,142 @@ var addSubject = () =>
 	$('#submitSubject').click(function(event){
 
 
-		
 
 		let name = $('#name').val();
-		let ects = $('#ects').val();
+		let ects = parseInt($('#ects').val());
 		let exam = $('#exam').val();
 
-		let postData = {
-			"name": name,
-			"ects": ects,
-			"exam": exam,
-			"_token": $('#token').val()
-		};
+		let validation = true;
+		let message = '';
+
+		if(name == ''){
+			message += '<p>Nazwa nie może być pusta</p>';
+			validation = false;
+		}
+		if(name.length < 2 || name.length > 50){
+			message += '<p>Nazwa musi zawierać od 2 do 50 znaków</p>';
+			validation = false;
+		}
+		if(Number.isNaN(ects)){
+			message += '<p>Liczba punktów ECTS musi być liczbą całkowitą</p>';
+			validation = false;
+		}
 
 
 
-		$.ajax({
-			type: "POST",
-			url: "/subjects/add",
-			data: postData,
-			success: function(data){
-				$('#success-info').show();
-				$('#info').html(data.success);
-				appendToTable(data);
+		
+
+		
+
+		if(validation == true){
+
+			let postData = {
+				"name": name,
+				"ects": ects,
+				"exam": exam,
+				"_token": $('#token').val()
+			};
+
+
+
+			$.ajax({
+				type: "POST",
+				url: "/subjects/add",
+				data: postData,
+				success: function(data){
+
+					closeModal();
+					$('#success-info').show();
+					$('#info').html(data.success);
+					appendToTable(data);
+					$('#validation-info').hide();
+
+					
+					/*		$('.modal-backdrop').css('background-color', 'transparent');*/
+
+				}
+
+			});
+
+		}else{
+			$('#validation-info').show();
+			$('#validation-info').html(message);
+		}
+
+
+
+	});
+
+}
+
+var editSubject = () => 
+{
+	$('body').on('click', '.edit-subject', function(){
+		let id = $(this).data('id');
+		let el = this;
+
+		$("#nameEdit").attr("value",  $(this).data('name'));
+		$("#ectsEdit").attr("value",  $(this).data('ects'));
+		$("#examEdit").attr("value",  $(this).data('exam'));
+
+		$('#submitEditSubject').click(function(event){
+
+			let name = $('#nameEdit').val();
+			let ects = parseInt($('#ectsEdit').val());
+			let exam = $('#examEdit').val();
+
+			let validation = true;
+			let message = '';
+
+
+			if(name == ''){
+				message += '<p>Nazwa nie może być pusta</p>';
+				validation = false;
+
 
 			}
+			if(name.length < 2 || name.length > 50){
+				message += '<p>Nazwa musi zawierać od 2 do 50 znaków</p>';
+				validation = false;
+			}
+			if(Number.isNaN(ects)){
+				message += '<p>Liczba punktów ECTS musi być liczbą całkowita</p>';
+				validation = false;
+			}
 
+
+			if(validation == true){
+
+				let postData = {
+					"name": name,
+					"ects": ects,
+					"exam": exam,
+					"_token": $('#token').val()
+				};
+
+
+
+
+				$.ajax({
+					type: "PATCH",
+					url: `/subjects/${id}/update`,
+					data: postData,
+					success: function(data)
+					{
+						closeModal();
+						$('#validation-info').hide();
+						$(el).closest('tr').remove();
+						appendToTable(data);
+						$('#success-info').show();
+						$('#info').html(data.success);
+					}
+				});
+			}else{
+			$('#validation-edit').show();
+			$('#validation-edit').html(message);
+		}
 		});
+
 
 	});
 
@@ -87,53 +192,6 @@ var deleteSubject = () =>
 
 
 
-var editSubject = () => 
-{
-	$('body').on('click', '.edit-subject', function(){
-		let id = $(this).data('id');
-		let el = this;
-
-		$("#nameEdit").attr("value",  $(this).data('name'));
-		$("#ectsEdit").attr("value",  $(this).data('ects'));
-		$("#examEdit").attr("value",  $(this).data('exam'));
-
-		$('#submitEditSubject').click(function(event){
-
-			let name = $('#nameEdit').val();
-			let ects = $('#ectsEdit').val();
-			let exam = $('#examEdit').val();
-
-			let postData = {
-				"name": name,
-				"ects": ects,
-				"exam": exam,
-				"_token": $('#token').val()
-			};
-
-
-			
-
-			$.ajax({
-				type: "PATCH",
-				url: `/subjects/${id}/update`,
-				data: postData,
-				success: function(data)
-				{
-					$(el).closest('tr').remove();
-					appendToTable(data);
-					$('#success-info').show();
-					$('#info').html(data.success);
-				}
-			});
-
-		});
-
-
-	});
-
-}
-
-
 /**//**/
 var examCheck = (exam) => {
 	if(exam == 1) {
@@ -157,7 +215,7 @@ var appendToTable = (data) => {
 
 	<a href="" data-toggle="modal" data-target="#editSubject" data-id="${data.subject.id}" data-name="${data.subject.name}" data-ects="${data.subject.ects}"
 	data-exam="${data.subject.exam}"
-	 class="btn btn-light btn-sm edit-subject"><i class="far fa-edit fa-lg"></i></a>
+	class="btn btn-light btn-sm edit-subject"><i class="far fa-edit fa-lg"></i></a>
 
 
 	<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="${data.subject.id}" id="delete-subject" class="btn btn-light btn-sm">
@@ -175,3 +233,11 @@ var appendToTable = (data) => {
 }
 
 
+var closeModal = () =>
+{
+	$(".modal").removeClass("in");
+	$(".modal-backdrop").remove();
+	$('body').removeClass('modal-open');
+	$('body').css('padding-right', '');
+	$(".modal").hide();
+}

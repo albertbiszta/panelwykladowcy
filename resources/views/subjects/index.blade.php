@@ -110,103 +110,48 @@
 				</div>
 
 				{{-- add modal --}}
-				<div class="modal fade" id="addSubject" tabindex="-1" role="dialog" data-dismiss="modal">
+				<div class="modal fade" id="addSubject" tabindex="-1" role="dialog" data-dismiss="modal" aria-label="Close">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title">Dodaj nowy przedmiot</h4>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><span >&times;</span></button>
 
 							</div>
+
+
 							<div class="modal-body">
-								<div class="form-group">
-									<div  class="col-md-4 control-label">
-										{!! Form::label('name','Nazwa:') !!}
-									</div>
-									<div class="col-md-6">
-										{!! Form::text('name',null,['class'=>'form-control', 'id'=>'name']) !!}
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div  class="col-md-4 control-label">
-										{!! Form::label('ects','Punkty ECTS:') !!}
-									</div>
-									<div class="col-md-6">
-										{!! Form::text('ects',null,['class'=>'form-control', 'id'=>'ects']) !!}
-									</div>
-								</div>
-
-
-								<div class="form-group">
-									<div  class="col-md-4 control-label">
-										{!! Form::label('exam','Egzamin') !!}
-									</div>
-									<div class="col-md-6">
-
-										<select class="form-control" name="exam" id="exam" >
-											<option value="0" disable="true" selected="true"> Nie </option>
-											<option value="1"> Tak </option>
-										</select>
-									</div>
-								</div>
-
-
-							</div>
-							<div class="modal-footer">
-								<div class="form-group">
-									<div class="col-md-6 col-md-offset-4">
-										{!! Form::submit('Dodaj przedmiot',['class'=>'btn btn-outline-secondary button-1', 
-											'id'=>"submitSubject", 
-											'data-dismiss'=>'modal']) !!}
-										</div>
-									</div>
-								</div>
-							</div><!-- /.modal-content -->
-						</div><!-- /.modal-dialog -->
-					</div><!-- /.modal -->
-
-					{{--  --}}
-
-
-
-					{{-- edit modal --}}
-					<div class="modal fade" id="editSubject" tabindex="-1" role="dialog" data-dismiss="modal">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title">Dodaj nowy przedmiot</h4>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<div class="alert alert-danger alert-block"  id="validation-info" style="display:none">
 
 								</div>
-								<div class="modal-body">
+
+				
 									<div class="form-group">
 										<div  class="col-md-4 control-label">
-											{!! Form::label('nameEdit','Nazwa:') !!}
+											{!! Form::label('name','Nazwa:') !!}
 										</div>
 										<div class="col-md-6">
-											<input type="text" class="form-control" name="name" id="nameEdit">
-											
+											{!! Form::text('name',null,['class'=>'form-control', 'id'=>'name']) !!}
 										</div>
 									</div>
 
 									<div class="form-group">
 										<div  class="col-md-4 control-label">
-											{!! Form::label('ectEdits','Punkty ECTS:') !!}
+											{!! Form::label('ects','Punkty ECTS:') !!}
 										</div>
 										<div class="col-md-6">
-											<input type="text" class="form-control" name="ects" id="ectsEdit">
+											{!! Form::text('ects',null,['class'=>'form-control', 'id'=>'ects']) !!}
 										</div>
 									</div>
 
 
 									<div class="form-group">
 										<div  class="col-md-4 control-label">
-											{!! Form::label('examEdit','Egzamin') !!}
+											{!! Form::label('exam','Egzamin') !!}
 										</div>
 										<div class="col-md-6">
 
-											<select class="form-control" name="exam" id="examEdit" >
+											<select class="form-control" name="exam" id="exam" >
 												<option value="0" disable="true" selected="true"> Nie </option>
 												<option value="1"> Tak </option>
 											</select>
@@ -218,7 +163,81 @@
 								<div class="modal-footer">
 									<div class="form-group">
 										<div class="col-md-6 col-md-offset-4">
-											<button type="submit" class="btn btn-outline-secondary button-1" data-dismiss="modal" id="submitEditSubject">
+											<button type="submit" class="btn btn-outline-secondary button-1" 
+											id="submitSubject">Dodaj przedmiot</button>
+										{{-- 	{!! Form::submit('Dodaj przedmiot',['class'=>'btn btn-outline-secondary button-1', 
+												'id'=>"submitSubject"
+												]) !!} --}}
+											</div>
+										</div>
+									</div>
+
+
+								</div><!-- /.modal-content -->
+							</div><!-- /.modal-dialog -->
+						</div><!-- /.modal -->
+
+						{{--  --}}
+
+
+
+						{{-- edit modal --}}
+
+						<div class="modal fade" id="editSubject" tabindex="-1" role="dialog" data-dismiss="modal" aria-label="Close">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title"> Edytuj przedmiot</h4>
+		
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><span >&times;</span></button>
+
+							</div>
+
+
+							<div class="modal-body">
+								<div class="alert alert-danger alert-block"  id="validation-edit" style="display:none">
+
+								</div>
+										<div class="form-group">
+											<div  class="col-md-4 control-label">
+												{!! Form::label('nameEdit','Nazwa:') !!}
+											</div>
+											<div class="col-md-6">
+												<input type="text" class="form-control" name="name" id="nameEdit">
+
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div  class="col-md-4 control-label">
+												{!! Form::label('ectEdits','Punkty ECTS:') !!}
+											</div>
+											<div class="col-md-6">
+												<input type="text" class="form-control" name="ects" id="ectsEdit">
+											</div>
+										</div>
+
+
+										<div class="form-group">
+											<div  class="col-md-4 control-label">
+												{!! Form::label('examEdit','Egzamin') !!}
+											</div>
+											<div class="col-md-6">
+
+												<select class="form-control" name="exam" id="examEdit" >
+													<option value="0" disable="true" selected="true"> Nie </option>
+													<option value="1"> Tak </option>
+												</select>
+											</div>
+										</div>
+
+
+									</div>
+									<div class="modal-footer">
+										<div class="form-group">
+											<div class="col-md-6 col-md-offset-4">
+												<button type="submit" class="btn btn-outline-secondary button-1"
+												id="submitEditSubject">
 												Zapisz zmainy
 											</button>
 											
