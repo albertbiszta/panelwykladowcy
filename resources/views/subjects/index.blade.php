@@ -35,7 +35,7 @@
 								{{-- <th scope="col">Sylabus</th>
 								--}}								<th scope="col">Punkty ECTS</th>
 								<th scope="col">Egzamin</th>
-								<th scope="col">Szczegóły / grupy</th>
+								<th scope="col">Szczegóły / Grupy</th>
 								{{-- <th scioe="col">Lista grup</th> --}}
 								<th scope="col"><i class="fas fa-cog fa-lg"></i>
 
@@ -76,12 +76,12 @@
 
 
 								<td>
-
+{{-- 
 									<a href="" data-toggle="modal" data-target="#editSubject" data-id="{{$subject->id}}" 
 										data-name="{{$subject->name}}" data-ects="{{$subject->ects}}" data-exam="{{$subject->exam}}" 
 										class="btn btn-light btn-sm edit-subject">
 										<i class="far fa-edit fa-lg"></i>
-									</a>
+									</a> --}}
 
 
 
@@ -90,7 +90,7 @@
 									</button>
 
 
-
+ 
 
 
 
@@ -180,75 +180,6 @@
 						{{--  --}}
 
 
-
-						{{-- edit modal --}}
-
-						<div class="modal fade" id="editSubject" tabindex="-1" role="dialog" data-dismiss="modal" aria-label="Close">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title"> Edytuj przedmiot</h4>
-		
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><span >&times;</span></button>
-
-							</div>
-
-
-							<div class="modal-body">
-								<div class="alert alert-danger alert-block"  id="validation-edit" style="display:none">
-
-								</div>
-										<div class="form-group">
-											<div  class="col-md-4 control-label">
-												{!! Form::label('nameEdit','Nazwa:') !!}
-											</div>
-											<div class="col-md-6">
-												<input type="text" class="form-control" name="name" id="nameEdit">
-
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div  class="col-md-4 control-label">
-												{!! Form::label('ectEdits','Punkty ECTS:') !!}
-											</div>
-											<div class="col-md-6">
-												<input type="text" class="form-control" name="ects" id="ectsEdit">
-											</div>
-										</div>
-
-
-										<div class="form-group">
-											<div  class="col-md-4 control-label">
-												{!! Form::label('examEdit','Egzamin') !!}
-											</div>
-											<div class="col-md-6">
-
-												<select class="form-control" name="exam" id="examEdit" >
-													<option value="0" disable="true" selected="true"> Nie </option>
-													<option value="1"> Tak </option>
-												</select>
-											</div>
-										</div>
-
-
-									</div>
-									<div class="modal-footer">
-										<div class="form-group">
-											<div class="col-md-6 col-md-offset-4">
-												<button type="submit" class="btn btn-outline-secondary button-1"
-												id="submitEditSubject">
-												Zapisz zmainy
-											</button>
-											
-										</div>
-									</div>
-								</div>
-							</div><!-- /.modal-content -->
-						</div><!-- /.modal-dialog -->
-					</div><!-- /.modal -->
-
-					{{--  --}}
 
 
 

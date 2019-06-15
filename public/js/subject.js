@@ -4,6 +4,7 @@ $(document).ready(function(){
 	deleteSubject();
 	editSubject();
 
+
 });
 
 
@@ -35,12 +36,6 @@ var addSubject = () =>
 			validation = false;
 		}
 
-
-
-		
-
-		
-
 		if(validation == true){
 
 			let postData = {
@@ -64,6 +59,7 @@ var addSubject = () =>
 					appendToTable(data);
 					$('#validation-info').hide();
 
+
 					
 					/*		$('.modal-backdrop').css('background-color', 'transparent');*/
 
@@ -85,15 +81,15 @@ var addSubject = () =>
 var editSubject = () => 
 {
 	$('body').on('click', '.edit-subject', function(){
-		let id = $(this).data('id');
-		let el = this;
 
+		let el = this;
 		$("#nameEdit").attr("value",  $(this).data('name'));
 		$("#ectsEdit").attr("value",  $(this).data('ects'));
 		$("#examEdit").attr("value",  $(this).data('exam'));
 
 		$('#submitEditSubject').click(function(event){
 
+			let id = $('#subjectId').val();
 			let name = $('#nameEdit').val();
 			let ects = parseInt($('#ectsEdit').val());
 			let exam = $('#examEdit').val();
@@ -120,6 +116,7 @@ var editSubject = () =>
 
 			if(validation == true){
 
+
 				let postData = {
 					"name": name,
 					"ects": ects,
@@ -129,25 +126,30 @@ var editSubject = () =>
 
 
 
-
 				$.ajax({
 					type: "PATCH",
 					url: `/subjects/${id}/update`,
 					data: postData,
 					success: function(data)
 					{
+						$('#subject-name-h5').html(data.name);
 						closeModal();
-						$('#validation-info').hide();
-						$(el).closest('tr').remove();
-						appendToTable(data);
+						
+						
+						/*			$('#editSubject').one('hidden.bs.modal');*/
+						
+						$('#validation-edit').hide();
 						$('#success-info').show();
 						$('#info').html(data.success);
+						
+
+						
 					}
 				});
 			}else{
-			$('#validation-edit').show();
-			$('#validation-edit').html(message);
-		}
+				$('#validation-edit').show();
+				$('#validation-edit').html(message);
+			}
 		});
 
 
@@ -213,9 +215,6 @@ var appendToTable = (data) => {
 	</a></td>
 	<td>
 
-	<a href="" data-toggle="modal" data-target="#editSubject" data-id="${data.subject.id}" data-name="${data.subject.name}" data-ects="${data.subject.ects}"
-	data-exam="${data.subject.exam}"
-	class="btn btn-light btn-sm edit-subject"><i class="far fa-edit fa-lg"></i></a>
 
 
 	<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="${data.subject.id}" id="delete-subject" class="btn btn-light btn-sm">
@@ -231,6 +230,8 @@ var appendToTable = (data) => {
 
 	$('#subjects-tbody').append(newRecord);
 }
+
+
 
 
 var closeModal = () =>
