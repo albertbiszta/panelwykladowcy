@@ -7,10 +7,20 @@
 			<div class="card">
 
 				<div class="card-header">
-					<b> <a href="{{ url('groups', $group->id) }}" style="color: black"> 
-						{{$group->name}}
+						Oceny z przedmiotu
+					<b> 
+						<a href="{{ url('subjects', $subject->id) }}" style="color: black"> 
+							{{$subject->name}}
 
-					</a>  </b>
+						</a> 
+					</b>
+					Grupa: 
+					<b> 
+						<a href="{{ url('groups', $group->id) }}" style="color: black"> 
+							{{$group->name}}
+
+						</a>
+					</b>
 				</div>
 
 				{{-- <div class="card-header">
@@ -165,10 +175,14 @@
 
 					<div class="modal-body float-center">
 
+				<div class="alert alert-danger alert-block"  id="validation-info" style="display:none">
+
+				</div>
+
 						<!-- Formularz -->
 					{!! Form::open(['action'=> ['GradeController@addGrade',
 						$subject->id],
-						'method'=>'POST', 'class' =>'form-horizontal']) !!}
+						'method'=>'POST', 'class' =>'form-horizontal', 'id'=> 'form-addGrade']) !!}
 
 
 						<div class="form-group">
@@ -176,11 +190,11 @@
 
 							</div>
 							<div class="col-md-8">
-								<select class="form-control" name="student" id="exampleFormControlSelect2">
+								<select class="form-control" name="student" id="student" >
 									<option value="" disable="true" selected="true"> Wybierz studenta </option>
 									@foreach($group->students as $student)
 
-
+ 
 
 									<option value="{{$student->id}}">  {{$student->lastname}} {{$student->firstname}}</option>
 
@@ -200,7 +214,7 @@
 
 							</div>
 							<div class="col-md-8">
-								{!! Form::text('value',null,['class'=>'form-control', 'placeholder'=>'Ocena (np. 4.0)']) !!}
+								{!! Form::text('value',null,['class'=>'form-control', 'placeholder'=>'Ocena (np. 4.0)', 'id'=>'gradeValue']) !!}
 							</div>
 						</div>
 

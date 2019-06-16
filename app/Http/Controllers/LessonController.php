@@ -26,7 +26,7 @@ class LessonController extends Controller
        return view('lessons.index')->with(compact('subjects'));
     }
 
-
+ 
 
 
     public function groupLessons($subjectId, $groupId = null)

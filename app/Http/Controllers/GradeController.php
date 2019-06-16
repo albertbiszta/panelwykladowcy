@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 class GradeController extends Controller
 {
-    
- 
+
+
     public function groupGrades($subjectId, $groupId = null)
     {
     	if(Subject::userSubject($subjectId) && Group::userGroup($groupId)) {
@@ -22,22 +22,27 @@ class GradeController extends Controller
     		abort(404);
     	}
     }
- 
+
 
     public function addGrade(Request $request, $subjectId = null) {
     	if(Subject::userSubject($subjectId)) {
     		$grade = new Grade;
     		$grade->value = $request->input('value');
-    		$grade->student_id = $request->input('student');
-    		$grade->subject_id = $subjectId;
-    		$grade->save();
-    		$message = "Dodano ocenę";
+            if(!is_numeric($grade->value)){
+              $grade->value = preg_replace('~\D~', '', $grade->value);
 
-			return redirect()->back()->with('flash_message_success', $message);
-    	}else {
-    		abort(404);
-    	}
-    }
+          }
+          
+          $grade->student_id = $request->input('student');
+          $grade->subject_id = $subjectId;
+          $grade->save();
+          $message = "Dodano ocenę";
+
+          return redirect()->back()->with('flash_message_success', $message);
+      }else {
+          abort(404);
+      }
+  }
 
 
 }

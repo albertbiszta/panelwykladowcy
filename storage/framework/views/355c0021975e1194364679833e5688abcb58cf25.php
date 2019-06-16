@@ -17,7 +17,7 @@
 										<i class="far fa-edit fa-lg"></i> Edytuj przedmiot
 							</a>
 
-									
+									 
 						
 
 					</div>
