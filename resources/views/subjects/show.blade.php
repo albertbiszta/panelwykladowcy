@@ -7,23 +7,24 @@
 
 
 				<div class="card-header">
-					<h5> <b id="subject-name-h5"> {{$subject->name}} </b>      
+					<h5 id="subject-header">
+					 <b> {{$subject->name}} </b>   
 					<div class="float-right">
 
 							<a href="" data-toggle="modal" data-target="#editSubject" data-id="{{$subject->id}}" 
-										data-name="{{$subject->name}}" data-ects="{{$subject->ects}}" data-exam="{{$subject->exam}}" 
+										data-name="{{$subject->name}}" data-ects="{{$subject->ects}}"
 										class="btn btn-light btn-sm edit-subject">
 										<i class="far fa-edit fa-lg"></i> Edytuj przedmiot
 							</a>
 
-									
+									 
 						
 
 					</div>
-					 </h5>
-						
+					 
+					</h5>  	
 				</div>
-
+ 
 
 					<div class="card-body">
 

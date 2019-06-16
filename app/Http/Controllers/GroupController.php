@@ -38,6 +38,9 @@ class GroupController extends Controller
 	public function add(Request $request) 
 	{
 		$group = new Group($request->all());
+		if(empty($request->input('contact'))){
+			$group->contact = 'brak';
+		}
 		Auth::user()->groups()->save($group);
 		$message = 'Dodano grupę';
 		

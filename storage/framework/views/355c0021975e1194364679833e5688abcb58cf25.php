@@ -7,11 +7,12 @@
 
 
 				<div class="card-header">
-					<h5> <b id="subject-name-h5"> <?php echo e($subject->name); ?> </b>      
+					<h5 id="subject-header">
+					 <b> <?php echo e($subject->name); ?> </b>   
 					<div class="float-right">
 
 							<a href="" data-toggle="modal" data-target="#editSubject" data-id="<?php echo e($subject->id); ?>" 
-										data-name="<?php echo e($subject->name); ?>" data-ects="<?php echo e($subject->ects); ?>" data-exam="<?php echo e($subject->exam); ?>" 
+										data-name="<?php echo e($subject->name); ?>" data-ects="<?php echo e($subject->ects); ?>"
 										class="btn btn-light btn-sm edit-subject">
 										<i class="far fa-edit fa-lg"></i> Edytuj przedmiot
 							</a>
@@ -20,10 +21,10 @@
 						
 
 					</div>
-					 </h5>
-						
+					 
+					</h5>  	
 				</div>
-
+ 
 
 					<div class="card-body">
 

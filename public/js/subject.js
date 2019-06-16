@@ -73,7 +73,7 @@ var addSubject = () =>
 		}
 
 
-
+ 
 	});
 
 }
@@ -85,7 +85,6 @@ var editSubject = () =>
 		let el = this;
 		$("#nameEdit").attr("value",  $(this).data('name'));
 		$("#ectsEdit").attr("value",  $(this).data('ects'));
-		$("#examEdit").attr("value",  $(this).data('exam'));
 
 		$('#submitEditSubject').click(function(event){
 
@@ -132,11 +131,25 @@ var editSubject = () =>
 					data: postData,
 					success: function(data)
 					{
-						$('#subject-name-h5').html(data.name);
+						let editedHeader = `
+						<b> ${data.subject.name} </b>   
+						<div class="float-right">
+
+						<a href="" data-toggle="modal" data-target="#editSubject" data-id="${data.subject.id}" 
+						data-name="${data.subject.name}" data-ects="${data.subject.ects}" 
+						class="btn btn-light btn-sm edit-subject">
+						<i class="far fa-edit fa-lg"></i> Edytuj przedmiot
+						</a>
+
+
+						
+
+						</div>
+						`;
+
+						$('#subject-header').html(editedHeader);
 						closeModal();
 						
-						
-						/*			$('#editSubject').one('hidden.bs.modal');*/
 						
 						$('#validation-edit').hide();
 						$('#success-info').show();

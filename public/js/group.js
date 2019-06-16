@@ -19,10 +19,7 @@ var appendGroupToTable = (data) => {
 	<i class="far fa-address-card fa-lg" style="color: black"></i>
 	</a></td>
 	<td>
-	<a href="" data-toggle="modal" data-target="#editGroup" data-id="${data.group.id}" 
-	data-name="${data.group.name}"  data-year="${data.group.year}"  data-contact="${data.group.contact}"  class="btn btn-light btn-sm edit-group"><i class="far fa-edit fa-lg"></i></a>
-
-
+	
 
 	<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="${data.group.id}"  id="delete-group" class="btn btn-light btn-sm">
 	<i class="far fa-trash-alt fa-lg"></i>
@@ -49,28 +46,52 @@ var addGroup = () =>
 		let name = $('#name').val();
 		let year = $('#year').val();
 		let contact = $('#contact').val();
-		
-		let postData = {
-			"name": name,
-			"year": year,
-			"contact": contact,
-			"_token": $('#token').val()
-		};
 
 
-		$.ajax({
-			type: "POST",
-			url: "/groups/add",
-			data: postData,
-			success: function(data)
-			{
-				$('#success-info').show();
-				$('#info').html(data.success);
-				appendGroupToTable(data);
+		let validation = true;
+		let message = '';
 
-			}
+		if(name == ''){
+			message += '<p>Nazwa nie może być pusta</p>';
+			validation = false;
+		}
+		if(name.length < 2 || name.length > 50){
+			message += '<p>Nazwa musi zawierać od 2 do 50 znaków</p>';
+			validation = false;
+		}
+		if(year == ''){
+			message += '<p>Podaj rocznik grupy</p>';
+			validation = false;
+		}
 
-		});
+		if(validation == true){ 
+			let postData = {
+				"name": name,
+				"year": year,
+				"contact": contact,
+				"_token": $('#token').val()
+			};
+
+
+			$.ajax({
+				type: "POST",
+				url: "/groups/add",
+				data: postData,
+				success: function(data)
+				{
+					closeModal();
+					$('#success-info').show();
+					$('#info').html(data.success);
+					appendGroupToTable(data);
+					$('#validation-info').hide();
+
+				}
+
+			});
+		}else{
+			$('#validation-info').show();
+			$('#validation-info').html(message);
+		}
 
 
 
@@ -128,28 +149,66 @@ var editGroup = () =>
 			let year = $('#yearEdit').val();
 			let contact = $('#contactEdit').val();
 
-			let postData = {
-				"name": name,
-				"year": year,
-				"contact": contact,
-				"_token": $('#token').val()
-			};
+
+			let validation = true;
+			let message = '';
+
+			if(name == ''){
+				message += '<p>Nazwa nie może być pusta</p>';
+				validation = false;
+			}
+			if(name.length < 2 || name.length > 50){
+				message += '<p>Nazwa musi zawierać od 2 do 50 znaków</p>';
+				validation = false;
+			}
+			if(year == ''){
+				message += '<p>Podaj rocznik grupy</p>';
+				validation = false;
+			}
+
+			if(validation == true){ 
+
+				let postData = {
+					"name": name,
+					"year": year,
+					"contact": contact,
+					"_token": $('#token').val()
+				};
 
 
-			
+				
 
-			$.ajax({
-				type: "PATCH",
-				url: `/groups/${id}/update`,
-				data: postData,
-				success: function(data)
-				{
-					$(el).closest('tr').remove();
-					appendGroupToTable(data);
-					$('#success-info').show();
-					$('#info').html(data.success);
-				}
-			});
+				$.ajax({
+					type: "PATCH",
+					url: `/groups/${id}/update`,
+					data: postData,
+					success: function(data)
+					{
+						let editedHeader = `
+						<b> ${data.group.name} </b>   
+						<div class="float-right">
+
+						<a href="" data-toggle="modal" data-target="#editGroup" data-id="{{$group->id}}" 
+						data-name="${data.group.name}" data-year="${data.group.year}" data-contact=" ${data.group.contact}" 
+						class="btn btn-light btn-sm edit-group"><i class="far fa-edit fa-lg"></i>
+						Edytuj grupę
+						</a>
+
+						</div>
+						`;
+
+						$('#group-header').html(editedHeader);
+						closeModal();
+						$('#success-info').show();
+						$('#info').html(data.success);
+					}
+				});
+
+			}else{
+				$('#validation-edit').show();
+				$('#validation-edit').html(message);
+
+			}
 
 		});
 
@@ -157,6 +216,16 @@ var editGroup = () =>
 	});
 
 }
+
+var closeModal = () =>
+{
+	$(".modal").removeClass("in");
+	$(".modal-backdrop").remove();
+	$('body').removeClass('modal-open');
+	$('body').css('padding-right', '');
+	$(".modal").hide();
+}
+
 
 
 

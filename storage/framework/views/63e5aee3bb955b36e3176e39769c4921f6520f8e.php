@@ -70,9 +70,6 @@
 
 									<td>
 
-										<a href="" data-toggle="modal" data-target="#editGroup" data-id="<?php echo e($group->id); ?>" 
-											data-name="<?php echo e($group->name); ?>" data-year="<?php echo e($group->year); ?>" data-contact="<?php echo e($group->contact); ?>" class="btn btn-light btn-sm edit-group"><i class="far fa-edit fa-lg"></i></a>
-
 
 											
 											<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="<?php echo e($group->id); ?>" id="delete-group" class="btn btn-light btn-sm">
@@ -104,7 +101,7 @@
 
 
 		
-		<div class="modal fade" id="addGroup" tabindex="-1" role="dialog" data-dismiss="modal">
+		<div class="modal fade" id="addGroup" tabindex="-1" role="dialog" data-dismiss="modal" aria-label="Close">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -115,6 +112,10 @@
 
 
 					<div class="modal-body float-center">
+
+								<div class="alert alert-danger alert-block"  id="validation-info" style="display:none">
+
+								</div>
 
 						<div class="form-group">
 							<div class="col-md-8">
@@ -137,7 +138,7 @@
 						<div class="form-group">
 							<div class="col-md-8 col-md-offset-4">
 								<input type="submit" value="Dodaj grupę" id="submitGroup" class="btn btn-outline-secondary button-1 float-right"
-								data-dismiss='modal'>
+								>
 							</div>	
 						</div>
 
@@ -170,50 +171,6 @@
 		</div>
 
 		
-
-		
-		<div class="modal fade" id="editGroup" tabindex="-1" role="dialog" data-dismiss="modal">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Edytuj grupę</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-					</div>
-
-
-					<div class="modal-body float-center">
-
-						<div class="form-group">
-							<div class="col-md-8">
-								<input type="text" id="nameEdit"  class="form-control" >
-							</div>	
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-8">
-								<input type="text" id="yearEdit" placeholder="Rok (np. 2019/2020)" class="form-control">
-							</div>	
-						</div>
-
-
-						<div class="form-group">
-							<div class="col-md-8">
-								<input type="text" id="contactEdit" placeholder="Kontakt do przedstawiciela grupy" class="form-control">
-							</div>	
-						</div>
-						<div class="form-group">
-							<div class="col-md-8 col-md-offset-4">
-								<input type="submit" value="Zapisz zmiany" id="submitEditGroup" class="btn btn-outline-secondary button-1 float-right"
-								data-dismiss='modal'>
-							</div>	
-						</div>
-
-					</div>
-
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
 
 
 
