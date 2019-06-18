@@ -25,7 +25,8 @@ var addGradeValidation = () =>
 			valid = false;
 			
 		}
-		if((isInt(grade) && !isFloat(grade) || !isInt(grade) && isFloat(grade))){
+		/*if((isInt(grade) && !isFloat(grade) || !isInt(grade) && isFloat(grade))){*/
+			if(!isInt(grade) && !isFloat(grade)){
 			if(Number.isNaN(grade)){
 				message += '<p>Ocena musi być liczbą całkowitą lub zmiennoprzecinkową</p>';
 				valid = false;

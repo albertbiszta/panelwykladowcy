@@ -68,13 +68,42 @@ class Student extends Model
 
 			}else if($attendance->lesson->subject_id == $subjectId && $attendance->status == 'Nieobecny') {
 				$attendances['nb'] ++;
-				} else if($attendance->lesson->subject_id == $subjectId && $attendance->status == 'Nieobecność usprawiedliwiona') {
-					$attendances['uspr'] ++;
-				}
+			} else if($attendance->lesson->subject_id == $subjectId && $attendance->status == 'Nieobecność usprawiedliwiona') {
+				$attendances['uspr'] ++;
 			}
+		}
 
-			return $attendances;
+		return $attendances;
+
+	}
+
+ 
+
+	 /**
+	* Counting student's average grade
+	* 
+	* @param int $studentId
+	* 
+	* @param int $subjectId
+	* 
+	* @return float
+	*/
+	public static function averageGrade($studentId, $subjectId): float
+	{
+		$student = Student::findOrFail($studentId);
+		$numberOfGrades = $student->grades->where('subject_id', $subjectId)->count();
+		$sum = 0;
+
+		foreach($student->grades->where('subject_id', $subjectId) as $grade) {
+			$sum += $grade->value;
 
 		}
 
+		$average = $sum / $numberOfGrades;
+
+		return $average;
+
 	}
+
+
+}

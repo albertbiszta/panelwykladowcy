@@ -58,6 +58,7 @@
 									<th scope="col">Imię</th>
 									<th scope="col">Numer indeksu</th>
 									<th scope="col">Oceny</th>
+									<th scope="col">Średnia</th>
 
 
 
@@ -66,7 +67,7 @@
 							</tr>
 						</thead>
 						<tbody>
-
+ 
 
 							@foreach($group->students as $student)
 
@@ -76,12 +77,17 @@
 								<td> {{$student->indexNumber}} </td>
 
 
+								<td>
 
+									@foreach($student->grades as $grade) 
+									<div id="grade-square">  {{substr($grade->value,0,3)}} </div> 
+									@endforeach
+
+								</td>
 
 								<td>
-									@foreach($student->grades as $grade) 
-									{{$grade->value}} 
-									@endforeach
+										<b>  {{ substr(App\Student::averageGrade($student->id,$subject->id), 0, 4) }}  </b>
+									
 								</td>
 
 
