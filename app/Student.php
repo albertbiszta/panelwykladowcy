@@ -94,7 +94,8 @@ class Student extends Model
 		$numberOfGrades = $student->grades->where('subject_id', $subjectId)->count();
 		$sum = 0;
 
-		foreach($student->grades->where('subject_id', $subjectId) as $grade) {
+		if($numberOfGrades > 0) {
+			foreach($student->grades->where('subject_id', $subjectId) as $grade) {
 			$sum += $grade->value;
 
 		}
@@ -102,6 +103,11 @@ class Student extends Model
 		$average = $sum / $numberOfGrades;
 
 		return $average;
+
+		}else{
+			return 0.0;
+		}
+		
 
 	}
 

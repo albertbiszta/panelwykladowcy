@@ -43,8 +43,20 @@
 					</div>
 
 					<b>   
-						<a href=""  id="newGrade" class="float-right" style="color: black" data-toggle="modal" data-target="#addGrade">
-							<i class="fas fa-plus-circle fa-lg"></i> Dodaj ocenę 	</a>
+						{{-- <a href=""  id="newGrade" class="float-right" style="color: black" data-toggle="modal" data-target="#addGrade">
+							<i class="fas fa-plus-circle fa-lg"></i> Dodaj ocenę 	</a> --}}
+
+
+							
+						<div class="float-right" > 
+							<a class="btn btn-outline-secondary button-1 btn-sm" role="button" id="save-grades">
+								Zatwierdź oceny
+							</a>
+
+
+
+						</div>
+
 
 						</b>
 
@@ -57,7 +69,8 @@
 									<th scope="col">Nazwisko</th>
 									<th scope="col">Imię</th>
 									<th scope="col">Numer indeksu</th>
-									<th scope="col">Oceny</th>
+									<th scope="col">Oceny <div class="float-right">Dodaj  </div></th>
+
 									<th scope="col">Średnia</th>
 
 
@@ -67,7 +80,7 @@
 							</tr>
 						</thead>
 						<tbody>
- 
+  
 
 							@foreach($group->students as $student)
 
@@ -76,13 +89,18 @@
 								<td> {{$student->firstname}} </td>
 								<td> {{$student->indexNumber}} </td>
 
-
+ 
 								<td>
 
 									@foreach($student->grades as $grade) 
-									<div id="grade-square">  {{substr($grade->value,0,3)}} </div> 
+									<a id="grade-square"  data-toggle="modal" data-target="#editGrade" data-id="{{$student->id}}">
+									  {{substr($grade->value,0,3)}} </a> 
 									@endforeach
 
+										
+										<input class="form-control add-grade-input" name="add-grade-input" id="add-grade-input" data-id="{{$student->id}}">
+
+									  
 								</td>
 
 								<td>
@@ -101,6 +119,8 @@
 
 						</tbody>
 					</table>
+
+					
 
 				</div>
 {{-- 
@@ -241,6 +261,97 @@
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
+
+
+
+
+
+
+		{{-- edit grade --}}
+		<div class="modal fade" id="editGrade" tabindex="-1" role="dialog" data-dismiss="modal" aria-label="Close">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+			
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+					</div>
+
+
+					<div class="modal-body float-center">
+
+								<div class="alert alert-danger alert-block"  id="validation-edit" style="display:none">
+
+								</div>
+		<div class="float-right">
+			
+
+											<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="{{$group->id}}" id="delete-group" class="btn btn-light btn-sm">
+												<i class="far fa-trash-alt fa-lg"></i> Usuń ocenę
+											</button>
+
+			</div>
+
+
+								<!-- Formularz -->
+					{!! Form::open(['action'=> ['GradeController@addGrade',
+						$subject->id],
+						'method'=>'POST', 'class' =>'form-horizontal', 'id'=> 'form-addGrade']) !!}
+
+
+						<div class="form-group">
+							<div  class="col-md-4 control-label">
+
+							</div>
+							<div class="col-md-8">
+								<select class="form-control" name="student" id="student" >
+									<option value="" disable="true" selected="true"> Wybierz studenta </option>
+									@foreach($group->students as $student)
+
+ 
+
+									<option value="{{$student->id}}">  {{$student->lastname}} {{$student->firstname}}</option>
+
+
+
+									@endforeach
+								</select>
+
+							</div>
+						</div>
+
+
+
+
+						<div class="form-group">
+							<div  class="col-md-4 control-label">
+
+							</div>
+							<div class="col-md-8">
+								{!! Form::text('value',null,['class'=>'form-control', 'placeholder'=>'Ocena (np. 4.0)', 'id'=>'gradeValue']) !!}
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								{!! Form::submit('Dodaj ocenę',['class'=>'btn btn-outline-secondary float-right']) !!}
+							</div>
+						</div>
+
+
+							{!! Form::close() !!}
+
+					</div>
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+<input type="hidden" name="subjectId" id="subjectId" value="{{$subject->id}}">
+<input type="hidden" name="groupId" id="groupId" value="{{$group->id}}">
+
 
 
 			@endsection

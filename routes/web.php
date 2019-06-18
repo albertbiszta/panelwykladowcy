@@ -12,8 +12,10 @@
 */
 
 Route::get('/', function () {
+
 	return view('auth.login');
 });
+
 
 Route::get('/registered', function () {
 	return view('registered');
@@ -25,10 +27,6 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function()
 {
-	Route::get('/verified', function() {
-		return view('verified');
-	});
-
 	Route::get('/panel', 'PanelController@index')->name('panel');
 
 	Route::resource('subjects', 'SubjectController'); 
@@ -57,8 +55,8 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	/*Route::get('syllabuses/add?subject={id}', 'SyllabusController@addWithSubject')->name('syllabuses.addWithSubject');
 	Route::post('syllabuses/save?subject={id}', 'SyllabusController@saveWithSubject');*/
 
-	Route::get('grades/subject/{subject_id}/group/{group_id}', 'GradeController@groupGrades')->name('grades.group');
-	Route::post('grades/add/subject/{subject_id}', 'GradeController@addGrade')->name('grades.addGrade');
+	Route::get('/grades/subject/{subject_id}/group/{group_id}', 'GradeController@groupGrades')->name('grades.group');
+	Route::post('/grades/add/subject/{subject_id}', 'GradeController@addGrade')->name('grades.addGrade');
 	
 
 	Route::get('/lessons', 'LessonController@index')->name('lessons.index');
