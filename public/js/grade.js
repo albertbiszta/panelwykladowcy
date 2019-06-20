@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-	addGradeValidation();
 	saveGrades();
 
 });
@@ -12,14 +11,14 @@ var saveGrades = () =>
 
 	$('#save-grades').click(function(){
 
+
 		let subjectId = $('#subjectId').val();
 
 
 		$('input.add-grade-input').each(function(){
 
-			let value = parseFloat($(this).val());  
+	       let value = $(this).val();  
 			let student = $(this).data('id');
-
 
 
 			let valid = true;
@@ -45,7 +44,7 @@ var saveGrades = () =>
 
 
 			if(valid == false) {
-				console.log('zle');
+				console.log(message);
 	/*			e.preventDefault();
 				$('#validation-info').show();
 				$('#validation-info').html(message);*/
@@ -90,7 +89,7 @@ var saveGrades = () =>
 
 
 
-
+/*
 var addGradeValidation = () =>
 {
 	$('#form-addGrade').submit(function(e){
@@ -131,7 +130,7 @@ var addGradeValidation = () =>
 
 	});
 }
-
+*/
 function isInt(n){
 	return Number(n) === n && n % 1 === 0;
 }

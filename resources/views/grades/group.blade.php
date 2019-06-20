@@ -48,6 +48,8 @@
 
 
 							
+					<a href="{{ route('lessons.group',[$subject->id, $group->id]) }}" style="color: black"> 
+						<i class="far fa-arrow-alt-circle-left  fa-lg"></i> Wróć do zajęć   </a>
 						<div class="float-right" > 
 							<a class="btn btn-outline-secondary button-1 btn-sm" role="button" id="save-grades">
 								Zatwierdź oceny
@@ -85,8 +87,8 @@
 							@foreach($group->students as $student)
 
 							<tr>
-								<td> {{$student->lastname}} </td>
-								<td> {{$student->firstname}} </td>
+								<td> {{$student->lastName}} </td>
+								<td> {{$student->firstName}} </td>
 								<td> {{$student->indexNumber}} </td>
 
  
@@ -222,7 +224,7 @@
 
  
 
-									<option value="{{$student->id}}">  {{$student->lastname}} {{$student->firstname}}</option>
+									<option value="{{$student->id}}">  {{$student->lastName}} {{$student->firstName}}</option>
 
 
 
@@ -310,7 +312,7 @@
 
  
 
-									<option value="{{$student->id}}">  {{$student->lastname}} {{$student->firstname}}</option>
+									<option value="{{$student->id}}">  {{$student->lastName}} {{$student->firstName}}</option>
 
 
 

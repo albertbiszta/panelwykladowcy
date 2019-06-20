@@ -105,8 +105,8 @@ $(document).ready(function(){
 
 			var result = `
 			<tr>
-			<td> ${value.firstname}  </td>
-			<td> ${value.lastname}  </td>
+			<td> ${value.firstName}  </td>
+			<td> ${value.lastName}  </td>
 			<td> ${value.indexNumber}  </td>
 			<td> ${group.group}  </td>
 			<td>  <a href="/students/${value.id}"> 

@@ -13,7 +13,6 @@ var appendGroupToTable = (data) => {
 	var newRecord = `
 	<tr>
 	<td> ${data.group.name} </td>
-	<td> ${data.group.year} </td>
 	<td> ${data.group.contact} </td>
 	<td>   <a href="/groups/${data.group.id}"> 
 	<i class="far fa-address-card fa-lg" style="color: black"></i>
@@ -44,7 +43,6 @@ var addGroup = () =>
 	$('#submitGroup').click(function(event){
 
 		let name = $('#name').val();
-		let year = $('#year').val();
 		let contact = $('#contact').val();
 
 
@@ -59,15 +57,11 @@ var addGroup = () =>
 			message += '<p>Nazwa musi zawierać od 2 do 50 znaków</p>';
 			validation = false;
 		}
-		if(year == ''){
-			message += '<p>Podaj rocznik grupy</p>';
-			validation = false;
-		}
+	
 
 		if(validation == true){ 
 			let postData = {
 				"name": name,
-				"year": year,
 				"contact": contact,
 				"_token": $('#token').val()
 			};
@@ -140,13 +134,13 @@ var editGroup = () =>
 		let el = this;
 
 		$("#nameEdit").attr("value",  $(this).data('name'));
-		$("#yearEdit").attr("value",  $(this).data('year'));
+		
 		$("#contactEdit").attr("value",  $(this).data('contact'));
 
 		$('#submitEditGroup').click(function(event){
 
 			let name = $('#nameEdit').val();
-			let year = $('#yearEdit').val();
+			
 			let contact = $('#contactEdit').val();
 
 
@@ -161,16 +155,12 @@ var editGroup = () =>
 				message += '<p>Nazwa musi zawierać od 2 do 50 znaków</p>';
 				validation = false;
 			}
-			if(year == ''){
-				message += '<p>Podaj rocznik grupy</p>';
-				validation = false;
-			}
+			
 
 			if(validation == true){ 
 
 				let postData = {
 					"name": name,
-					"year": year,
 					"contact": contact,
 					"_token": $('#token').val()
 				};
@@ -189,7 +179,7 @@ var editGroup = () =>
 						<div class="float-right">
 
 						<a href="" data-toggle="modal" data-target="#editGroup" data-id="{{$group->id}}" 
-						data-name="${data.group.name}" data-year="${data.group.year}" data-contact=" ${data.group.contact}" 
+						data-name="${data.group.name}" data-contact=" ${data.group.contact}" 
 						class="btn btn-light btn-sm edit-group"><i class="far fa-edit fa-lg"></i>
 						Edytuj grupę
 						</a>

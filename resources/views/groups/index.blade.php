@@ -41,7 +41,7 @@
 							<thead>
 								<tr>
 									<th scope="col">Nazwa Grupy</th>
-									<th scope="col">Rok</th>
+					
 									<th scope="col">Kontakt do starosty</th>
 									<th scope="col">Lista studentów</th>
 									<th scope="col"><i class="fas fa-cog fa-lg"></i>
@@ -60,7 +60,7 @@
 								<tr>
 									<td> {{$group->name}} </td>
 
-									<td> {{$group->year}} </td>
+								
 									<td> {{$group->contact}}</td>
 									<td>   <a href="{{ url('groups', $group->id) }}"> 
 
@@ -121,12 +121,6 @@
 						<div class="form-group">
 							<div class="col-md-8">
 								<input type="text" id="name" placeholder="Nazwa grupy" class="form-control" >
-							</div>	
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-8">
-								<input type="text" id="year" placeholder="Rok (np. 2019/2020)" class="form-control">
 							</div>	
 						</div>
 

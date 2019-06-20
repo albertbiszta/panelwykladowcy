@@ -12,24 +12,24 @@ class CreateSyllabusesTable extends Migration
      * @return void
      */
     public function up()
-    {
-      Schema::create('syllabuses', function (Blueprint $table) {
+    { 
+     Schema::create('syllabuses', function (Blueprint $table) {
         $table->increments('id');
         $table->integer('subject_id')->unsigned();
         $table->string('language')->default('polski')->nullable();
         $table->text('description')->nullable();
         $table->text('literature')->nullable();
 
-        $table->timestamps();
+       
     });
 
       Schema::table('syllabuses', function (Blueprint $table) {
-       $table->foreign('subject_id')
-       ->references('id')->on('subjects')
-       ->onDelete('cascade');  
+         $table->foreign('subject_id')
+         ->references('id')->on('subjects')
+         ->onDelete('cascade');  
 
-   });
-  }
+     });
+    }
 
     /**
      * Reverse the migrations.

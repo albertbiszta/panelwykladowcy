@@ -32,8 +32,10 @@
 
 				<div class="card-body">
 
-					<div id="main">
-
+					
+					<a href="{{ route('lessons.group',[$subject->id, $group->id]) }}" style="color: black"> 
+						<i class="far fa-arrow-alt-circle-left  fa-lg"></i> Wróć do zajęć   </a>
+<div id="main">
 						@if(count($lesson->attendances) > 0)
 
 						<button class="btn btn-outline-secondary float-right" id="update-attendance"> Zatwierdź zmiany w obecności</button>
@@ -64,8 +66,8 @@
 								<tr>
 
 
-									<td> {{$student->lastname}} </td>
-									<td> {{$student->firstname}} </td>
+									<td> {{$student->lastName}} </td>
+									<td> {{$student->firstName}} </td>
 									<td> {{$student->indexNumber}} </td> 
 
 
@@ -130,6 +132,7 @@
 
 
 					@else
+				
 
 					<button class="btn btn-outline-secondary float-right" id="submit-attendance"> Zatwierdź obecność </button>
 					<br> <br>
@@ -161,8 +164,8 @@
 							<tr>
 
 
-								<td> {{$student->lastname}} </td>
-								<td> {{$student->firstname}} </td>
+								<td> {{$student->lastName}} </td>
+								<td> {{$student->firstName}} </td>
 								<td> {{$student->indexNumber}} </td>
 
 

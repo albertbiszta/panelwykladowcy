@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-	protected $fillable = ['name', 'year', 'contact'];
+	protected $fillable = ['name', 'contact'];
 
 	public $timestamps = false;
 

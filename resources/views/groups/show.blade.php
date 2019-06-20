@@ -13,7 +13,7 @@
 
 							
 							<a href="" data-toggle="modal" data-target="#editGroup" data-id="{{$group->id}}" 
-								data-name="{{$group->name}}" data-year="{{$group->year}}" data-contact="{{$group->contact}}" 
+								data-name="{{$group->name}}"  data-contact="{{$group->contact}}" 
 								class="btn btn-light btn-sm edit-group"><i class="far fa-edit fa-lg"></i>
 								Edytuj grupę
 							</a>
@@ -67,8 +67,8 @@
 										@foreach($students as $student)
 
 										<tr>
-											<td> {{$student->lastname}} </td>
-											<td> {{$student->firstname}} </td>
+											<td> {{$student->lastName}} </td>
+											<td> {{$student->firstName}} </td>
 											<td> {{$student->indexNumber}} </td>
 											<td> {{$student->contact}} </td>
 
@@ -81,8 +81,8 @@
 
 
 												<a href="" data-toggle="modal" data-target="#editStudent" data-id="{{$student->id}}" 
-													data-firstname="{{$student->firstname}}" data-lastname="{{$student->lastname}}"
-													data-indexNumber="{{$student->indexNumber}}" 
+													data-firstname="{{$student->firstName}}" data-lastname="{{$student->lastName}}"
+													data-indexnumber="{{$student->indexNumber}}" 
 													data-contact="{{$student->contact}}" 
 													class="btn btn-light btn-sm edit-student"><i class="far fa-edit fa-lg"></i></a>
 
@@ -130,20 +130,20 @@
 
 								<div class="form-group">
 									<div  class="col-md-4 control-label">
-										{!! Form::label('firstname','Imię:') !!}
+										{!! Form::label('firstName','Imię:') !!}
 									</div>
 									<div class="col-md-6">
-										{!! Form::text('firstname',null,['class'=>'form-control', 'id'=>'firstname']) !!}
+										{!! Form::text('firstName',null,['class'=>'form-control', 'id'=>'firstName']) !!}
 									</div>
 								</div>
 
 
 								<div class="form-group">
 									<div  class="col-md-4 control-label">
-										{!! Form::label('lastname','Nazwisko:') !!}
+										{!! Form::label('lastName','Nazwisko:') !!}
 									</div>
 									<div class="col-md-6">
-										{!! Form::text('lastname',null,['class'=>'form-control', 'id'=>'lastname']) !!}
+										{!! Form::text('lastName',null,['class'=>'form-control', 'id'=>'lastName']) !!}
 									</div>
 								</div>
 
@@ -200,21 +200,21 @@
 
 									<div class="form-group">
 										<div  class="col-md-4 control-label">
-											{!! Form::label('firstnameEdit','Imię:') !!}
+											{!! Form::label('firstNameEdit','Imię:') !!}
 										</div>
 										<div class="col-md-6">
 
-											{!! Form::text('firstnameEdit',null,['class'=>'form-control', 'id'=>'firstnameEdit']) !!}
+											{!! Form::text('firstNameEdit',null,['class'=>'form-control', 'id'=>'firstNameEdit']) !!}
 										</div>
 									</div>
 
 
 									<div class="form-group">
 										<div  class="col-md-4 control-label">
-											{!! Form::label('lastnameEdit','Nazwisko:') !!}
+											{!! Form::label('lastNameEdit','Nazwisko:') !!}
 										</div>
 										<div class="col-md-6">
-											{!! Form::text('lastnameEdit',null,['class'=>'form-control', 'id'=>'lastnameEdit']) !!}
+											{!! Form::text('lastNameEdit',null,['class'=>'form-control', 'id'=>'lastNameEdit']) !!}
 										</div>
 									</div>
 
@@ -306,11 +306,7 @@
 							</div>	
 						</div>
 
-						<div class="form-group">
-							<div class="col-md-8">
-								<input type="text" id="yearEdit" placeholder="Rok (np. 2019/2020)" class="form-control">
-							</div>	
-						</div>
+					
 
 
 						<div class="form-group">

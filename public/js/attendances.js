@@ -37,9 +37,9 @@ var saveAttendance = () =>
 					<tr>
 
 
-					<td> ${data.student.lastname} </td>
-					<td> ${data.student.firstname} </td>
-					<td> ${data.student.lastname} </td>
+					<td> ${data.student.lastName} </td>
+					<td> ${data.student.firstName} </td>
+					<td> ${data.student.indexNumber} </td>
 
 
 
@@ -75,7 +75,6 @@ var saveAttendance = () =>
 		$('#main').empty();
 
 		let table = `
-
 
 		<button class="btn btn-outline-secondary float-right" id="update-attendance"> Zatwierdź zmiany w obecności</button>
 		<br> <br>
@@ -177,9 +176,9 @@ var updateAttendance = () =>
 					<tr>
 
 
-					<td> ${data.student.lastname} </td>
-					<td> ${data.student.firstname} </td>
-					<td> ${data.student.lastname} </td>
+					<td> ${data.student.lastName} </td>
+					<td> ${data.student.firstName} </td>
+					<td> ${data.student.indexNumber} </td>
 
 
 

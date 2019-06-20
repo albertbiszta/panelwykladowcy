@@ -16,6 +16,8 @@
 
             <div class="card-body">
 
+              @if(count($subjects) > 0)
+
               @foreach($subjects as $subject)
               @if(count($subject->groups) > 0)
 
@@ -33,7 +35,6 @@
             <thead>
                 <tr>
                     <th scope="col">Nazwa grupy</th>
-                    <th scope="col">Rok</th>
                     <th scope="col">Lista studentów</th>
                     <th scope="col">Oceny</th>
                     <th scope="col">Zajęcia</th>
@@ -59,7 +60,7 @@
                 </td>
 
 
-                <td> {{$group->year}} </td>
+            
                 <td>    <a href="{{ url('groups', $group->id) }}" > 
 
                     <i class="fas fa-user-graduate fa-lg" style="color: black"></i>
@@ -107,11 +108,18 @@
              </u>
             </b></h6>
            
-            <p>[ Nie dodałeś grup do tego przedmiotu ]</p>
+            <p>[ Nie dodano grup do tego przedmiotu ]</p>
 
 @endif
 
+
+
 @endforeach
+
+@else
+<h6>Nie dodano jeszcze przedmiotów</h6>
+
+@endif
 
 
 

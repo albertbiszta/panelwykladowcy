@@ -158,7 +158,7 @@
 
                 <li class="nav-item dropdown">
                   <a id="nav-link" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
-                   <b>  {{ Auth::user()->name }}  </b><span class="caret"></span>
+                   <b>  {{ Auth::user()->firstName }}  {{ Auth::user()->lastName }} </b><span class="caret"></span>
                  </a>
 
 

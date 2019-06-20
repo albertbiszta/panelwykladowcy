@@ -18,7 +18,6 @@ class CreateAttendancesTable extends Migration
            $table->integer('lesson_id')->unsigned();
            $table->integer('student_id')->unsigned();
            $table->string('status');
-           $table->timestamps();
        });
 
 

@@ -15,8 +15,8 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->string('firstName');
+            $table->string('lastName');
             $table->string('contact')->default('brak')->nullable();
             $table->integer('indexNumber');
             $table->integer('group_id')->unsigned();

@@ -30,7 +30,7 @@ class StudentController extends Controller
 		$query = $request->get('query');
 		$data = explode(' ', $query);
 
-		$students = Student::where('firstname', 'LIKE', '%'.$data[0].'%')->where('lastname', 'LIKE', '%'.$data[1].'%')->get();
+		$students = Student::where('firstName', 'LIKE', '%'.$data[0].'%')->where('lastName', 'LIKE', '%'.$data[1].'%')->get();
 		if(count($students) > 0) {
 			return response()->json(['students'=>$students]);
 
@@ -56,6 +56,9 @@ class StudentController extends Controller
 		$groupId = $request->get('group_id');
 
 		$student = new Student($request->all());
+		if(is_null($request->get('contact'))){
+			$student->contact = '';
+		}
 		$student->group()->associate($groupId);
 		$student->save();	
 		$message = "Dodano studenta do grupy";
@@ -80,6 +83,9 @@ class StudentController extends Controller
 		if(Student::userStudent($id)) {
 			$student = Student::findOrFail($id);
 			$groupId = $request->input('group_id');
+			if(is_null($request->get('contact'))){
+			$student->contact = '';
+		}
 			$student->group()->associate($groupId);
 			$student->update($request->all());
 

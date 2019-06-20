@@ -212,7 +212,7 @@
 				?>
 
 				<tr>
-					<td> {{$student->lastname}} {{$student->firstname}}  </td>
+					<td> {{$student->lastName}} {{$student->firstName}}  </td>
 
 					<?php
 					$studentAttendances = App\Student::studentAttendances($student->id,$subject->id);
