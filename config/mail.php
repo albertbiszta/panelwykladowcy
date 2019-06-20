@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailtrap.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 2525),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        "address" => "from@example.com",
-        "name" => "Example"
+        "address" => "panelwykladowcy@gmail.com",
+        "name" => "PanelWykladowcy"
     ],
 
     /*
@@ -84,8 +84,8 @@ return [
     |
     */
 
-    "username" => "9d430d92b74281",
-    "password" => "246940a0479c6b",
+    "username" => "panelwykladowcy@gmail.com",
+    "password" => "Basquiat2019",
 
     /*
     |--------------------------------------------------------------------------

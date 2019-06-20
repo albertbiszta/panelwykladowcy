@@ -27,7 +27,12 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function()
 {
+	Route::get('/verified', function () {
+	return view('verified');
+});
+
 	Route::get('/panel', 'PanelController@index')->name('panel');
+
 
 	Route::resource('subjects', 'SubjectController'); 
 	Route::post('/subjects/add', 'SubjectController@add');

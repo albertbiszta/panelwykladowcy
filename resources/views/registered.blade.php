@@ -8,7 +8,7 @@
          
 
 
-                    Check your email for verification.
+                   W celu weryfikacji sprawdź e-mail.
            
             </div>
         </div>
