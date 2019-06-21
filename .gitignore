@@ -4,6 +4,7 @@
 public/images
 /storage/*.key
 /vendor
+/config
 /.idea
 /.vagrant
 /nbproject
