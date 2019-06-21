@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
 	saveGrades();
+	updateGrade();
+	deleteGrade();
 
 });
 
@@ -17,7 +19,7 @@ var saveGrades = () =>
 
 		$('input.add-grade-input').each(function(){
 
-	       let value = $(this).val();  
+			let value = $(this).val();  
 			let student = $(this).data('id');
 
 
@@ -85,6 +87,119 @@ var saveGrades = () =>
 
 
 	});
+}
+
+
+
+var updateGrade = () => 
+{
+	$('body').on('click', '#grade-square', function(){
+		let id = $(this).data('id');
+
+
+		$("#editGradeValue").attr("placeholder",  $(this).data('value'));
+
+
+
+		$('#submitGradeUpdate').click(function(event){
+
+			let value = $('#editGradeValue').val();
+
+
+			let valid = true;
+			let message = '';
+
+			if(!isInt(value) && !isFloat(value)){
+				if(Number.isNaN(value)){
+					message += 'Ocena musi być liczbą całkowitą lub zmiennoprzecinkową';
+					valid = false;
+				}
+			}
+			if(Number.isNaN(value)){
+				message += 'Ocena musi być liczbą całkowitą lub zmiennoprzecinkową';
+				valid = false;
+			}
+
+
+
+			if(valid == false) {
+				console.log(message);
+	/*			e.preventDefault();
+				$('#validation-info').show();
+				$('#validation-info').html(message);*/
+
+			}else{
+
+				let patchData = {
+					"value": value,
+					"_method:": 'PATCH',
+					"_token": $('#token').val()
+				};
+
+
+
+				$.ajax({
+					type: "PATCH",
+					url: `/grades/${id}/update`,
+					data: patchData,
+					success: function(data)
+					{
+						location.reload(); 
+
+					}
+
+				});
+
+			}
+
+
+		});
+
+
+	});
+
+}
+
+var deleteGrade = () => 
+{
+	$('body').on('click', '#grade-square', function(){
+		let id = $(this).data('id');
+
+
+
+		$('#delete-grade').click(function(event){
+
+
+
+			let deleteData = {
+				"_token": $('#token').val(),
+				"_method:": 'delete'
+			};
+
+
+			$.ajax({
+				type: "DELETE",
+				url: `/grades/${id}/delete`,
+				data: deleteData,
+				success: function()
+				{
+					location.reload(); 
+
+
+
+				}
+
+			});
+
+
+
+
+		});
+
+	})
+
+
+
 }
 
 

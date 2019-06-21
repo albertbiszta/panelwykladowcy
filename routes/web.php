@@ -60,9 +60,11 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	/*Route::get('syllabuses/add?subject={id}', 'SyllabusController@addWithSubject')->name('syllabuses.addWithSubject');
 	Route::post('syllabuses/save?subject={id}', 'SyllabusController@saveWithSubject');*/
 
+
 	Route::get('/grades/subject/{subject_id}/group/{group_id}', 'GradeController@groupGrades')->name('grades.group');
 	Route::post('/grades/add/subject/{subject_id}', 'GradeController@addGrade')->name('grades.addGrade');
-	
+	Route::patch('/grades/{grade_id}/update', 'GradeController@update')->name('grades.update');
+	Route::delete('/grades/{id}/delete', 'GradeController@delete')->name('grades.delete');
 
 	Route::get('/lessons', 'LessonController@index')->name('lessons.index');
 	Route::get('/lessons/subject/{subject_id}/group/{group_id}', 'LessonController@groupLessons')->name('lessons.group');

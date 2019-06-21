@@ -14,7 +14,6 @@
 
   
 
-  <script src="{{ asset('js/app.js') }}" defer></script>
   
 
 
@@ -243,6 +242,9 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('js/student.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/subject.js') }}" type="text/javascript"></script>
 
+
+
+  <script src="{{ asset('js/app.js') }}" defer></script>
 
 
 
