@@ -23,14 +23,22 @@ class Subject extends Model
         return $this->hasMany('App\Grade');
     }
 
+
     public function groups() 
     {
     	return $this->belongsToMany('App\Group');
     }
 
+
     public function lessons()
     {
         return $this->hasMany('App\Lesson')->orderBy('date');
+    }
+
+
+      public function materials()
+    {
+        return $this->hasMany('App\Material');
     }
 
     
@@ -38,6 +46,7 @@ class Subject extends Model
     {
     	return $this->belongsTo('App\User');
     }
+
 
     public function syllabus()
     {

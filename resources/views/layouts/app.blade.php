@@ -36,7 +36,7 @@
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <link href="{{ asset('css/layout/app.css') }}" rel="stylesheet">
 
-   <link href="{{ asset('css/mobile.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/mobile.css') }}" rel="stylesheet">
 
 
 </head>
@@ -65,54 +65,61 @@
 
 
 
-  
-              <li class="nav-item ">
-                <a class="nav-link" href="/subjects"> <b>Przedmioty </b></a>
-              </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/subjects"> <b>Przedmioty </b></a>
+            </li>
 
             
 
 
-              <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> 
-                 <b>
-                 Grupy i Studenci </b>  <i class="fas fa-sort-down"></i> </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> 
+               <b>
+               Grupy i Studenci </b>  <i class="fas fa-sort-down"></i> </a>
 
 
-                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="/groups">Lista grup / Dodaj grupy</a>
-            
-                  <div class="dropdown-divider">  </div>
-                  <a class="dropdown-item" href="/students">Wyszukaj studenta</a>
+               <div class="dropdown-menu">
+                <a class="dropdown-item" href="/groups">Lista grup / Dodaj grupy</a>
+
+                <div class="dropdown-divider">  </div>
+                <a class="dropdown-item" href="/students">Wyszukaj studenta</a>
 
 
+
+              </div>
+
+
+            </li>
+
+
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/lessons"> <b> Zajęcia </b></a>
+            </li>
+
+
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <b>Syllabusy </b> <i class="fas fa-sort-down"></i> </a>
+
+
+                <div class="dropdown-menu">
+
+                  <a class="dropdown-item" href="/syllabuses/create">Dodaj syllabus</a>  
 
                 </div>
 
 
               </li>
 
-              
+            
 
-              <li class="nav-item ">
-                <a class="nav-link" href="/lessons"> <b> Zajęcia </b></a>
-              </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/materials"> <b> Materiały dla studentów </b></a>
+            </li>
 
-
-
-              <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                  <b>Syllabusy </b> <i class="fas fa-sort-down"></i> </a>
-
-
-                  <div class="dropdown-menu">
-                    
-                    <a class="dropdown-item" href="/syllabuses/create">Dodaj syllabus</a>  
-
-                  </div>
-
-
-                </li>
 
 
 {{-- 
@@ -205,7 +212,7 @@
 
 
 
-  
+
   <!-- Footer Elements -->
 
 
@@ -244,7 +251,7 @@ crossorigin="anonymous"></script>
 
 
 
-  <script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
 
 
 

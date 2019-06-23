@@ -28,8 +28,8 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'verified']], function()
 {
 	Route::get('/verified', function () {
-	return view('verified');
-});
+		return view('verified');
+	});
 
 	Route::get('/panel', 'PanelController@index')->name('panel');
 
@@ -42,7 +42,6 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::post('/subjects/{id}/assign-group', 'SubjectController@assignGroup')->name('subjects.assignGroup');
 	Route::delete('/subjects/{subject_id}/{group_id}', 'SubjectController@unassignGroup')->name('subjects.unassignGroup');
 	Route::get('/subject/{id}/groups', 'SubjectController@subjectGroups');
-
 
 	Route::resource('groups', 'GroupController'); 
 	Route::post('/groups/add', 'GroupController@add');
@@ -57,9 +56,6 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::get('/search-students', 'StudentController@search')->name('students.search');
 
 	Route::resource('syllabuses', 'SyllabusController');
-	/*Route::get('syllabuses/add?subject={id}', 'SyllabusController@addWithSubject')->name('syllabuses.addWithSubject');
-	Route::post('syllabuses/save?subject={id}', 'SyllabusController@saveWithSubject');*/
-
 
 	Route::get('/grades/subject/{subject_id}/group/{group_id}', 'GradeController@groupGrades')->name('grades.group');
 	Route::post('/grades/add/subject/{subject_id}', 'GradeController@addGrade')->name('grades.addGrade');
@@ -69,7 +65,6 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::get('/lessons', 'LessonController@index')->name('lessons.index');
 	Route::get('/lessons/subject/{subject_id}/group/{group_id}', 'LessonController@groupLessons')->name('lessons.group');
 	Route::post('/lessons/subject/{subject_id}/group/{group_id}/add', 'LessonController@add')->name('lessons.add');
-
 	Route::patch('/lessons/{id}/edit-status','LessonController@editStatus');
 
 	//Route::resource('attendances', 'AttendanceController');
@@ -77,7 +72,9 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::post('/attendances/save', 'AttendanceController@save')->name('attendances.save');
 	Route::post('/attendances/{id}/update', 'AttendanceController@update')->name('attendances.update');
 
-
+	Route::resource('materials', 'MaterialController');
+	Route::get('/materials/download/{name}', 'MaterialController@downloadFile')->name('materials.download');
+	
 
 
 });

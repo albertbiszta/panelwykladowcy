@@ -25,11 +25,11 @@
 {!! Form::open(['route' => 'syllabuses.store']) !!}
 
 
-<div class="form-group">
+<div class="form-group ">
    <div  class="col-md-4 control-label">
        {!! Form::label('subject','Przedmiot: ') !!}
    </div>
-   <div  class="col-md-4">
+   <div  class="col-md-6">
 
        <select class="form-control" name="subject" id="exampleFormControlSelect2">
            <option value="" disable="true" selected="true"> Wybierz przedmiot </option>
@@ -77,7 +77,7 @@
    {!! Form::label('description','Opis:') !!}
 </div>
 <div class="col-md-6">
-   {!! Form::textarea('description',null,['class'=>'form-control','rows' => 8, 'cols' => 54]) !!}
+   {!! Form::textarea('description',null,['class'=>'form-control','rows' => 6, 'cols' => 44]) !!}
 </div>
 </div>
 
@@ -94,7 +94,7 @@
 
 <div class="form-group">
 <div class="col-md-6 col-md-offset-4">
-   {!! Form::submit('Dodaj sylabus',['class'=>'btn btn-primary']) !!}
+   {!! Form::submit('Dodaj sylabus',['class'=>'btn btn-outline-secondary float-right']) !!}
   </div>
 </div>
 
