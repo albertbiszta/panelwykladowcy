@@ -74,7 +74,8 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
 	Route::resource('materials', 'MaterialController');
 	Route::get('/materials/download/{name}', 'MaterialController@downloadFile')->name('materials.download');
+	Route::delete('/materials/{id}/delete', 'MaterialController@delete')->name('materials.delete');
 	
-
-
 });
+
+Route::get('/profile/{lastName}{firstName}/{id}', 'UserProfileController@publicProfile')->name('profiles.public');

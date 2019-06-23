@@ -30,7 +30,7 @@
 						@if(count($subjects) > 0)
 
 						@foreach($subjects as $subject)
-							@if(count($subject->materials) > 0)
+						@if(count($subject->materials) > 0)
 
 
 						<div class="card">
@@ -49,11 +49,16 @@
 
 
 									<li class="list-group-item mh-25">{{$material->name}}   
-									  <a  href="{{route('materials.download', [$material->fileName])}}" class="float-right mh-25" > 
-										<button class="btn btn-outline-secondary button-1 mh-25" >Pobierz</button>
+										<a  href="{{route('materials.download', [$material->fileName])}}" class="float-right mh-25" > 
+											<button class="btn btn-outline-secondary button-1 mh-25" >Pobierz</button>
 
-									</a>  
-									  </li>
+										</a>  
+										<button type="submit" data-id="{{$material->id}}" 
+											id="delete-material" class="btn btn-light delete-material float-right">
+											<i class="far fa-trash-alt fa-lg"></i>
+										</button>
+
+									</li>
 
 
 
@@ -73,55 +78,12 @@
 
 
 
-				@endif
+						@endif
 						@endforeach
 
 						@endif
 
 						
-
-
-			{{-- 			@if(count($subjects) > 0)
-
-						@foreach($subjects as $subject)
-						<table class="table table-bordered table-sm table-responsive-sm">
-
-							<div class="card" style="width: 18rem;">
-								<ul class="list-group list-group-flush">
-
-
-
-
-
-
-									@foreach($subject->materials as $material)
-
-									<li class="list-group-item">  	{{$material->name}} 
-
-
-										<a  href="{{route('materials.download', [$material->fileName])}}"> Pobierz </a>  
-									</li>
-
-
-
-
-
-
-
-
-
-									@endforeach
-
-
-								</ul>
-							</div>
-
-							@endforeach
-
-							@endif
-
-						</div>
-						--}}
 
 
 

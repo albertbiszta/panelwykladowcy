@@ -169,7 +169,7 @@ var deleteGrade = () =>
 
 		$('#delete-grade').click(function(event){
 
-
+ 
 
 			let deleteData = {
 				"_token": $('#token').val(),

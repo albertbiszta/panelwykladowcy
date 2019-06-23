@@ -5,11 +5,22 @@ $(document).ready(function(){
 	editStudent();
 	deleteStudent();
 
+	$(".modal").on("hidden.bs.modal", function(){
+   	   $('.modal-body-add-student').find("input").val("");
+  
+});
+
+
+
+
 });
 
 /**/
 var addStudent = () => 
 {
+
+
+
 	$('#submitStudent').click(function(event){
 
 		let groupId = $('#groupId').val();
@@ -37,6 +48,9 @@ var addStudent = () =>
 				$('#success-info').show();
 				$('#info').html(data.success);
 				appendStudent(data);
+			
+			
+		
 
 			}
 
@@ -148,7 +162,7 @@ var appendStudent = (data) =>
 	<td> ${data.student.contact} </td>
 	<td>
 	<a href="" data-toggle="modal" data-target="#editStudent" data-id="${data.student.id}"   
-	 data-firstname="${data.student.firstName}"   data-lastname="${data.student.lastName}"  data-indexnumber="${data.student.indexNumber}"    data-contact="${data.student.contact}" 
+	data-firstname="${data.student.firstName}"   data-lastname="${data.student.lastName}"  data-indexnumber="${data.student.indexNumber}"    data-contact="${data.student.contact}" 
 	class="btn btn-light btn-sm edit-student"><i class="far fa-edit fa-lg"></i></a>
 
 	<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="${data.student.id}" id="delete-student" class="btn btn-light btn-sm">

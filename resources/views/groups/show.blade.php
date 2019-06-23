@@ -29,7 +29,7 @@
 					<div class="card-header">
 
 						<b>  
-							<a href=""  id="newStudent" class="float-right" style="color: black" data-toggle="modal" data-target="#addStudent">
+							<a href=""  id="newStudent" class="float-right new-student" style="color: black" data-toggle="modal" data-target="#addStudent">
 								<i class="fas fa-plus-circle fa-lg"></i> Dodaj studentów 	</a>
 							</b>
 							<br> 
@@ -124,7 +124,7 @@
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
 							</div>
-							<div class="modal-body">
+							<div class="modal-body-add-student">
 								{!! Form::hidden('group_id', $group->id) !!}
 
 

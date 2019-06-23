@@ -8,6 +8,7 @@ use App\Material;
 use App\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 class MaterialController extends Controller
 {
@@ -42,7 +43,7 @@ class MaterialController extends Controller
 		
 		$file = $request->input('file');
 		$filename = $request->file->getClientOriginalName();
-/*		$extension = $request->file->getClientOriginalExtension();*/
+		/*		$extension = $request->file->getClientOriginalExtension();*/
 
 		if($request->hasFile('file')){
 
@@ -53,10 +54,10 @@ class MaterialController extends Controller
 			$request->file->storeAs('materials', $material->fileName);
 			$material->subject_id = $request->input('subject');
 			$material->save();
-				return redirect()->route('materials.index');
+			return redirect()->route('materials.index');
 
 		}
-	
+
 		
 	}
 
@@ -73,6 +74,28 @@ class MaterialController extends Controller
 	public function downloadFile($name)
 	{
 		return response()->download(storage_path("app/materials/{$name}"));
+	}
+
+
+	/**
+	 * Delete material
+	 * 
+	 * /materials/{id}/delete
+     *  
+	 * @param  int $id
+	 * 
+	 * @return \Illuminate\Http\Response
+	 */
+
+	public function delete($id = null)
+	{
+		$material = Material::findOrFail($id);
+		$material->delete();
+		/*$material = Material::where(['id'=>$id])->delete();*/
+		unlink(storage_path('app/materials/'.$material->fileName));
+		$message = "Usunięto materiał";
+		return response()->json(['success'=>$message]);
+
 	}
 
 

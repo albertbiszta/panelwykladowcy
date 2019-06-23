@@ -114,11 +114,11 @@
 
               </li>
 
-            
 
-            <li class="nav-item ">
-              <a class="nav-link" href="/materials"> <b> Materiały dla studentów </b></a>
-            </li>
+
+              <li class="nav-item ">
+                <a class="nav-link" href="/materials"> <b> Materiały dla studentów </b></a>
+              </li>
 
 
 
@@ -150,9 +150,9 @@
 
 
 
-          
+
           <!-- Right Side Of Navbar -->
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav mr-autot">
             <!-- Authentication Links -->
             <nav class="navbar navbar-light bg-light justify-content-between">
              <div class="flex-center position-ref full-height">
@@ -160,9 +160,11 @@
 
               <div class="top-right links">
                 @auth
-                {{--    <a href="{{ url('/') }}">Home</a> --}}
 
-                <li class="nav-item dropdown">
+
+
+    
+       {{--          <li class="nav-item dropdown">
                   <a id="nav-link" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
                    <b>  {{ Auth::user()->firstName }}  {{ Auth::user()->lastName }} </b><span class="caret"></span>
                  </a>
@@ -172,6 +174,10 @@
 
 
                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('profiles.public', [Auth::user()->lastName, Auth::user()->firstName, Auth::user()->id ]) }}"
+                 >
+                  {{ __('Publiczny profil') }}
+                </a>
                   <a class="dropdown-item" href="{{ route('logout') }}"
                   onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();">
@@ -183,23 +189,83 @@
                 </form>
               </div>
             </li>
-            @else
-            <a href="{{ route('login') }}">Login</a>
+ --}}
 
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
-            @endif
-            @endauth
-          </div>
-          @endif
-        </ul>
-      </div>
-    </div>
-  </nav>
+           
 
-  <main class="py-4">
-    @yield('content')
-  </main>
+
+
+
+
+        
+         
+
+
+               <ul class="nav nav-tabs">
+
+
+
+
+
+
+                <li class="nav-item dropdown">
+                 <a id="nav-link" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
+                   <b>  {{ Auth::user()->firstName }}  {{ Auth::user()->lastName }} </b><span class="caret"></span>
+                 </a>
+
+
+                 <div class="dropdown-menu">
+
+                   <a class="dropdown-item" href="{{ route('profiles.public', [Auth::user()->lastName, Auth::user()->firstName, Auth::user()->id ]) }}"
+                     >
+                     {{ __('Publiczny profil') }}
+                   </a>  
+
+                 </a>
+                 <a class="dropdown-item" href="{{ route('logout') }}"
+                 onclick="event.preventDefault();
+                 document.getElementById('logout-form').submit();">
+                 {{ __('Wyloguj się') }}
+               </a>
+
+               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>
+
+            </div>
+
+
+          </li>
+
+
+      
+      </ul>
+ 
+
+
+
+
+
+
+
+
+    @else
+    <a href="{{ route('login') }}">Login</a>
+
+    @if (Route::has('register'))
+    <a href="{{ route('register') }}">Register</a>
+    @endif
+    @endauth
+  </div>
+  @endif
+</ul>
+</div>
+</div>
+</nav>
+
+<main class="py-4">
+  @yield('content')
+</main>
 </div>
 
 
@@ -245,9 +311,11 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('js/grade.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/group.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/lesson.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/material.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/search.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/student.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/subject.js') }}" type="text/javascript"></script>
+
 
 
 

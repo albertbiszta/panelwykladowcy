@@ -97,12 +97,10 @@ class StudentController extends Controller
 
 
 	/**
-	 * Update group data
+	 * Delete student
 	 * 
-	 * /groups/{id}/update
+	 * /students/{id}/delete
      * 
-	 * @param  Request $request
-	 * 
 	 * @param  int $id
 	 * 
 	 * @return \Illuminate\Http\Response
