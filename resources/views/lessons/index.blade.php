@@ -33,7 +33,7 @@
             <thead>
                 <tr>
                     <th scope="col">Nazwa grupy</th>
-                    <th scope="col">Rok</th>
+                    
                 
                     <th scope="col">Lista zajęć</th>
 
@@ -58,7 +58,7 @@
                 </td>
 
 
-                <td> {{$group->year}} </td>
+            
                
                
               <td> 

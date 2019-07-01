@@ -5,9 +5,17 @@ $(document).ready(function(){
 	deleteGroup();
 	editGroup();
 
+		$(".modal").on("hidden.bs.modal", function(){
+			$('#validation-info').hide();
+				$('#name').val("");
+				$('#contact').val("");
+
+	});
+
+
 
 });
-
+ 
 var appendGroupToTable = (data) => {
 
 	var newRecord = `
@@ -73,11 +81,12 @@ var addGroup = () =>
 				data: postData,
 				success: function(data)
 				{
+
 					closeModal();
 					$('#success-info').show();
 					$('#info').html(data.success);
 					appendGroupToTable(data);
-					$('#validation-info').hide();
+					
 
 				}
 

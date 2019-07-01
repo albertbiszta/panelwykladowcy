@@ -6,9 +6,11 @@ $(document).ready(function(){
 	deleteStudent();
 
 	$(".modal").on("hidden.bs.modal", function(){
-   	   $('.modal-body-add-student').find("input").val("");
-  
-});
+		$('#validation-info').hide();
+		$('#validation-edit-student').hide();
+		$('.modal-body-add-student').find("input").val("");
+
+	});
 
 
 
@@ -29,32 +31,58 @@ var addStudent = () =>
 		let indexNumber = $('#indexNumber').val();
 		let contact = $('#contact').val();
 
-		let postData = {
-			"group_id": groupId,
-			"firstName": firstName,
-			"lastName": lastName,
-			"indexNumber": indexNumber,
-			"contact": contact,
-			"_token": $('#token').val()
-		};
+
+		let validation = true;
+		let message = '';
+
+		if((firstName == '') || (lastName == '')){
+			message += '<p>Musisz podać imię i nazwisko</p>';
+			validation = false;
+		}
+		else if((firstName.length < 2 || firstName.length > 50) || (lastName.length < 2 || lastName.length > 50) ) {
+			message += '<p>Imię i nazwisko muszą zawierać od 2 do 50 znaków</p>';
+			validation = false;
+		}
 
 
-		$.ajax({
-			type: "POST",
-			url: "/students/add",
-			data: postData,
-			success: function(data)
-			{
-				$('#success-info').show();
-				$('#info').html(data.success);
-				appendStudent(data);
-			
-			
-		
+		if(indexNumber == '' || indexNumber.length < 4){
+			message += '<p>Podaj prawidłowy numer indeksu</p>';
+			validation = false;
+		}
 
-			}
 
-		});
+		if(validation == true) {
+			let postData = {
+				"group_id": groupId,
+				"firstName": firstName,
+				"lastName": lastName,
+				"indexNumber": indexNumber,
+				"contact": contact,
+				"_token": $('#token').val()
+			};
+
+
+			$.ajax({
+				type: "POST",
+				url: "/students/add",
+				data: postData,
+				success: function(data)
+				{
+					closeModal();
+					$('#success-info').show();
+					$('#info').html(data.success);
+					appendStudent(data);
+				}
+
+			});
+
+
+		} else {
+			$('#validation-info').show();
+			$('#validation-info').html(message);
+		}
+
+
 
 
 
@@ -79,35 +107,65 @@ var editStudent = () =>
 
 			let groupId = $('#groupId').val();
 			let firstName = $('#firstNameEdit').val();
-			let lastName = $('#lastnameEdit').val();
+			let lastName = $('#lastNameEdit').val();
 			let indexNumber = $('#indexNumberEdit').val();
 			let contact = $('#contactEdit').val();
 
-			let postData = {
-				"group_id": groupId,
-				"firstName": firstName,
-				"lastName": lastName,
-				"indexNumber": indexNumber,
-				"contact": contact,
-				"_token": $('#token').val()
-			};
 
-			
+			let validation = true;
+			let message = '';
 
-			$.ajax({
-				type: "PATCH",
-				url: `/students/${id}/update`,
-				data: postData,
-				success: function(data)
-				{
-					$(el).closest('tr').remove();
-					appendStudent(data);
-					$('#success-info').show();
-					$('#info').html(data.success);
+			if((firstName == '') || (lastName == '')){
+				message += '<p>Musisz podać imię i nazwisko</p>';
+				validation = false;
+			}
+			else if((firstName.length < 2 || firstName.length > 50) || (lastName.length < 2 || lastName.length > 50) ) {
+				message += '<p>Imię i nazwisko muszą zawierać od 2 do 50 znaków</p>';
+				validation = false;
+			}
 
-				}
 
-			});
+
+
+			if(indexNumber == '' || indexNumber.length < 4){
+				message += '<p>Podaj prawidłowy numer indeksu</p>';
+				validation = false;
+			}
+
+
+			if(validation == true) {
+
+				let postData = {
+					"group_id": groupId,
+					"firstName": firstName,
+					"lastName": lastName,
+					"indexNumber": indexNumber,
+					"contact": contact,
+					"_token": $('#token').val()
+				};
+
+
+
+				$.ajax({
+					type: "PATCH",
+					url: `/students/${id}/update`,
+					data: postData,
+					success: function(data)
+					{
+						closeModal();
+						$(el).closest('tr').remove();
+						appendStudent(data);
+						$('#success-info').show();
+						$('#info').html(data.success);
+
+					}
+
+				});
+
+			} else {
+				$('#validation-edit-student').show();
+				$('#validation-edit-student').html(message);
+			}
 		});
 
 
@@ -136,6 +194,7 @@ var deleteStudent = () =>
 				data: sendData,
 				success: function(data)
 				{
+
 					$('#success-info').show();
 					$('#info').html(data.success);
 					$(el).closest('tr').remove();
@@ -149,6 +208,15 @@ var deleteStudent = () =>
 
 }
 
+var appendContact = (contact) =>
+{
+	if(contact == null){
+		return '';
+	}else{
+		return contact;
+	}
+} 
+
 
 
 var appendStudent = (data) => 
@@ -159,7 +227,10 @@ var appendStudent = (data) =>
 	<td> ${data.student.firstName} </td>
 	<td> ${data.student.lastName} </td>
 	<td> ${data.student.indexNumber} </td>
-	<td> ${data.student.contact} </td>
+	<td> ${appendContact(data.student.contact)} </td>
+
+	
+
 	<td>
 	<a href="" data-toggle="modal" data-target="#editStudent" data-id="${data.student.id}"   
 	data-firstname="${data.student.firstName}"   data-lastname="${data.student.lastName}"  data-indexnumber="${data.student.indexNumber}"    data-contact="${data.student.contact}" 
@@ -174,4 +245,13 @@ var appendStudent = (data) =>
 	`;
 
 	$('#students-tbody').append(newRecord);
+}
+
+var closeModal = () =>
+{
+	$(".modal").removeClass("in");
+	$(".modal-backdrop").remove();
+	$('body').removeClass('modal-open');
+	$('body').css('padding-right', '');
+	$(".modal").hide();
 }
