@@ -61,7 +61,7 @@
 				@if((count($subject->lessons) > 0) && (count($group->lessons) > 0))
 				<table class="table table-bordered table-sm table-responsive-sm">
 					<thead>
-						<tr>
+						<tr >
 							<th scope="col">Data</th>
 							<th scope="col">Temat zajęć</th>
 							<th scope="col">Status</th>
@@ -88,15 +88,24 @@
 
 					<tr>
 						<td> 
-							{{ $groupLesson->date->format('d-m-Y') }} 
+							<div class="lessons-tab"> 
+								{{ $groupLesson->date->format('d-m-Y') }}
+							</div>
+							 
 						</td>
-						<td> {{$groupLesson->topic}} </td>
+						<td> 
+							<div class="lessons-tab"> 
+							{{$groupLesson->topic}} 
+							</div>
+						</td>
 
 
 						@if ($groupLesson->performed == 1)
 						{{-- grid here --}}
 						<td> 	
+<div class="lessons-tab"> 
 							Odbyły się
+							</div>
 						</td>
 
 						<td> 	
@@ -107,7 +116,9 @@
 
 						@else
 						<td> 	
+							<div class="lessons-tab"> 
 							Nie odbyły się
+							</div>
 						</td>
 
 						<td> 	

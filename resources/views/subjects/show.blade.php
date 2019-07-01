@@ -84,7 +84,7 @@
 							<thead>
 								<tr>
 									<th scope="col">Nazwa </th>
-									<th scope="col">Rok</th>
+								
 									<th scope="col">Lista studentów</th>
 									<th scope="col">Oceny</th>
 									<th scope="col">Zajęcia</th>
@@ -113,7 +113,7 @@
 									</td>
 
 
-									<td> {{$group->year}} </td>
+								
 									<td> 
 										<a href="{{ url('groups', $group->id) }}" style="color: black"> 
 											<i class="fas fa-user-graduate fa-lg" style="color: black"></i>

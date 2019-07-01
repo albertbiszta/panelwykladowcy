@@ -1,0 +1,46 @@
+@media only screen and (max-width: 600px) {
+
+ .nav-tabs{
+	display: block;
+	text-align: center;
+	
+ }
+
+ .mr-autot{
+ 	display:none;
+ }
+
+.profile-nav{
+	display: block;
+	text-align: center;
+ }
+
+.options-tab{
+	width: 5rem;
+	border: 1px solid #ccc;
+}
+
+.lessons-tab{
+	width: 6rem;
+}
+
+.grades-tab{
+	width: 12rem;
+	
+}
+
+
+
+
+
+}
+
+
+@media only screen and (min-width: 601px) {
+
+.mobile-nav{
+	display: none;
+
+}
+
+}

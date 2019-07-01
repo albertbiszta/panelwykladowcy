@@ -78,20 +78,22 @@
 
 										<td>
 
-
-
-											<a href="" data-toggle="modal" data-target="#editStudent" data-id="{{$student->id}}" 
-												data-firstname="{{$student->firstName}}" data-lastname="{{$student->lastName}}"
-												data-indexnumber="{{$student->indexNumber}}" 
-												data-contact="{{$student->contact}}" 
-												class="btn btn-light btn-sm edit-student"><i class="far fa-edit fa-lg"></i></a>
-
-												<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="{{$student->id}}" id="delete-student" class="btn btn-light btn-sm">
-													<i class="far fa-trash-alt fa-lg"></i>
-												</button>
+											<div class="options-tab">
 
 
 
+												<a href="" data-toggle="modal" data-target="#editStudent" data-id="{{$student->id}}" 
+													data-firstname="{{$student->firstName}}" data-lastname="{{$student->lastName}}"
+													data-indexnumber="{{$student->indexNumber}}" 
+													data-contact="{{$student->contact}}" 
+													class="btn btn-light btn-sm edit-student"><i class="far fa-edit fa-lg"></i></a>
+
+													<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="{{$student->id}}" id="delete-student" class="btn btn-light btn-sm">
+														<i class="far fa-trash-alt fa-lg"></i>
+													</button>
+
+
+												</div>
 
 
 											</td>

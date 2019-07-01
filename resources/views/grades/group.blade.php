@@ -93,6 +93,7 @@
 
 									
 									<td>
+										<div class="grades-tab"> 
 
 										@foreach($student->grades as $grade) 
 										<a id="grade-square"  data-toggle="modal" data-target="#editGrade" data-id="{{$grade->id}}" 
@@ -104,6 +105,7 @@
 											<input class="form-control add-grade-input" name="add-grade-input" id="add-grade-input" data-id="{{$student->id}}">
 
 											
+											</div>
 										</td>
 
 										<td>

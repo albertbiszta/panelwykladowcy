@@ -36,6 +36,7 @@
                     
                 
                     <th scope="col">Lista zajęć</th>
+                     <th scope="col">Oceny </th>
 
 
                 </th>
@@ -68,6 +69,17 @@
               </a>
 
           </td>
+
+             <td> 
+                    <a href="{{ action('GradeController@groupGrades', [$subject->id, $group->id]) }}" style="color: black"> 
+                      <i class="far fa-file-alt fa-lg" style="color: black"></i>
+
+                  </a>
+
+
+
+              </td>
+
 
 
 

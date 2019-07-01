@@ -59,7 +59,7 @@
 
 
           <ul class="navbar-nav mr-auto">
-           <ul class="nav nav-tabs">
+           <ul class="nav nav-tabs ">
 
 
 
@@ -121,63 +121,15 @@
               </li>
 
 
+              <div class="mobile-nav">
 
-{{-- 
-              <li class="nav-item ">
-                <a class="nav-link" href="/users"> <b>Współpracownicy </b></a>
-              </li>
+                <li class="nav-item profile-nav" id="profile-nav">
+                  <a class="nav-link"href="{{ route('profiles.public', [Auth::user()->lastName, Auth::user()->firstName, Auth::user()->id ]) }}"> <b> Profil</b></a>
 
+                </li>
 
-              @if(Auth::user()->admin == 1)
+                <li class="nav-item" id="logout-nav" >
 
-
-              <li class="nav-item ">
-                <a class="nav-link" href="/admin">Admin</a>
-              </li>
-
-              @else
-              <li class="nav-item ">
-                <a class="nav-link disable" href="#" aria-disabled="true">Admin</a>
-              </li>
-
-              @endif --}}
-              
-            </ul>
-          </ul>
-
-
-          {{--  --}}
-
-
-
-
-          <!-- Right Side Of Navbar -->
-          <ul class="navbar-nav mr-autot">
-            <!-- Authentication Links -->
-            <nav class="navbar navbar-light bg-light justify-content-between">
-             <div class="flex-center position-ref full-height">
-              @if (Route::has('login'))
-
-              <div class="top-right links">
-                @auth
-
-
-
-    
-       {{--          <li class="nav-item dropdown">
-                  <a id="nav-link" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
-                   <b>  {{ Auth::user()->firstName }}  {{ Auth::user()->lastName }} </b><span class="caret"></span>
-                 </a>
-
-
-
-
-
-                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('profiles.public', [Auth::user()->lastName, Auth::user()->firstName, Auth::user()->id ]) }}"
-                 >
-                  {{ __('Publiczny profil') }}
-                </a>
                   <a class="dropdown-item" href="{{ route('logout') }}"
                   onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();">
@@ -187,21 +139,41 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
                 </form>
-              </div>
-            </li>
- --}}
 
-           
+
+              </li>
 
 
 
+            </div>
 
 
-        
-         
 
 
-               <ul class="nav nav-tabs">
+
+
+          </ul>
+        </ul>
+
+
+        {{--  --}}
+
+
+
+
+        <!-- Right Side Of Navbar -->
+        <ul class="navbar-nav mr-autot">
+          <!-- Authentication Links -->
+          <nav class="navbar navbar-light bg-light justify-content-between">
+           <div class="flex-center position-ref full-height">
+            @if (Route::has('login'))
+
+            <div class="top-right links">
+              @auth
+
+
+
+              <ul class="nav nav-tabs">
 
 
 
@@ -238,9 +210,8 @@
           </li>
 
 
-      
-      </ul>
- 
+
+        </ul>
 
 
 
@@ -249,17 +220,18 @@
 
 
 
-    @else
-    <a href="{{ route('login') }}">Login</a>
 
-    @if (Route::has('register'))
-    <a href="{{ route('register') }}">Register</a>
-    @endif
-    @endauth
+        @else
+        <a href="{{ route('login') }}">Login</a>
+
+        @if (Route::has('register'))
+        <a href="{{ route('register') }}">Register</a>
+        @endif
+        @endauth
+      </div>
+      @endif
+    </ul>
   </div>
-  @endif
-</ul>
-</div>
 </div>
 </nav>
 

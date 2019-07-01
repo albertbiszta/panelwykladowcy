@@ -99,64 +99,6 @@ th, td{
 
 
 
-.products{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 50px 15px;
-}
-
-
-
-
-#promo-books{
-
-
-  font-size: 14px;
-  font-weight: 520;
-
-  text-decoration: none;
-}
-
-#promo-price{
-
-
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: .1rem;
-  text-decoration: none;
-
-
-}
-
-
-#cart-products{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
-  grid-gap: 50px 15px;
-}
-
-#cart-checkout{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
-  grid-gap: 50px 15px;
-}
-
-
-.grid-2{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  /*  grid-gap: 50px 15px;*/
-}
-/*
-#grid-2-card{
-  width:50rem;
-}
-*/
-
-.card-header #details{
-  text-align: center;
-}
-
 
 .search-btn{
  background-color: Transparent;
