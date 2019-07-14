@@ -105,10 +105,10 @@
 
 
 
-										{!! Form::open(['route' => 'materials.store', 'files'=>true]) !!}
+										{!! Form::open(['route' => 'materials.store', 'files'=>true, 'id'=>'form-addMaterial']) !!}
 
 
-
+		
 
 
 										<div class="form-group">
@@ -129,7 +129,7 @@
 											</div>
 											<div  class="col-md-8">
 
-												<select class="form-control" name="subject" id="exampleFormControlSelect2">
+												<select class="form-control" name="subject" id="subject">
 													<option value="" disable="true" selected="true"> Wybierz przedmiot </option>
 													@foreach($formSubjects as $key => $value)
 

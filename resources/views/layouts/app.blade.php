@@ -100,19 +100,6 @@
 
 
 
-            <li class="nav-item dropdown">
-              <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <b>Syllabusy </b> <i class="fas fa-sort-down"></i> </a>
-
-
-                <div class="dropdown-menu">
-
-                  <a class="dropdown-item" href="/syllabuses/create">Dodaj syllabus</a>  
-
-                </div>
-
-
-              </li>
 
 
 
@@ -287,6 +274,7 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('js/search.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/student.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/subject.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/syllabus.js') }}" type="text/javascript"></script>
 
 
 

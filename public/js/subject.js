@@ -49,7 +49,7 @@ var addSubject = () =>
 
 			$.ajax({
 				type: "POST",
-				url: "/subjects/add",
+				url: "/subjects/store",
 				data: postData,
 				success: function(data){
 

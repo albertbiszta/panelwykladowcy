@@ -35,13 +35,21 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
 
 	Route::resource('subjects', 'SubjectController'); 
-	Route::post('/subjects/add', 'SubjectController@add');
+	Route::post('/subjects/store', 'SubjectController@store');
 	Route::patch('/subjects/{id}/update', 'SubjectController@update');
-	Route::delete('/subjects/{id}/delete', 'SubjectController@delete')->name('subjects.delete');
+	Route::delete('/subjects/{id}/delete', 'SubjectController@destroy')->name('subjects.delete');
 
 	Route::post('/subjects/{id}/assign-group', 'SubjectController@assignGroup')->name('subjects.assignGroup');
 	Route::delete('/subjects/{subject_id}/{group_id}', 'SubjectController@unassignGroup')->name('subjects.unassignGroup');
 	Route::get('/subject/{id}/groups', 'SubjectController@subjectGroups');
+
+	Route::get('/subject/{id}/add-syllabus', 'SyllabusController@create');
+	Route::post('/subject/{id}/syllabus/store', 'SyllabusController@store')->name('syllabuses.store');
+	Route::delete('/syllabuses/{id}/delete', 'SyllabusController@delete')->name('syllabuses.delete');
+	Route::get('/syllabuses/{id}/edit', 'SyllabusController@edit');
+	Route::patch('/syllabuses/{id}/update', 'SyllabusController@update');
+
+
 
 	Route::resource('groups', 'GroupController'); 
 	Route::post('/groups/add', 'GroupController@add');
@@ -55,7 +63,8 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::delete('/students/{id}/delete', 'StudentController@delete')->name('students.delete');
 	Route::get('/search-students', 'StudentController@search')->name('students.search');
 
-	Route::resource('syllabuses', 'SyllabusController');
+	/*Route::resource('syllabuses', 'SyllabusController');*/
+
 
 	Route::get('/grades/subject/{subject_id}/group/{group_id}', 'GradeController@groupGrades')->name('grades.group');
 	Route::post('/grades/add/subject/{subject_id}', 'GradeController@addGrade')->name('grades.addGrade');

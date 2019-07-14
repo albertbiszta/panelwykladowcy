@@ -3,10 +3,10 @@
 /public/storage
 public/images
 /storage/*.key
-/vendor
 /config
 /.idea
 /.vagrant
+/vendor
 /nbproject
 Homestead.json
 Homestead.yaml

@@ -7,6 +7,8 @@
             <div class="card">
                <div class="card-header">
 
+              <h6> <b>Dodaj syllabus do przedmiotu:    </b>{{$subject->name}}</h6>
+
 
     @if(count($errors) > 0)
     <div class="alert alert-danger">
@@ -18,38 +20,16 @@
     </div>
 @endif
 
-</div>
-            <div class="card-header">
+
+          
+
+            </div>
+  <div class="card-body">
+
+{!! Form::open(['route' => ['syllabuses.store', $subject->id]]) !!}
 
 
-{!! Form::open(['route' => 'syllabuses.store']) !!}
-
-
-<div class="form-group ">
-   <div  class="col-md-4 control-label">
-       {!! Form::label('subject','Przedmiot: ') !!}
-   </div>
-   <div  class="col-md-6">
-
-       <select class="form-control" name="subject" id="exampleFormControlSelect2">
-           <option value="" disable="true" selected="true"> Wybierz przedmiot </option>
-           @foreach($subjects as $key => $value)
-
-
-           <option value="{{$key}}">{{$value}} </option>
-
-
-           @endforeach
-       </select>
-
-
-   </div>
-</div>
-
-
-
-
-
+  {!! Form::hidden('subject', $subject->id) !!}
 
 
 

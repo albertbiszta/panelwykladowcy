@@ -20,7 +20,6 @@ class SubjectController extends Controller
 	*/
 	public function index() 
 	{
-		$exam = Subject::examOptions();
 		$subjects = User::find(Auth::user()->id)->subjects;
 		return view('subjects.index', compact('exam', 'subjects')); 
 	}
@@ -29,13 +28,13 @@ class SubjectController extends Controller
 	/**
 	 * Save new subject
 	 * 
-	 * /subjects/add
+	 * /subjects/store
 	 * 
 	 * @param  Request $request
 	 * 
 	 * @return \Illuminate\Http\Response
 	*/
-	public function add(Request $request) 
+	public function store(Request $request)
 	{
 		$subject = new Subject($request->all());
 		Auth::user()->subjects()->save($subject);
@@ -76,7 +75,7 @@ class SubjectController extends Controller
 	 * 
 	 * @return \Illuminate\Http\Response
      */
-	public function delete($id = null)
+	public function destroy($id = null)
 	{
 		if(Subject::userSubject($id)) {
 			$subject = Subject::where(['id'=>$id])->delete();
