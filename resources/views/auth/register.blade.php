@@ -17,11 +17,11 @@
                         @csrf
 
                         <div class="form-group row justify-content-center">
-                        {{--     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Imię i Nazwisko ') }}</label> --}}
+
 
                             <div class="col-md-6">
-                                <input id="firstName"  placeholder="Imię" type="text" class="form-control @error('firstName') is-invalid @enderror" 
-                                name="firstName" value="{{ old('name') }}" required autocomplete="firstName" autofocus>
+                                <input id="first_name"  placeholder="Imię" type="text" class="form-control @error('first_name') is-invalid @enderror"
+                                name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -32,11 +32,11 @@
                         </div>
 
                           <div class="form-group row justify-content-center">
-                        {{--     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Imię i Nazwisko ') }}</label> --}}
+
 
                             <div class="col-md-6">
-                                <input id="lastName"  placeholder="Nazwisko" type="text" class="form-control @error('lastName') is-invalid @enderror" 
-                                name="lastName" value="{{ old('lastName') }}" required autocomplete="lastName" autofocus>
+                                <input id="last_name"  placeholder="Nazwisko" type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">

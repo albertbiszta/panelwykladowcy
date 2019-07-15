@@ -67,9 +67,9 @@
 									@foreach($students as $student)
 
 									<tr>
-										<td> {{$student->lastName}} </td>
-										<td> {{$student->firstName}} </td>
-										<td> {{$student->indexNumber}} </td>
+										<td> {{$student->last_name}} </td>
+										<td> {{$student->first_name}} </td>
+										<td> {{$student->index_number}} </td>
 										<td> {{$student->contact}} </td>
 
 
@@ -83,8 +83,8 @@
 
 
 												<a href="" data-toggle="modal" data-target="#editStudent" data-id="{{$student->id}}" 
-													data-firstname="{{$student->firstName}}" data-lastname="{{$student->lastName}}"
-													data-indexnumber="{{$student->indexNumber}}" 
+													data-firstname="{{$student->first_name}}" data-lastname="{{$student->last_name}}"
+													data-indexnumber="{{$student->index_number}}"
 													data-contact="{{$student->contact}}" 
 													class="btn btn-light btn-sm edit-student"><i class="far fa-edit fa-lg"></i></a>
 

@@ -18,7 +18,7 @@ class CreateMaterialsTable extends Migration
             $table->string('name');
               $table->integer('subject_id')->unsigned();
             $table->text('description')->nullable();
-            $table->string('fileName');
+            $table->string('file_name');
         
         });
 

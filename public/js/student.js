@@ -54,9 +54,9 @@ var addStudent = () =>
 		if(validation == true) {
 			let postData = {
 				"group_id": groupId,
-				"firstName": firstName,
-				"lastName": lastName,
-				"indexNumber": indexNumber,
+				"first_name": firstName,
+				"last_name": lastName,
+				"index_number": indexNumber,
 				"contact": contact,
 				"_token": $('#token').val()
 			};
@@ -64,7 +64,7 @@ var addStudent = () =>
 
 			$.ajax({
 				type: "POST",
-				url: "/students/add",
+				url: "/students/store",
 				data: postData,
 				success: function(data)
 				{
@@ -224,16 +224,16 @@ var appendStudent = (data) =>
 
 	var newRecord = `
 	<tr>
-	<td> ${data.student.firstName} </td>
-	<td> ${data.student.lastName} </td>
-	<td> ${data.student.indexNumber} </td>
+	<td> ${data.student.first_name} </td>
+	<td> ${data.student.last_name} </td>
+	<td> ${data.student.index_number} </td>
 	<td> ${appendContact(data.student.contact)} </td>
 
 	
 
 	<td>
 	<a href="" data-toggle="modal" data-target="#editStudent" data-id="${data.student.id}"   
-	data-firstname="${data.student.firstName}"   data-lastname="${data.student.lastName}"  data-indexnumber="${data.student.indexNumber}"    data-contact="${data.student.contact}" 
+	data-firstname="${data.student.first_name}"   data-lastname="${data.student.last_name}"  data-indexnumber="${data.student.index_number}"    data-contact="${data.student.contact}" 
 	class="btn btn-light btn-sm edit-student"><i class="far fa-edit fa-lg"></i></a>
 
 	<button type="submit" data-toggle="modal" data-target="#confirm-delete" data-id="${data.student.id}" id="delete-student" class="btn btn-light btn-sm">

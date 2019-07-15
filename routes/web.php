@@ -45,22 +45,22 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
 	Route::get('/subject/{id}/add-syllabus', 'SyllabusController@create');
 	Route::post('/subject/{id}/syllabus/store', 'SyllabusController@store')->name('syllabuses.store');
-	Route::delete('/syllabuses/{id}/delete', 'SyllabusController@delete')->name('syllabuses.delete');
+	Route::delete('/syllabuses/{id}/delete', 'SyllabusController@destroy')->name('syllabuses.delete');
 	Route::get('/syllabuses/{id}/edit', 'SyllabusController@edit');
 	Route::patch('/syllabuses/{id}/update', 'SyllabusController@update');
 
 
 
 	Route::resource('groups', 'GroupController'); 
-	Route::post('/groups/add', 'GroupController@add');
+	Route::post('/groups/store', 'GroupController@store');
 	Route::patch('/groups/{id}/update', 'GroupController@update');
-	Route::delete('/groups/{id}/delete', 'GroupController@delete')->name('groups.delete');
+	Route::delete('/groups/{id}/delete', 'GroupController@destroy')->name('groups.delete');
 	Route::get('/user-group/{id}', 'GroupController@userGroup');
 
 	Route::resource('students', 'StudentController'); 
-	Route::post('/students/add', 'StudentController@add')->name('students.add');
+	Route::post('/students/store', 'StudentController@store')->name('students.store');
 	Route::patch('/students/{id}/update', 'StudentController@update');
-	Route::delete('/students/{id}/delete', 'StudentController@delete')->name('students.delete');
+	Route::delete('/students/{id}/delete', 'StudentController@destroy')->name('students.delete');
 	Route::get('/search-students', 'StudentController@search')->name('students.search');
 
 	/*Route::resource('syllabuses', 'SyllabusController');*/
@@ -69,11 +69,11 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::get('/grades/subject/{subject_id}/group/{group_id}', 'GradeController@groupGrades')->name('grades.group');
 	Route::post('/grades/add/subject/{subject_id}', 'GradeController@addGrade')->name('grades.addGrade');
 	Route::patch('/grades/{grade_id}/update', 'GradeController@update')->name('grades.update');
-	Route::delete('/grades/{id}/delete', 'GradeController@delete')->name('grades.delete');
+	Route::delete('/grades/{id}/delete', 'GradeController@destroy')->name('grades.delete');
 
 	Route::get('/lessons', 'LessonController@index')->name('lessons.index');
 	Route::get('/lessons/subject/{subject_id}/group/{group_id}', 'LessonController@groupLessons')->name('lessons.group');
-	Route::post('/lessons/subject/{subject_id}/group/{group_id}/add', 'LessonController@add')->name('lessons.add');
+	Route::post('/lessons/subject/{subject_id}/group/{group_id}/store', 'LessonController@store')->name('lessons.add');
 	Route::patch('/lessons/{id}/edit-status','LessonController@editStatus');
 
 	//Route::resource('attendances', 'AttendanceController');
@@ -83,8 +83,8 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
 	Route::resource('materials', 'MaterialController');
 	Route::get('/materials/download/{name}', 'MaterialController@downloadFile')->name('materials.download');
-	Route::delete('/materials/{id}/delete', 'MaterialController@delete')->name('materials.delete');
+	Route::delete('/materials/{id}/delete', 'MaterialController@destroy')->name('materials.delete');
 	
 });
 
-Route::get('/profile/{lastName}{firstName}/{id}', 'UserProfileController@publicProfile')->name('profiles.public');
+Route::get('/profile/{full_name}/{id}', 'UserProfileController@show')->name('profiles.show');

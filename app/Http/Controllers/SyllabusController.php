@@ -70,7 +70,7 @@ class SyllabusController extends Controller
    * 
    * @return \Illuminate\Http\Response
     */
-   public function delete($id = null) 
+   public function destroy($id = null)
    {
    	$syllabus = Syllabus::findOrFail($id);
    	if(Subject::userSubject($syllabus->subject_id)){

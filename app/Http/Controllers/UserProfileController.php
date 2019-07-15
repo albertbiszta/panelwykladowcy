@@ -11,11 +11,11 @@ class UserProfileController extends Controller
 {
     
 
-    public function publicProfile($lastName, $firstName, $id = null)
+    public function show($fullName, $id = null)
     {
     	$user = User::findOrFail($id);;
 		$subjects = $user->subjects()->get();
-    	return view('profiles.public')->with(compact('subjects', 'user'));
+    	return view('profiles.public', compact('subjects', 'user'));
     }
 
 }

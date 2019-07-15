@@ -29,13 +29,13 @@ class GroupController extends Controller
 	/**
 	 * Save new group
 	 * 
-	 * /groups/add
+	 * /groups/store
 	 * 
 	 * @param  Request $request
 	 * 
 	 * @return \Illuminate\Http\Response
 	*/
-	public function add(Request $request) 
+	public function store(Request $request)
 	{
 		$group = new Group($request->all());
 		if(empty($request->input('contact'))){
@@ -79,7 +79,7 @@ class GroupController extends Controller
 	 * 
 	 * @return \Illuminate\Http\Response
      */
-	public function delete($id = null) 
+	public function destroy($id = null)
 	{
 		if(Group::userGroup($id)) {
 			$group = Group::where(['id'=>$id])->delete();

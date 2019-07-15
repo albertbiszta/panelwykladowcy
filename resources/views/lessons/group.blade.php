@@ -223,7 +223,7 @@
 				?>
 
 				<tr>
-					<td> {{$student->lastName}} {{$student->firstName}}  </td>
+					<td> {{$student->last_name}} {{$student->first_name}}  </td>
 
 					<?php
 					$studentAttendances = App\Student::studentAttendances($student->id,$subject->id);
@@ -295,7 +295,7 @@
 				
 
 
-				{!! Form::open(['action'=> ['LessonController@add',
+				{!! Form::open(['action'=> ['LessonController@store',
 					$subject->id, $group->id],
 					'method'=>'POST', 'class' =>'form-horizontal', 'id'=>'form-addLesson',]) !!}
 

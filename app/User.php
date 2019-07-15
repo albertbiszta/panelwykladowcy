@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'firstName', 'lastName', 'university', 'email', 'password',
+        'first_name', 'last_name', 'university', 'email', 'password',
     ];
 
 
@@ -40,14 +40,21 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
 
-    public function groups() {
+    public function groups()
+    {
         return $this->hasMany('App\Group');
     }
 
-    public function subjects() {
+    public function subjects()
+    {
         return $this->hasMany('App\Subject');
     }
 
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name.$this->last_name;
+    }
     
 
 }

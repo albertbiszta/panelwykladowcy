@@ -111,7 +111,7 @@
               <div class="mobile-nav">
 
                 <li class="nav-item profile-nav" id="profile-nav">
-                  <a class="nav-link"href="{{ route('profiles.public', [Auth::user()->lastName, Auth::user()->firstName, Auth::user()->id ]) }}"> <b> Profil</b></a>
+                  <a class="nav-link" href="{{ route('profiles.show', [Auth::user()->getFullNameAttribute(), Auth::user()->id ]) }}"> <b> Profil</b></a>
 
                 </li>
 
@@ -169,13 +169,13 @@
 
                 <li class="nav-item dropdown">
                  <a id="nav-link" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
-                   <b>  {{ Auth::user()->firstName }}  {{ Auth::user()->lastName }} </b><span class="caret"></span>
+                   <b>  {{ Auth::user()->first_name }}  {{ Auth::user()->last_name }} </b><span class="caret"></span>
                  </a>
 
 
                  <div class="dropdown-menu">
 
-                   <a class="dropdown-item" href="{{ route('profiles.public', [Auth::user()->lastName, Auth::user()->firstName, Auth::user()->id ]) }}"
+                   <a class="dropdown-item" href="{{ route('profiles.show', [Auth::user()->getFullNameAttribute(), Auth::user()->id ]) }}"
                      >
                      {{ __('Publiczny profil') }}
                    </a>  

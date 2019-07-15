@@ -77,7 +77,7 @@ var addGroup = () =>
 
 			$.ajax({
 				type: "POST",
-				url: "/groups/add",
+				url: "/groups/store",
 				data: postData,
 				success: function(data)
 				{

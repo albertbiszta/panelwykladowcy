@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Material extends Model
 {
-    protected $fillable = ['name', 'subject_id', 'description', 'fileName'];
+    protected $fillable = ['name', 'subject_id', 'description', 'file_name'];
 
 	public $timestamps = false;
 

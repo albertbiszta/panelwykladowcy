@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-	protected $fillable = ['firstName', 'lastName', 'contact', 'indexNumber'];
+	protected $fillable = ['first_name', 'last_name', 'contact', 'index_number'];
 
 	public $timestamps = false;
 
@@ -25,6 +25,7 @@ class Student extends Model
 	{
 		return $this->hasMany('App\Grade');
 	}
+
 
 
      /**
@@ -110,6 +111,24 @@ class Student extends Model
 		
 
 	}
+
+    /**/
+
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
+
+    public function getIndexNumber()
+    {
+        return $this->index_number;
+    }
+
 
 
 }

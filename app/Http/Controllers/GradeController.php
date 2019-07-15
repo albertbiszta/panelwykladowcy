@@ -96,7 +96,7 @@ class GradeController extends Controller
    * 
    * @return \Illuminate\Http\Response
      */
-  public function delete($id = null) 
+  public function destroy($id = null)
   {
       $grade = Grade::where(['id'=>$id])->delete();
       $message = 'Usunięto ocenę';

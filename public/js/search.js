@@ -27,9 +27,9 @@ $(document).ready(function(){
 
 			var result = `
 			<tr>
-			<td> ${value.firstName}  </td>
-			<td> ${value.lastName}  </td>
-			<td> ${value.indexNumber}  </td>
+			<td> ${value.first_name}  </td>
+			<td> ${value.last_name}  </td>
+			<td> ${value.index_number}  </td>
 			<td> ${group.group}  </td>
 			<td>  <a href="/students/${value.id}"> 
 			<i class="far fa-list-alt fa-lg" ></i>

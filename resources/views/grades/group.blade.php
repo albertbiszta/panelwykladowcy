@@ -87,9 +87,9 @@
 								@foreach($group->students as $student)
 
 								<tr>
-									<td> {{$student->lastName}} </td>
-									<td> {{$student->firstName}} </td>
-									<td> {{$student->indexNumber}} </td>
+									<td> {{$student->last_name}} </td>
+									<td> {{$student->first_name}} </td>
+									<td> {{$student->index_number}} </td>
 
 									
 									<td>

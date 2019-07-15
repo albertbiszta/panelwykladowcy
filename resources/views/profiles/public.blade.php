@@ -8,16 +8,20 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <b>  
-            {{$user->lastName}}  {{$user->firstName}} 
-
+          <b>
+            {{$user->last_name}}  {{$user->first_name}}
 
           </b>
+          ({{$user->university}})
 
         </div>
 
+
         <div class="card-body">
-          <div>
+
+       <b>Udostępnione materiały</b>
+
+        <div class="card-body">
             <div class="alert alert-success alert-block"  id="success-info" style="display: none">
               <button type="button" class="close" data-dismiss="alert" >×</button> 
               <strong>
@@ -35,7 +39,8 @@
 
 
           <div class="card">
-            <div class="card-header">
+            <div class="card-body">
+              <div class="card-header">
               <b> {{$subject->name}} </b>
             </div>
             <div class="card-body">
@@ -50,7 +55,7 @@
 
 
                 <li class="list-group-item mh-25">{{$material->name}}   
-                  <a  href="{{route('materials.download', [$material->fileName])}}" class="float-right mh-25" > 
+                  <a  href="{{route('materials.download', [$material->file_name])}}" class="float-right mh-25" >
                     <button class="btn btn-outline-secondary button-1 mh-25" >Pobierz</button>
 
                   </a>  

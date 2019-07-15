@@ -37,9 +37,9 @@ var saveAttendance = () =>
 					<tr>
 
 
-					<td> ${data.student.lastName} </td>
-					<td> ${data.student.firstName} </td>
-					<td> ${data.student.indexNumber} </td>
+					<td> ${data.student.last_name} </td>
+					<td> ${data.student.first_name} </td>
+					<td> ${data.student.index_number} </td>
 
 
 
@@ -176,9 +176,9 @@ var updateAttendance = () =>
 					<tr>
 
 
-					<td> ${data.student.lastName} </td>
-					<td> ${data.student.firstName} </td>
-					<td> ${data.student.indexNumber} </td>
+					<td> ${data.student.last_name} </td>
+					<td> ${data.student.first_name} </td>
+					<td> ${data.student.index_number} </td>
 
 
 

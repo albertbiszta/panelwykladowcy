@@ -43,15 +43,15 @@ class MaterialController extends Controller
 		
 		$file = $request->input('file');
 		$filename = $request->file->getClientOriginalName();
-		/*		$extension = $request->file->getClientOriginalExtension();*/
+
 
 		if($request->hasFile('file')){
 
 			$material = new Material;
 			$material->name = $request->input('name');
 			$material->description = $request->input('description');
-			$material->fileName = rand(111,99999).$filename;
-			$request->file->storeAs('materials', $material->fileName);
+			$material->file_name = rand(111,99999).$filename;
+			$request->file->storeAs('materials', $material->file_name);
 			$material->subject_id = $request->input('subject');
 			$material->save();
 			return redirect()->route('materials.index');
@@ -87,7 +87,7 @@ class MaterialController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 
-	public function delete($id = null)
+	public function destroy($id = null)
 	{
 		$material = Material::findOrFail($id);
 		$material->delete();

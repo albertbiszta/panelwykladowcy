@@ -27,7 +27,7 @@ class Group extends Model
 
 	public function students() 
 	{
-		return $this->hasMany('App\Student')->orderBy('lastname');
+		return $this->hasMany('App\Student')->orderBy('last_name');
 	}
 
 
