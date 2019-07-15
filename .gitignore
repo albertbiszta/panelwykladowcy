@@ -3,6 +3,7 @@
 /public/storage
 public/images
 /storage/*.key
+/config
 /.idea
 /.vagrant
 /vendor

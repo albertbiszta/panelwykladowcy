@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        "address" => "panelwykladowcy@gmail.com",
+        "name" => "PanelWykladowcy"
     ],
 
     /*
@@ -84,9 +84,8 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
-
-    'password' => env('MAIL_PASSWORD'),
+    "username" => "panelwykladowcy@gmail.com",
+    "password" => "Basquiat2019",
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +98,8 @@ return [
     |
     */
 
-    'sendmail' => '/usr/sbin/sendmail -bs',
+    "sendmail" => "/usr/sbin/sendmail -bs",
+
 
     /*
     |--------------------------------------------------------------------------
