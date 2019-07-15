@@ -44,8 +44,6 @@ class SubjectTest extends TestCase
         $this->delete('/subjects/'. $subject->id .'/delete');
         $this->assertEquals($numberOfSubjects -1, Subject::all()->count());
 
-
-
     }
 
 
