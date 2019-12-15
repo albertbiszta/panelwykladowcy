@@ -14,7 +14,6 @@ class CreateGroupSubjectTable extends Migration
     public function up()
     {
        Schema::create('group_subject', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('group_id')->unsigned();
             $table->integer('subject_id')->unsigned();
          

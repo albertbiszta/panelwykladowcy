@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class SubjectTest extends TestCase
 {
-    use WithoutMiddleware;
+
 
     private $password = 'testing';
 
@@ -45,6 +45,8 @@ class SubjectTest extends TestCase
         $this->assertEquals($numberOfSubjects -1, Subject::all()->count());
 
     }
+
+
 
 
     private function createUserWithFactory()

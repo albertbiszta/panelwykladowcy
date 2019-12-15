@@ -17,6 +17,7 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('/registered', function () {
 	return view('registered');
 });
@@ -63,7 +64,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::delete('/students/{id}/delete', 'StudentController@destroy')->name('students.delete');
 	Route::get('/search-students', 'StudentController@search')->name('students.search');
 
-	/*Route::resource('syllabuses', 'SyllabusController');*/
+
 
 
 	Route::get('/grades/subject/{subject_id}/group/{group_id}', 'GradeController@groupGrades')->name('grades.group');
@@ -76,15 +77,15 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 	Route::post('/lessons/subject/{subject_id}/group/{group_id}/store', 'LessonController@store')->name('lessons.add');
 	Route::patch('/lessons/{id}/edit-status','LessonController@editStatus');
 
-	//Route::resource('attendances', 'AttendanceController');
 	Route::get('/attendances/lessons/{lesson_id}', 'AttendanceController@lessonAttendance')->name('attendances.lesson');
 	Route::post('/attendances/save', 'AttendanceController@save')->name('attendances.save');
 	Route::post('/attendances/{id}/update', 'AttendanceController@update')->name('attendances.update');
 
 	Route::resource('materials', 'MaterialController');
-	Route::get('/materials/download/{name}', 'MaterialController@downloadFile')->name('materials.download');
+
 	Route::delete('/materials/{id}/delete', 'MaterialController@destroy')->name('materials.delete');
 	
 });
 
 Route::get('/profile/{full_name}/{id}', 'UserProfileController@show')->name('profiles.show');
+Route::get('/materials/download/{name}', 'MaterialController@downloadFile')->name('materials.download');

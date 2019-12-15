@@ -21,26 +21,26 @@ class SubjectController extends Controller
 	public function index() 
 	{
 		$subjects = User::find(Auth::user()->id)->subjects;
-		return view('subjects.index', compact('exam', 'subjects')); 
+		return view('subjects.index', compact('subjects'));
 	}
 
 
-	/**
-	 * Save new subject
-	 * 
-	 * /subjects/store
-	 * 
-	 * @param  Request $request
-	 * 
-	 * @return \Illuminate\Http\Response
-	*/
-	public function store(Request $request)
-	{
-		$subject = new Subject($request->all());
-		Auth::user()->subjects()->save($subject);
-		$message = "Dodano przedmiot";
-		return response()->json(['success'=>$message, 'subject' => $subject]);
-	}
+    /**
+     * Save new subject
+     *
+     * /subjects/store
+     *
+     * @param  Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $subject = new Subject($request->all());
+        Auth::user()->subjects()->save($subject);
+        $message = "Dodano przedmiot";
+        return response()->json(['success'=>$message, 'subject' => $subject]);
+    }
 
 
 	/**
@@ -123,7 +123,7 @@ class SubjectController extends Controller
 	/**
 	 *  Assign group to subject
 	 * 
-	 * /subjects/{id}/assign-group
+	 * POST: /subjects/{id}/assign-group
 	 * 
 	 * @param  Request $request
 	 * 

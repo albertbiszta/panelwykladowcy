@@ -31,12 +31,12 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <!-- Styles -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('/public/css/app.css') }}" rel="stylesheet">
   
-  <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/layout/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('/public/css/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('/public/css/layout/app.css') }}" rel="stylesheet">
 
-  <link href="{{ asset('css/mobile.css') }}" rel="stylesheet">
+  <link href="{{ asset('/public/css/mobile.css') }}" rel="stylesheet">
 
 
 </head>
@@ -266,21 +266,21 @@ crossorigin="anonymous"></script>
 
 
 
-<script src="{{ asset('js/attendances.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/grade.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/group.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/lesson.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/material.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/search.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/student.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/subject.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/syllabus.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/public/js/attendances.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/public/js/grade.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/public/js/group.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/public/js/lesson.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/public/js/material.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/public/js/search.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/public/js/student.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/public/js/subject.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/public/js/syllabus.js') }}" type="text/javascript"></script>
 
 
 
 
-<script src="{{ asset('js/app.js') }}" defer></script>
 
+  <script src="{{asset('/public/js/app.js')}}"></script>
 
 
 

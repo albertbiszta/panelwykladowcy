@@ -119,4 +119,26 @@ class StudentController extends Controller
     }
 
 
+    /**
+     * Student info
+     *
+     * /students/{id}
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($id = null)
+    {
+        if (Student::userStudent($id)) {
+            $student = Student::findOrFail($id);
+            return view('students.show')->with(compact('student'));
+
+        } else {
+            abort(404);
+        }
+
+    }
+
+
 }

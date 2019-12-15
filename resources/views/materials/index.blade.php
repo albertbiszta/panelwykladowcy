@@ -48,17 +48,22 @@
 
 
 
-									<li class="list-group-item mh-25">{{$material->name}}   
-										<a  href="{{route('materials.download', [$material->fileName])}}" class="float-right mh-25" > 
-											<button class="btn btn-outline-secondary button-1 mh-25" >Pobierz</button>
+									<li class="list-group-item mh-25">{{$material->name}}
+										<a href="{{route('materials.download', [$material->file_name])}}"
+										   class="float-right mh-25">
+											<button class="btn btn-outline-secondary button-1 mh-25">
+												Pobierz
+											</button>
 
-										</a>  
+										</a>
 										<button type="submit" data-id="{{$material->id}}" 
 											id="delete-material" class="btn btn-light delete-material float-right">
 											<i class="far fa-trash-alt fa-lg"></i>
 										</button>
 
 									</li>
+
+
 
 
 

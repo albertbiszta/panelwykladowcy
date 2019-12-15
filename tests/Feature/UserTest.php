@@ -9,20 +9,19 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
-    private $password = 'testing';
 
     /** @test */
     public function user_after_logging_in_is_redirected_to_the_panel()
     {
-        $user = $this->createUserWithFactory();
+        $user = factory(User::class)->create(['password' => bcrypt('testing')]);
 
         $response = $this->post('/login', [
             'email' => $user->email,
-            'password' => $this->password,
+            'password' => 'testing',
         ]);
 
-        $response->assertRedirect('/panel');
         $this->assertAuthenticatedAs($user);
+        $response->assertRedirect('/panel');
     }
 
 
@@ -35,16 +34,5 @@ class UserTest extends TestCase
         $response->assertRedirect('/panel');
 
     }
-
-
-    private function createUserWithFactory()
-    {
-        $user = factory(User::class)->create([
-            'password' => bcrypt($this->password),
-        ]);
-
-        return $user;
-    }
-
 
 }
