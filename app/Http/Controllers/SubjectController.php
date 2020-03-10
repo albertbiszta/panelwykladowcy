@@ -11,27 +11,23 @@ use Illuminate\Http\Request;
 class SubjectController extends Controller
 {
 
-	/**
-	 * List of subjects + modals [Subject CRUD]
-	 * 
-	 * /subjects
-	 * 
+    /**
+     * List of subjects + modals [Subject CRUD]
+     *
      * @return \Illuminate\Http\Response
-	*/
-	public function index() 
-	{
-		$subjects = User::find(Auth::user()->id)->subjects;
-		return view('subjects.index', compact('subjects'));
-	}
+     */
+    public function index()
+    {
+        $subjects = User::find(Auth::user()->id)->subjects;
+
+        return view('subjects.index', compact('subjects'));
+    }
 
 
     /**
      * Save new subject
      *
-     * /subjects/store
-     *
      * @param  Request $request
-     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -39,136 +35,120 @@ class SubjectController extends Controller
         $subject = new Subject($request->all());
         Auth::user()->subjects()->save($subject);
         $message = "Dodano przedmiot";
-        return response()->json(['success'=>$message, 'subject' => $subject]);
+
+        return response()->json(['success' => $message, 'subject' => $subject]);
     }
 
 
-	/**
-	 * Update subject data
-	 * 
-	 * /subjects/{id}/update
-     * 
-	 * @param  Request $request
-	 * 
-	 * @param  int $id
-	 * 
-	 * @return \Illuminate\Http\Response
+    /**
+     * Update subject data
+     *
+     * @param Request $request
+     * @param Subject $subject
+     * @return \Illuminate\Http\JsonResponse
      */
-	public function update(Request $request, $id = null) 
-	{
-		if(Subject::userSubject($id)) {
-			$subject = Subject::findOrFail($id);
-			$subject->update($request->all());
-			$message = "Zapisano zmiany";
+    public function update(Request $request, Subject $subject)
+    {
+        if ($subject->user == Auth::user()) {
+            $subject->update($request->all());
+            $message = "Zapisano zmiany";
 
-			return response()->json(['success'=>$message, 'subject' => $subject]);
-		}
-	}
+            return response()->json(['success' => $message, 'subject' => $subject]);
+        }
+    }
 
 
-	/**
-	 * Delete subject
-	 * 
-	 * /subjects/{id}/delete
-	 * 
-	 * @param  int $id
-	 * 
-	 * @return \Illuminate\Http\Response
+    /**
+     * Delete subject
+     *
+     * @param Subject $subject
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-	public function destroy($id = null)
-	{
-		if(Subject::userSubject($id)) {
-			$subject = Subject::where(['id'=>$id])->delete();
-			$message = "Usunięto przedmiot";
-			return response()->json(['success'=>$message]);
-		}else {
-			$message = "Wystąpił błąd";
-			return response()->json(['error'=>$message]);
-		}
-	}
+    public function destroy(Subject $subject)
+    {
+        if ($subject->user == Auth::user()) {
+            $subject->delete();
+            $message = "Usunięto przedmiot";
+
+            return response()->json(['success' => $message]);
+        } else {
+            $message = "Wystąpił błąd";
+
+            return response()->json(['error' => $message]);
+        }
+    }
 
 
-	/**
-	 * Details about subject: groups, syllabuses
-	 * 
-	 * /subjects/{id}
-	 * 
-	 * @param  int $id
-	 * 
-	 * @return \Illuminate\Http\Response
-	*/
-	public function show($id = null) 
-	{ 
-		if(Subject::userSubject($id)) {
-			$groups = Group::authGroups();
-			$subject = Subject::findOrFail($id);
-			return view('subjects.show')->with(compact('groups', 'subject'));
-		}else {
-			abort(404);	
-		}
-	}
+    /**
+     * Details about subject: groups, syllabuses
+     *
+     * @param  Subject $subject
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Subject $subject)
+    {
+        if ($subject->user == Auth::user()) {
+            $groups = Auth::user()->groups;
+
+            return view('subjects.show')->with(compact('groups', 'subject'));
+        } else {
+            abort(404);
+        }
+    }
 
 
-	/*?*/
-	public function subjectGroups($id = null)
-	{
-		$subject = Subject::findOrFail($id);
-		$subjectGroups = $subjects->groups()->get();
+    /**
+     * @param Subject $subject
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function subjectGroups(Subject $subject)
+    {
+        $subjectGroups = $subject->groups;
 
-		/*return response()->json(['subjectGroups'=>$subjectGroups]);*/
-		return response()->json(['success'=>'test']);
-	}
-
-
-	/**
-	 *  Assign group to subject
-	 * 
-	 * POST: /subjects/{id}/assign-group
-	 * 
-	 * @param  Request $request
-	 * 
-	 * @param  int $id
-	 * 
-	 * @return \Illuminate\Http\Response
-	*/
-	public function assignGroup(Request $request, $id = null) 
-	{
-		if(Subject::userSubject($id)) {
-			$subject = Subject::findOrFail($id);
-			$groups = $request->input('groups');
-			$subject->groups()->attach($groups);
-			$message = "Dodano grupę do przedmiotu";
-			return redirect()->back()->with('flash_message_success', $message);
-		}else {
-			abort(404);	
-		}	
-	}
+        return response()->json(['success' => 'test']);
+    }
 
 
-	/**
-	 * Unassign group from subject
-	 * 
-	 * /subjects/{id}/unassign-group
-	 * 
-	 * @param  int $subjectId
-	 * 
-	 * @param  int $groupId
-	 * 
-	 * @return \Illuminate\Http\Response
-	*/
-	public function unassignGroup($subjectId, $groupId = null) 
-	{
-		if(Subject::userSubject($subjectId)) {
-			$subject = Subject::findOrFail($subjectId);
-			$group = Group::findOrFail($groupId);
-			$subject->groups()->detach($group);
-			$message = "Usunięto grupę z przedmiotu";
-			return redirect()->back()->with('flash_message_success', $message);
-		}else {
-			abort(404);	
-		}
-	}
+    /**
+     * Assign group to subject
+     *
+     * @param Request $request
+     * @param Subject $subject
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function assignGroup(Request $request, Subject $subject)
+    {
+        if ($subject->user == Auth::user()) {
+            $groups = $request->input('groups');
+            $subject->groups()->attach($groups);
+            $message = "Dodano grupę do przedmiotu";
 
+            return redirect()->back()->with('flash_message_success', $message);
+        } else {
+            abort(404);
+        }
+    }
+
+
+    /**
+     * Unassign group from subject
+     *
+     * @param Subject $subject
+     * @param Group $group
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function unassignGroup(Subject $subject, Group $group)
+    {
+        if ($subject->user == Auth::user()) {
+            $subject->groups()->detach($group);
+            $message = "Usunięto grupę z przedmiotu";
+
+            return redirect()->back()->with('flash_message_success', $message);
+        } else {
+            abort(404);
+        }
+    }
 
 
 }

@@ -14,19 +14,13 @@ class GradeController extends Controller
     /**
      * Grades Index /w create, edit, delete
      *
-     * /grades/subject/{subject_id}/group/{group_id}
-     *
-     * @param  int $subjectId
-     *
-     * @param  int $groupId
-     *
-     * @return \Illuminate\Http\Response
+     * @param Subject $subject
+     * @param Group $group
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function groupGrades($subjectId, $groupId = null)
+    public function groupGrades(Subject $subject, Group $group)
     {
-        if (Subject::userSubject($subjectId) && Group::userGroup($groupId)) {
-            $subject = Subject::findOrFail($subjectId);
-            $group = Group::findOrFail($groupId);
+        if ($subject->user == Auth::user() && $group->user == Auth::user()) {
             return view('grades.group')->with(compact('subject', 'group'));
         } else {
             abort(404);
@@ -41,13 +35,13 @@ class GradeController extends Controller
      *
      * @param  Request $request
      *
-     * @param  int $subjectId
+     * @param  Subject $subject
      *
      * @return \Illuminate\Http\Response
      */
-    public function addGrade(Request $request, $subjectId = null)
+    public function addGrade(Request $request, Subject $subject)
     {
-        if (Subject::userSubject($subjectId)) {
+        if ($subject->user == Auth::user()) {
             $grade = new Grade;
             $grade->value = $request->input('value');
             if (!is_numeric($grade->value)) {
@@ -55,7 +49,7 @@ class GradeController extends Controller
             }
 
             $grade->student_id = $request->input('student');
-            $grade->subject_id = $subjectId;
+            $grade->subject_id = $subject->id;
             $grade->save();
             $message = "Dodano ocenę";
 
@@ -67,41 +61,31 @@ class GradeController extends Controller
 
 
     /**
-     * Change student's grade
-     *
-     * /grades/{id}/update
-     *
-     * @param  Request $request
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Grade $grade
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id = null)
+    public function update(Request $request, Grade $grade)
     {
-        $grade = Grade::findOrFail($id);
         $grade->value = $request->input('value');
         $grade->update();
         $message = 'Zapisano zmiany';
+
         return response()->json(['success' => $message]);
     }
 
 
     /**
-     * Delete grade
-     *
-     * /grades/{id}/delete
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Grade $grade
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-    public function destroy($id = null)
+    public function destroy(Grade $grade)
     {
-        $grade = Grade::where(['id' => $id])->delete();
+        $grade->delete();
         $message = 'Usunięto ocenę';
-        return response()->json(['success' => $message]);
 
+        return response()->json(['success' => $message]);
     }
 
 

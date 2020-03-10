@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 class PanelController extends Controller
 {
 
-	public function index()
-	{
-		$user = User::findOrFail(Auth::id());
-		$subjects = $user->subjects()->get();
-		return view('panel')->with(compact('subjects'));
-	}
 
+    public function index()
+    {
+        $user = User::findOrFail(Auth::id());
+        $subjects = $user->subjects()->get();
 
+        return view('panel')->with(compact('subjects'));
+    }
 
 
 }

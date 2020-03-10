@@ -14,23 +14,27 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
 
-    /**
-     * Search students view
-     *  /students
-     */
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('students.index');
     }
 
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function search(Request $request)
     {
         $query = $request->get('query');
         $data = explode(' ', $query);
 
-        $students = Student::where('first_name', 'LIKE', '%' . $data[0] . '%')->where('last_name', 'LIKE', '%' . $data[1] . '%')->get();
+        $students = Student::where('first_name', 'LIKE', '%'.$data[0].'%')->where('last_name', 'LIKE',
+            '%'.$data[1].'%')->get();
         if (count($students) > 0) {
             return response()->json(['students' => $students]);
 
@@ -45,10 +49,7 @@ class StudentController extends Controller
     /**
      * Add new student to group
      *
-     * /students/store'
-     *
      * @param  Request $request
-     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -62,6 +63,7 @@ class StudentController extends Controller
         $student->group()->associate($groupId);
         $student->save();
         $message = "Dodano studenta do grupy";
+
         return response()->json(['success' => $message, 'student' => $student]);
 
     }
@@ -70,18 +72,13 @@ class StudentController extends Controller
     /**
      * Update student data
      *
-     * /students/{id}/update
-     *
      * @param  Request $request
-     *
-     * @param  int $id
-     *
+     * @param Student $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id = null)
+    public function update(Request $request, Student $student)
     {
-        if (Student::userStudent($id)) {
-            $student = Student::findOrFail($id);
+        if ($student->subject->user == Auth::user()) {
             $groupId = $request->input('group_id');
             if (is_null($request->get('contact'))) {
                 $student->contact = '';
@@ -90,6 +87,7 @@ class StudentController extends Controller
             $student->update($request->all());
 
             $message = "Zapisano zmiany";
+
             return response()->json(['success' => $message, 'student' => $student]);
         }
 
@@ -97,23 +95,20 @@ class StudentController extends Controller
 
 
     /**
-     * Delete student
-     *
-     * /students/{id}/delete
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Student $student
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-
-    public function destroy($id = null)
+    public function destroy(Student $student)
     {
-        if (Student::userStudent($id)) {
-            $student = Student::where(['id' => $id])->delete();
+        if ($student->subject->user == Auth::user()) {
+            $student->delete();
             $message = "Usunięto studenta";
+
             return response()->json(['success' => $message]);
         } else {
             $message = "Wystąpił błąd";
+
             return response()->json(['error' => $message]);
         }
     }
@@ -122,16 +117,12 @@ class StudentController extends Controller
     /**
      * Student info
      *
-     * /students/{id}
-     *
-     * @param int $id
-     *
+     * @param Student $student
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id = null)
+    public function show(Student $student)
     {
-        if (Student::userStudent($id)) {
-            $student = Student::findOrFail($id);
+        if ($student->subject->user == Auth::user()) {
             return view('students.show')->with(compact('student'));
 
         } else {

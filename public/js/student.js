@@ -93,7 +93,7 @@ var addStudent = () =>
 var editStudent = () => 
 {
 	$('body').on('click', '.edit-student', function(){
-		let id = $(this).data('id');
+		let student = $(this).data('student');
 		let el = this;
 		let groupId = $('#groupId').val();
 
@@ -148,7 +148,7 @@ var editStudent = () =>
 
 				$.ajax({
 					type: "PATCH",
-					url: `/students/${id}/update`,
+					url: `/students/${student}/update`,
 					data: postData,
 					success: function(data)
 					{

@@ -24,9 +24,9 @@ class Subject extends Model
     }
 
 
-    public function groups() 
+    public function groups()
     {
-    	return $this->belongsToMany('App\Group');
+        return $this->belongsToMany('App\Group');
     }
 
 
@@ -36,15 +36,15 @@ class Subject extends Model
     }
 
 
-      public function materials()
+    public function materials()
     {
         return $this->hasMany('App\Material');
     }
 
-    
-    public function user() 
+
+    public function user()
     {
-    	return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 
 
@@ -54,42 +54,14 @@ class Subject extends Model
     }
 
 
-
-
-    protected function examOptions() 
+    protected function examOptions()
     {
-    	$exam = [0 => 'Nie',
-        1 => 'Tak'];
+        $exam = [
+            0 => 'Nie',
+            1 => 'Tak',
+        ];
+
         return $exam;
-    }
-
-     /**
-    * Auth User subjects list with subject name and id as value
-    */
-    protected function authSubjects() 
-     {
-        $authSubjects = User::find(Auth::user()->id)->subjects;
-        $subjects = $authSubjects->pluck('name', 'id');
-
-        return $subjects;
-    }
-
-
-    /**
-    * if this subject belongs to auth user
-    * 
-    *@param int $groupId
-    * 
-    *@return bool
-    */
-    protected function userSubject($subjectId = null): bool
-    {
-        $subject = Subject::findOrFail($subjectId);
-        if($subject->user_id == Auth::user()->id) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 

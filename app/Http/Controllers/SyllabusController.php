@@ -14,123 +14,96 @@ class SyllabusController extends Controller
 {
 
 
-	/**
-	 * Add syllabus form
-	 * 
-	 * /subjects/{id}/add-syllabus
-	 * 
-	 * @param  int $id
-	 * 
-	 * @return \Illuminate\Http\Response
-	*/
-	public function create($id = null)
-	{
-		if(Subject::userSubject($id)) {
-			$subject = Subject::findOrFail($id);
-			return view('syllabuses.create')->with(compact('subject'));
-		}else {
-			abort(404);	
-		}
-	}
+    /**
+     * Add syllabus form
+     *
+     * @param  Subject $subject
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Subject $subject)
+    {
+        if ($subject->user == Auth::user()) {
+            return view('syllabuses.create')->with(compact('subject'));
+        } else {
+            abort(404);
+        }
+    }
 
 
-	/**
-	 * Save syllabus
-	 * 
-	 * /subjects/{id}/syllabus/store
-	 * 
-	 * @param  Request $request
-	 * 
-	 * @param  int $id
-	 * 
-	 * @return \Illuminate\Http\Response
-	*/
-	public function store(Request $request, $id = null)
-	{
-		if(Subject::userSubject($id)) {
-			$syllabus = new Syllabus($request->all());
-			$syllabus->subject()->associate($id);
-			$syllabus->save();
-			$message = "Dodano syllabus";
+    /**
+     * Save syllabus
+     *
+     * @param  Request $request
+     * @param  Subject $subject
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, Subject $subject)
+    {
+        if ($subject->user == Auth::user()) {
+            $syllabus = new Syllabus($request->all());
+            $syllabus->subject()->associate($id);
+            $syllabus->save();
+            $message = "Dodano syllabus";
 
-			return redirect()->route('subjects.show', [$id])->with('flash_message_success', $message); 
-		}else {
-			abort(404);	
-		}
-		
-	}
+            return redirect()->route('subjects.show', [$id])->with('flash_message_success', $message);
+        } else {
+            abort(404);
+        }
+
+    }
 
 
-   /**
-   * Delete syllabus
-   * 
-   * /syllabuses/{id}/delete
-   * 
-   * @param  int $id
-   * 
-   * @return \Illuminate\Http\Response
-    */
-   public function destroy($id = null)
-   {
-   	$syllabus = Syllabus::findOrFail($id);
-   	if(Subject::userSubject($syllabus->subject_id)){
-   		$syllabus->delete();
-   		$message = 'Usunięto syllabus';
-   		return response()->json(['success'=>$message]);
-   	}
+    /**
+     * @param Syllabus $syllabus
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function destroy(Syllabus $syllabus)
+    {
+        if ($syllabus->subject->user == Auth::user()) {
+            $syllabus->delete();
+            $message = 'Usunięto syllabus';
 
-   }
+            return response()->json(['success' => $message]);
+        }
+
+    }
 
 
-   /**
-	 * Edit syllabus form
-	 * 
-	 * /syllabuses/{id}/edit
-	 * 
-	 * @param  int $id
-	 * 
-	 * @return \Illuminate\Http\Response
-	 */
+    /**
+     * Edit syllabus form
+     *
+     * @param Syllabus $syllabus
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(Syllabus $syllabus)
+    {
+        if ($syllabus->subject->user == Auth::user()) {
+            return view('syllabuses.edit')->with(compact('syllabus'));
+        } else {
+            abort(404);
+        }
+    }
 
-   public function edit($id = null)
-   {
-   	$syllabus = Syllabus::findOrFail($id);
-   	if(Subject::userSubject($syllabus->subject_id)){
-   		return view('syllabuses.edit')->with(compact('syllabus'));
-   	}else {
-   		abort(404);	
-   	}
-   }
+    /**
+     * Update syllabus
+     *
+     * @param  Request $request
+     * @param  Syllabus $syllabus
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Syllabus $syllabus)
+    {
+        if ($syllabus->subject->user == Auth::user()) {
+            $syllabus->update($request->all());
+            $message = "Zapisano zmiany";
 
-   /**
-	 * update syllabus
-	 * 
-	 * /syllabuses/{id}/update
-	 * 
-	 * @param  Request $request
-	 * 
-	 * @param  int $id
-	 * 
-	 * @return \Illuminate\Http\Response
-	*/
-	public function update(Request $request, $id = null)
-	{
-		$syllabus = Syllabus::findOrFail($id);
-   	      if(Subject::userSubject($syllabus->subject_id)){
-			$syllabus->update($request->all());
+            return redirect()->route('subjects.show', [$syllabus->subject])->with('flash_message_success', $message);
+        } else {
+            abort(404);
+        }
 
-			$message = "Zapisano zmiany";
-
-			return redirect()->route('subjects.show', [$syllabus->subject_id])->with('flash_message_success', $message); 
-		}else {
-			abort(404);	
-		}
-		
-	}
-
-
-
-
+    }
 
 
 }

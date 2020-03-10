@@ -12,7 +12,7 @@
     <!-- Scripts -->
    {{-- <script src="{{ asset('/js/app.js') }}"></script>--}}
 
-    <script src="{{asset('/public/js/app.js')}}"></script>
+    <script src="{{asset('/js/app.js')}}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -25,8 +25,8 @@
   {{--  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/guest/main.css') }}" rel="stylesheet">--}}
 
-    <link href="{{ asset("/public/css/app.css")}}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset("/public/css/guest/main.css")}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset("/css/app.css")}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset("/css/guest/main.css")}}" rel="stylesheet" type="text/css" />
 
 </head>
 <body>

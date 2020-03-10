@@ -13,70 +13,61 @@ class AttendanceController extends Controller
 {
 
     /**
-	* Attendance for lesson
-	* 
-	* /attendances/lessons/{lesson_id}
-	* 
-	* @param int $id
-	* 
-	* @return \Illuminate\Http\Response
-	*/
-	public function lessonAttendance($id = null)
-	{
-		$lesson = Lesson::findOrFail($id);
+     * Attendance for lesson
+     *
+     * @param Lesson $lesson
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function lessonAttendance(Lesson $lesson)
+    {
+        if ($lesson->subject->user == Auth::user() && $lesson->group->user == Auth::user()) {
+            $subject = $lesson->subject;
+            $group = $lesson->group;
 
-		if(Subject::userSubject($lesson->subject_id) && Group::userGroup($lesson->group_id)) {
-			$subject = Subject::findOrFail($lesson->subject_id);
-			$group = Group::findOrFail($lesson->group_id);
-			
-			return view('attendances.lesson')->with(compact('lesson', 'subject', 'group'));
-		}else {
-			abort(404);
-		}
-	}
+            return view('attendances.lesson')->with(compact('lesson', 'subject', 'group'));
+        } else {
+            abort(404);
+        }
+    }
 
 
+    /**
+     * Save attenndance
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function save(Request $request)
+    {
+        $attendance = new Attendance($request->all());
+        $attendance->save();
+        $student = $attendance->student;
 
-	/**
-	* Save attenndance
-	* 
-	* /attendances/save
-	* 
-	* @param  Request $request
-	* 
-	* @return \Illuminate\Http\Response
-    */
-	public function save(Request $request) {
-		$attendance = new Attendance($request->all());
-		$attendance->save();
-		$student = Student::findOrFail($attendance->student_id);
-
-		return response()->json(['success'=>'true', 'attendance'=>$attendance, 'student'=>$student]);
-	}
+        return response()->json(['success' => 'true', 'attendance' => $attendance, 'student' => $student]);
+    }
 
 
-	/**
-	* Update attenndance
-	* 
-	* /attendances/{id}/update
-	* 
-	* @param  Request $request
-	* 
-	* @param  int $id
-	* 
-	* @return \Illuminate\Http\Response
-    */
-	public function update(Request $request, $id = null) {
-		$attendance = Attendance::findOrFail($id);
-		$attendance->status = $request->input('status');
-		$attendance->update();
-		$message = "Zapisano zmiany";
-		$student = Student::findOrFail($attendance->student_id);
+    /**
+     * Update attenndance
+     *
+     * @param Request $request
+     * @param Attendance $attendance
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request, Attendance $attendance)
+    {
+        $attendance->status = $request->input('status');
+        $attendance->update();
+        $message = "Zapisano zmiany";
+        $student = $attendance->student;
 
-		return response()->json(['success'=>'true', 'attendance'=>$attendance, 'student'=>$student, 'message'=>$message]);
-	}
-
-
+        return response()->json([
+            'success' => 'true',
+            'attendance' => $attendance,
+            'student' => $student,
+            'message' => $message,
+        ]);
+    }
 
 
 }

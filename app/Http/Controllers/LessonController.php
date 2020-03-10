@@ -14,9 +14,6 @@ class LessonController extends Controller
 
     /**
      * List of user's lessons
-     *
-     * /lessons
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -27,12 +24,14 @@ class LessonController extends Controller
     }
 
 
-    public function groupLessons($subjectId, $groupId = null)
+    /**
+     * @param Subject $subject
+     * @param Group $group
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function groupLessons(Subject $subject, Group $group)
     {
-        if (Subject::userSubject($subjectId) && Group::userGroup($groupId)) {
-            $subject = Subject::findOrFail($subjectId);
-            $group = Group::findOrFail($groupId);
-
+        if ($subject->user == Auth::user() && $group->user == Auth::user()) {
 
             return view('lessons.group')->with(compact('subject', 'group'));
 
@@ -42,17 +41,24 @@ class LessonController extends Controller
     }
 
 
-    public function store(Request $request, $subjectId, $groupId = null)
+    /**
+     * @param Request $request
+     * @param Subject $subject
+     * @param Group $group
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request, Subject $subject, Group $group)
     {
-        if (Subject::userSubject($subjectId) && Group::userGroup($groupId)) {
+        if ($subject->user == Auth::user() && $group->user == Auth::user()) {
             $lesson = new Lesson;
-            $lesson->subject_id = $subjectId;
-            $lesson->group_id = $groupId;
+            $lesson->subject_id = $subject->id;
+            $lesson->group_id = $group->id;
             $lesson->topic = $request->input('topic');
             $lesson->performed = $request->input('performed');
             $lesson->date = $request->input('date');
             $lesson->save();
             $message = "Dodano lekcję";
+
             return redirect()->back()->with('flash_message_success', $message);
         } else {
             abort(404);
@@ -60,9 +66,13 @@ class LessonController extends Controller
     }
 
 
-    public function editStatus(Request $request, $id = null)
+    /**
+     * @param Request $request
+     * @param Lesson $lesson
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function editStatus(Request $request, Lesson $lesson)
     {
-        $lesson = Lesson::findOrFail($id);
         $lesson->performed = $request->input('performed');
         $lesson->update();
         $message = "Zmieniono status zajęć";

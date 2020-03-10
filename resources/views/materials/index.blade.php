@@ -41,10 +41,7 @@
 								<ul class="list-group list-group-flush">
 
 
-
 									@foreach($subject->materials as $material)
-
-
 
 
 
@@ -62,16 +59,6 @@
 										</button>
 
 									</li>
-
-
-
-
-
-
-
-
-
-
 
 									@endforeach
 

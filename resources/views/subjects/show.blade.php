@@ -1,473 +1,442 @@
 <div>@extends('layouts.app')
-	@section('content')
-	
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="card"  style="width: 65rem;" >
+    @section('content')
 
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="card" style="width: 65rem;">
 
-				<div class="card-header">
-					<h5 id="subject-header">
-						<b> {{$subject->name}} </b>   
-						<div class="float-right">
 
-							<a href="" data-toggle="modal" data-target="#editSubject" data-id="{{$subject->id}}" 
-								data-name="{{$subject->name}}" data-ects="{{$subject->ects}}"
-								class="btn btn-light btn-sm edit-subject">
-								<i class="far fa-edit fa-lg"></i> Edytuj przedmiot
-							</a>
+                    <div class="card-header">
+                        <h5 id="subject-header">
+                            <b> {{$subject->name}} </b>
+                            <div class="float-right">
 
+                                <a href="" data-toggle="modal" data-target="#editSubject" data-id="{{$subject->id}}"
+                                   data-name="{{$subject->name}}" data-ects="{{$subject->ects}}"
+                                   class="btn btn-light btn-sm edit-subject">
+                                    <i class="far fa-edit fa-lg"></i> Edytuj przedmiot
+                                </a>
 
 
+                            </div>
 
-						</div>
+                        </h5>
+                    </div>
 
-					</h5>  	
-				</div>
 
+                    <div class="card-body">
 
-				<div class="card-body">
+                        @if(Session::has('flash_message_error'))
+                            <div class="alert alert-error alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>{!! session('flash_message_error') !!}</strong>
+                            </div>
+                        @endif
+                        @if(Session::has('flash_message_success'))
+                            <div class="alert alert-success alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>{!! session('flash_message_success') !!}</strong>
+                            </div>
+                        @endif
 
-					@if(Session::has('flash_message_error'))
-					<div class="alert alert-error alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button> 
-						<strong>{!! session('flash_message_error') !!}</strong>
-					</div>
-					@endif   
-					@if(Session::has('flash_message_success'))
-					<div class="alert alert-success alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button> 
-						<strong>{!! session('flash_message_success') !!}</strong>
-					</div>
-					@endif
+                        <div>
+                            <div class="alert alert-success alert-block" id="success-info" style="display: none">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>
+                                    <p id="info">
+                                    </p>
+                                </strong>
+                            </div>
 
-					<div>
-						<div class="alert alert-success alert-block"  id="success-info" style="display: none">
-							<button type="button" class="close" data-dismiss="alert" >×</button> 
-							<strong>
-								<p id="info">
-								</p>
-							</strong>
-						</div>
+                        </div>
 
-					</div>
 
+                        <div class="float-right">
+                            <a class="btn btn-outline-secondary button-1 showSyllabus-btn" href="#" role="button"
+                               data-toggle="modal" data-target="#showSyllabus" aria-haspopup="true"
+                               aria-expanded="false">
+                                Wyświetl Syllabus
+                            </a>
 
+                            <a class="btn btn-outline-secondary button-1" id="open-assignGroup-modal" href="#"
+                               role="button" data-toggle="modal" data-target="#assignGroup" aria-haspopup="true"
+                               aria-expanded="false">
+                                Przypisz grupę
+                            </a>
 
 
+                            <br> <br>
 
-					<div class="float-right" > 
-						<a class="btn btn-outline-secondary button-1 showSyllabus-btn"  href="#" role="button" data-toggle="modal" data-target="#showSyllabus" aria-haspopup="true" aria-expanded="false">
-							Wyświetl Syllabus
-						</a>
 
-						<a class="btn btn-outline-secondary button-1" id="open-assignGroup-modal" href="#" role="button" data-toggle="modal" data-target="#assignGroup" aria-haspopup="true" aria-expanded="false">
-							Przypisz grupę 
-						</a>
+                        </div>
 
 
+                        @if(count($subject->groups) > 0)
 
-						<br> <br>
 
+                            <table class="table table-bordered table-sm table-responsive-sm">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Nazwa</th>
 
+                                    <th scope="col">Lista studentów</th>
+                                    <th scope="col">Oceny</th>
+                                    <th scope="col">Zajęcia</th>
 
-					</div>
+                                    <th scope="col"><i class="fas fa-cog fa-lg"></i>
 
 
+                                    </th>
 
+                                </tr>
+                                </thead>
+                                <tbody id="groups-tbody">
 
 
-					@if(count($subject->groups) > 0)
+                                @foreach($subject->groups as $group)
 
+                                    <tr>
 
-					<table class="table table-bordered table-sm table-responsive-sm">
-						<thead>
-							<tr>
-								<th scope="col">Nazwa </th>
-								
-								<th scope="col">Lista studentów</th>
-								<th scope="col">Oceny</th>
-								<th scope="col">Zajęcia</th>
+                                        <td>
+                                            <a href="{{ url('groups', $group->id) }}" style="color: black">
+                                                {{$group->name}}
 
-								<th scope="col"><i class="fas fa-cog fa-lg"></i>
+                                            </a>
 
+                                        </td>
 
 
-								</th>
+                                        <td>
+                                            <a href="{{ url('groups', $group->id) }}" style="color: black">
+                                                <i class="fas fa-user-graduate fa-lg" style="color: black"></i>
 
-							</tr>
-						</thead>
-						<tbody id="groups-tbody">
+                                            </a>
 
+                                        </td>
+                                        <td>
+                                            <a href="{{ action('GradeController@groupGrades', [$subject->id, $group->id]) }}"
+                                               style="color: black">
+                                                <i class="far fa-file-alt fa-lg" style="color: black"></i>
 
-							@foreach($subject->groups as $group)
+                                            </a>
 
-							<tr>
+                                        </td>
+                                        <td>
+                                            <a href="{{ action('LessonController@groupLessons', [$subject->id, $group->id]) }}"
+                                               style="color: black">
+                                                <i class="fas fa-chalkboard" style="color: black"></i>
 
-								<td> 
-									<a href="{{ url('groups', $group->id) }}" style="color: black"> 
-										{{$group->name}}
+                                            </a>
 
-									</a>
+                                        </td>
 
-								</td>
+                                        <td>
 
 
-								
-								<td> 
-									<a href="{{ url('groups', $group->id) }}" style="color: black"> 
-										<i class="fas fa-user-graduate fa-lg" style="color: black"></i>
+                                            <input type="hidden" name="groupId" id="groupId" value="{{ $group->id }}">
+                                            <button type="submit" data-toggle="modal" data-target="#confirm-unassign"
+                                                    data-id="{{$group->id}}"
+                                                    id="unassign-group" class="btn btn-light btn-sm">
+                                                <i class="far fa-trash-alt fa-lg"></i>
+                                            </button>
 
-									</a>
 
-								</td>
-								<td> 
-									<a href="{{ action('GradeController@groupGrades', [$subject->id, $group->id]) }}" style="color: black"> 
-										<i class="far fa-file-alt fa-lg" style="color: black"></i>
+                                        </td>
 
-									</a>
 
-								</td>
-								<td> 
-									<a href="{{ action('LessonController@groupLessons', [$subject->id, $group->id]) }}" style="color: black"> 
-										<i class="fas fa-chalkboard" style="color: black"></i>
+                                    </tr>
 
-									</a>
+                                @endforeach
 
-								</td>
+                                </tbody>
+                            </table>
 
-								<td>
+                        @else
 
 
+                            <h6><b>
+                                    <p>[ Nie dodałeś grup do tego przedmiotu ]</p>
+                                </b></h6>
 
-								{{-- 	{!! Form::open(['action'=> ['SubjectController@unassignGroup',
-										$subject->id, $group->id],
-										'method'=>'POST', 'class' =>'form-horizontal']) !!}
 
 
-										{{ Form::hidden('_method', 'DELETE') }}
-										{{ Form::button('<i class="far fa-trash-alt fa-lg"></i>', [ 'type'=>'submit' , 'class' => 'btn btn-light btn-sm']) }}
 
+                        @endif
 
-										{!! Form::close() !!}	 --}}		
+                    </div>
 
 
-										<input type="hidden" name="groupId" id="groupId" value="{{ $group->id }}">
-										<button type="submit" data-toggle="modal" data-target="#confirm-unassign" data-id="{{$group->id}}" 
-											id="unassign-group" class="btn btn-light btn-sm">
-											<i class="far fa-trash-alt fa-lg"></i>
-										</button>
+                </div>
+            </div>
+        </div>
 
 
+        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
+        <input type="hidden" name="subjectId" id="subjectId" value="{{ $subject->id }}">
 
 
 
-									</td>
 
+        {{-- show syllabus--}}
 
+        <div class="modal fade" id="showSyllabus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
+                    <div class="modal-header">
+                        <h4 class="modal-title"><b>Syllabus: </b> {{$subject->name}}</h4>
 
 
-								</tr>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        @if($subject->syllabus)
+                            <input type="hidden" name="syllabusId" id="syllabusId" value="{{$subject->syllabus->id}}">
 
-								@endforeach
 
-							</tbody>
-						</table>
 
-						@else
+                            <p><b>Język prowadzenia: </b> {{$subject->syllabus->language}}  </p>
+                            <p><b>Punkty ECTS: </b> {{$subject->ects}}  </p>
+                            <p><b>Przedmiot kończy się egzaminem: </b>
 
+                                @if ($subject->exam == 1)
+                                    Tak
 
-						<h6><b> 
-							<p>[ Nie dodałeś grup do tego przedmiotu ]</p>
-						</b></h6>
+                                @else
+                                    Nie
 
+                                @endif
 
+                            </p>
 
 
+                            <p><b>Opis: </b> {{$subject->syllabus->description}} </p>
 
 
-						@endif
 
-					</div>
+                            <p><b>Literaura: </b> {{$subject->syllabus->literature}}   </p>
 
 
+                            <div class="float-right">
 
+                                <a href="{{action('SyllabusController@edit', [$subject->syllabus->id])}}"
+                                   class="btn btn-light btn-sm edit-student"><i class="far fa-edit fa-lg"></i></a>
 
+                                <button type="submit" data-id="{{$subject->syllabus->id}}" id="delete-syllabus"
+                                        class="btn btn-light btn-sm">
+                                    <i class="far fa-trash-alt fa-lg"></i>
+                                </button>
 
-				</div>
-			</div>
-		</div>
+                            </div>
+                            <br>
 
+                        @else
+                            <h6><b> Nie stworzyłeś jeszcze syllabusa do tego przedmiotu </b></h6>
+                            <br> <br>
+                            <a href="{{action('SyllabusController@create', [$subject->id])}}" style="color: black"
+                               class="float-right">
+                                <b> Dodaj syllabus</b>
 
-		<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                            </a>
+                        @endif
+                    </div>
 
-		<input type="hidden" name="subjectId" id="subjectId" value="{{ $subject->id }}">
 
+                </div>
+            </div>
+        </div>
 
+        {{--  --}}
 
 
-		{{-- show syllabus--}}
 
-		<div class="modal fade" id="showSyllabus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
+        {{-- assign group --}}
 
-					<div class="modal-header">
-						<h4 class="modal-title"><b>Syllabus:  </b> {{$subject->name}}</h4>
+        {!! Form::open(['route'=> ['subjects.assign_group', $subject->id], 'class' =>'form-horizontal']) !!}
 
 
+        <div class="modal fade" id="assignGroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<div class="modal-body">
-						@if($subject->syllabus)
-						<input type="hidden" name="syllabusId" id="syllabusId" value="{{$subject->syllabus->id}}">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Przypisz grupę do przedmiotu</h4>
 
 
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
 
-						<p>	<b>Język prowadzenia: </b> {{$subject->syllabus->language}}  </p>
-						<p>	<b>Punkty ECTS: </b> {{$subject->ects}}  </p>
-						<p>	<b>Przedmiot kończy się egzaminem: </b> 
+                        <div class="form-group">
+                            <div class="col-md-6">
 
-							@if ($subject->exam == 1)
-							Tak
+                                <select class="form-control" name="groups" id="groups">
+                                    <option value="" disable="true" selected="true"> Wybierz grupę</option>
+                                    @foreach($groups as $key => $value)
 
-							@else
-							Nie
+                                        @if(!$subject->groups->contains($value->id))
 
-							@endif
+                                            <option value="{{$value->id}}">{{$value->name}} </option>
 
-						</p>
+                                        @endif
 
+                                    @endforeach
+                                </select>
 
-						<p>  <b>Opis: </b>  {{$subject->syllabus->description}} </p>
 
+                            </div>
+                        </div>
 
 
-						<p> <b>Literaura: </b> {{$subject->syllabus->literature}}   </p>
+                    </div>
+                    <div class="modal-footer">
 
-						
-						<div class="float-right">  
+                        <div class="form-group">
+                            <div class="col-md-4 col-md-offset-4">
+                                {!! Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-outline-secondary button-1']) !!}
+                            </div>
+                        </div>
 
-						<a href="{{action('SyllabusController@edit', [$subject->syllabus->id])}}"
-							class="btn btn-light btn-sm edit-student"><i class="far fa-edit fa-lg"></i></a>
+                        {{-- <div class="form-group">
+                            <div class="col-md-4 col-md-offset-4">
+                                {!! Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-outline-secondary button-1',
+                                'data-dismiss'=>'modal', 'id'=>'assignSubmit']) !!}
+                            </div>
+                        </div> --}}
 
-							<button type="submit" data-id="{{$subject->syllabus->id}}" id="delete-syllabus" class="btn btn-light btn-sm">
-								<i class="far fa-trash-alt fa-lg"></i>
-							</button>
+                    </div>
 
- </div>
-				<br>
 
-						@else
-						<h6>  <b> Nie stworzyłeś jeszcze syllabusa do tego przedmiotu </b>  </h6>
-						<br> <br> 	
-						<a href="{{action('SyllabusController@create', [$subject->id])}}" style="color: black" class="float-right"> 
-							<b>  Dodaj syllabus</b>
+                    {!! Form::close() !!}
 
-						</a>
-						@endif
-					</div>
 
+                </div>
+            </div>
+        </div>
 
+        {{--  --}}
 
 
-				</div>
-			</div>
-		</div>
+        {{-- confirm unassign modal --}}
 
-		{{--  --}}
 
+        @if(count($subject->groups) > 0)
+            <div class="modal fade" id="confirm-unassign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
 
+                        <div class="modal-header">
+                            <h4 class="modal-title">Czy na pewno chcesz usunąć grupę z przedmiotu?</h4>
 
-		{{-- assign group --}}
 
-		{!! Form::open(['route'=> ['subjects.assignGroup', $subject->id], 'class' =>'form-horizontal']) !!}
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            {!! Form::open(['action'=> ['SubjectController@unassignGroup',
+                                $subject->id, $group->id],
+                                'method'=>'POST', 'class' =>'form-horizontal']) !!}
 
 
-		<div class="modal fade" id="assignGroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
+                            {{ Form::hidden('_method', 'DELETE') }}
+                            {{ Form::button('Tak', [ 'type'=>'submit' , 'class' => 'btn btn-outline-danger float-right']) }}
 
-					<div class="modal-header">
-						<h4 class="modal-title">Przypisz grupę do przedmiotu</h4>
 
+                            {!! Form::close() !!}
 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<div class="modal-body">
 
-						<div class="form-group">
-							<div  class="col-md-6">
+                        </div>
 
-								<select class="form-control" name="groups" id="groups">
-									<option value="" disable="true" selected="true"> Wybierz grupę </option>
-									@foreach($groups as $key => $value)
 
-									@if(!$subject->groups->contains($key))
+                    </div>
+                </div>
+            </div>
 
-									<option value="{{$key}}">{{$value}} </option>
+        @endif
 
-									@endif
 
-									@endforeach
-								</select>
 
 
-							</div></div>
+        {{-- edit modal --}}
 
+        <div class="modal fade" id="editSubject" tabindex="-1" role="dialog" data-dismiss="modal" aria-label="Close">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> Edytuj przedmiot</h4>
 
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">
+                            <span>&times;</span></button>
 
-						</div>
-						<div class="modal-footer">
+                    </div>
 
-							<div class="form-group">
-								<div class="col-md-4 col-md-offset-4">
-									{!! Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-outline-secondary button-1']) !!}
-								</div>
-							</div>
 
-						{{-- <div class="form-group">
-							<div class="col-md-4 col-md-offset-4">
-								{!! Form::submit('Dodaj grupę do przedmiotu',['class'=>'btn btn-outline-secondary button-1',
-								'data-dismiss'=>'modal', 'id'=>'assignSubmit']) !!}
-							</div>
-						</div> --}}
+                    <div class="modal-body">
 
-					</div>
+                        <input type="hidden" name="subjectId" id="subjectId">
 
+                        <div class="alert alert-danger alert-block" id="validation-edit" style="display:none">
 
-					{!! Form::close() !!}
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 control-label">
+                                {!! Form::label('nameEdit','Nazwa:') !!}
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="name" id="nameEdit">
 
+                            </div>
+                        </div>
 
-				</div>
-			</div>
-		</div>
+                        <div class="form-group">
+                            <div class="col-md-4 control-label">
+                                {!! Form::label('ectEdits','Punkty ECTS:') !!}
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="ects" id="ectsEdit">
+                            </div>
+                        </div>
 
-		{{--  --}}
 
+                        <div class="form-group">
+                            <div class="col-md-4 control-label">
+                                {!! Form::label('examEdit','Egzamin') !!}
+                            </div>
+                            <div class="col-md-6">
 
-		{{-- confirm unassign modal --}}
+                                <select class="form-control" name="exam" id="examEdit">
+                                    <option value="0" disable="true" selected="true"> Nie</option>
+                                    <option value="1"> Tak</option>
+                                </select>
+                            </div>
+                        </div>
 
 
-		@if(count($subject->groups) > 0)
-		<div class="modal fade" id="confirm-unassign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					
-					<div class="modal-header">
-						<h4 class="modal-title">Czy na pewno chcesz usunąć grupę z przedmiotu?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-outline-secondary button-1"
+                                        id="submitEditSubject">
+                                    Zapisz zmainy
+                                </button>
 
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<div class="modal-body">
-						{!! Form::open(['action'=> ['SubjectController@unassignGroup',
-							$subject->id, $group->id],
-							'method'=>'POST', 'class' =>'form-horizontal']) !!}
+        {{--  --}}
 
 
-							{{ Form::hidden('_method', 'DELETE') }}
-							{{ Form::button('Tak', [ 'type'=>'submit' , 'class' => 'btn btn-outline-danger float-right']) }}
+</div>
 
-
-							{!! Form::close() !!}
-
-							
-						</div>
-
-						
-					</div>
-				</div>
-			</div>
-
-			@endif	
-
-
-
-
-			{{-- edit modal --}}
-
-			<div class="modal fade" id="editSubject" tabindex="-1" role="dialog" data-dismiss="modal" aria-label="Close">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title"> Edytuj przedmiot</h4>
-
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"><span >&times;</span></button>
-
-						</div>
-
-
-						<div class="modal-body">
-
-							<input type="hidden" name="subjectId" id="subjectId">
-
-							<div class="alert alert-danger alert-block"  id="validation-edit" style="display:none">
-
-							</div>
-							<div class="form-group">
-								<div  class="col-md-4 control-label">
-									{!! Form::label('nameEdit','Nazwa:') !!}
-								</div>
-								<div class="col-md-6">
-									<input type="text" class="form-control" name="name" id="nameEdit">
-
-								</div>
-							</div>
-
-							<div class="form-group">
-								<div  class="col-md-4 control-label">
-									{!! Form::label('ectEdits','Punkty ECTS:') !!}
-								</div>
-								<div class="col-md-6">
-									<input type="text" class="form-control" name="ects" id="ectsEdit">
-								</div>
-							</div>
-
-
-
-
-							<div class="form-group">
-								<div  class="col-md-4 control-label">
-									{!! Form::label('examEdit','Egzamin') !!}
-								</div>
-								<div class="col-md-6">
-
-									<select class="form-control" name="exam" id="examEdit" >
-										<option value="0" disable="true" selected="true"> Nie </option>
-										<option value="1"> Tak </option>
-									</select>
-								</div>
-							</div>
-
-
-						</div>
-						<div class="modal-footer">
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-4">
-									<button type="submit" class="btn btn-outline-secondary button-1"
-									id="submitEditSubject">
-									Zapisz zmainy
-								</button>
-
-							</div>
-						</div>
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-
-		{{--  --}}
-
-
-
-
-
-
-
-	</div>
-
-	@endsection
+@endsection
